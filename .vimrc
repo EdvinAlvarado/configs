@@ -12,12 +12,18 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'patstockwell/vim-monokai-tasty'
 Plug 'frazrepo/vim-rainbow'
 Plug 'astoff/digestif'
+Plug 'ap/vim-css-color'
+Plug 'PyGamer0/vim-apl'
 " Initialize plugin system
 call plug#end()
 
 
 " Vim with all enhancements
-source $VIMRUNTIME/vimrc_example.vim
+if has ('nvim')
+	"boo
+else
+	source $VIMRUNTIME/vimrc_example.vim
+endif
 " TODO add archlinux.vim
 
 
@@ -37,7 +43,8 @@ nnoremap <c-f> :NERDTreeToggle<CR>
 " Theme Settings
 let g:vim_monokai_tasty_italic = 1
 colorscheme vim-monokai-tasty
-let g:airline_theme='monokai_tasty' 
+let g:airline_theme='monokai_tasty'
+
 
 " User setting
 syntax on
@@ -74,3 +81,5 @@ autocmd FileType rust nnoremap <expr> <c-c> "I// <ESC>"
 autocmd FileType rust nnoremap <expr> <c-x> <HOME><Del><Del><Del><ESC>
 autocmd FileType rust vnoremap <expr> <c-c>  "<c-V>" . "I// <ESC>"
 autocmd FileType rust vnoremap <expr> <c-x>  "<c-V>" . "I<Del><Del><Del><ESC>"
+autocmd FileType nroff nnoremap <expr> <c-b> ":w<CR>" . ":make<CR><CR><CR>"
+autocmd FileType apl nnoremap <expr> <c-b> ":w<CR>" . ":!apl -q -f % --OFF<CR>"
