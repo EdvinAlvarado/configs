@@ -14,6 +14,7 @@ Plug 'frazrepo/vim-rainbow'
 Plug 'astoff/digestif'
 Plug 'ap/vim-css-color'
 Plug 'PyGamer0/vim-apl'
+Plug 'neovimhaskell/haskell-vim' 
 " Initialize plugin system
 call plug#end()
 
@@ -33,6 +34,15 @@ let g:cpp_member_variable_highlight = 1
 let g:cpp_class_decl_highlight = 1
 let g:cpp_experimental_simple_template_highlight = 1
 let g:cpp_concepts_highlight = 1
+
+"neovimhaskell/haskell-vim
+let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
+let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
+let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
+let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
+let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
+let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
+let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
 
 "frazrepo/vim-rainbow
 let g:rainbow_active = 1
@@ -83,3 +93,4 @@ autocmd FileType rust vnoremap <expr> <c-c>  "<c-V>" . "I// <ESC>"
 autocmd FileType rust vnoremap <expr> <c-x>  "<c-V>" . "I<Del><Del><Del><ESC>"
 autocmd FileType nroff nnoremap <expr> <c-b> ":w<CR>" . ":make<CR><CR><CR>"
 autocmd FileType apl nnoremap <expr> <c-b> ":w<CR>" . ":!apl -q -f % --OFF<CR>"
+autocmd FileType haskell nnoremap <expr> <c-b> ":w<CR>" . "!ghc -dynamic %<CR>" 
