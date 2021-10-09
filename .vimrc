@@ -63,7 +63,11 @@ set number " line numbering
 set autochdir " vim directory same as where open from
 set foldmethod=syntax " folding will be based on syntax. TODO find solution for python
 " eliminate current search highlight
-nnoremap <c-_> :noh<ESC> 
+if has('unix')
+	nnoremap <c-_> :noh<ESC> 
+else
+	nnoremap <c-/> :noh<ESC> 
+endif
 " closing paranthesis
 inoremap " ""<left>
 inoremap ' ''<left>
