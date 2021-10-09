@@ -19,6 +19,8 @@ alias ls='ls --color=auto'
 alias lsa='ls -a'
 # alias vpn='cyberghostvpn --connect --country-code'
 export PATH="$HOME/bin/:$PATH"
+export EDITOR=nvim
+export VISUAL=nvim
 
 autoload -Uz promptinit
 promptinit
