@@ -30,7 +30,8 @@ timedatectl set-ntp true
 
 ## Partition disk
 
-[For encrypted BTRFS](https://github.com/EdvinAlvarado/configs/blob/master/Arch/Encrypted%20Btrfs.md)
+[For encrypted Btrfs](https://github.com/EdvinAlvarado/configs/blob/master/Arch/Encrypted%20Btrfs.md)
+[For Btrfs](https://github.com/EdvinAlvarado/configs/blob/master/Arch/Btrfs.md)
 
 ### Partition Table
 | partition | type | size | mount point |
