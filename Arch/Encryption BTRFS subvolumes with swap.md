@@ -95,7 +95,7 @@ mkswap /mnt/swap/swapfile
 swapon /mnt/swap/swapfile
 ```
 
-# Continue from pacstrap till mkinitcpio
+# Continue from [pacstrap untill mkinitcpio](https://github.com/EdvinAlvarado/configs/blob/master/Arch/install.md#general-configuration)
 Be sure to pacstrap btrfs-progsd
 
 # Configure mkinitcpio

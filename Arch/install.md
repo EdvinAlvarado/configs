@@ -1,4 +1,19 @@
-# Connect to Wireless
+# Prologue
+This guide is mostly to document my [arch install](https://wiki.archlinux.org/title/installation_guide), be it with DE or without. Arch provides a higher level of customizability over any distro besides source-based distros (e.g. Gentoo). Some of the options taken here:
+
+| types          | software          |
+| -----          | --------          |
+| kernel         | linux-zen         |
+| CPU            | intel-ucode       | 
+| GPU   		 | xf86-video-intel  |
+| editor         | neovim            |
+| bootloader     | grub,efibootmgr   |
+| root privilege | sudo,opendoas     |
+| misc           | ranger,python,git |
+
+# Installation
+
+## Connect to Wireless
 ```
 iwctl
 station wlan0 scan
@@ -8,17 +23,17 @@ quit
 ping -c 3 www.google.com
 ```
 
-# Updating System Clock
+## Updating System Clock
 ```
 timedatectl set-ntp true
 ```
 
-# Partition disk
+## Partition disk
 
-[For encrypted BTRFS]("Encruption BTRFS subvolumes with swap.md")
+[For encrypted BTRFS](https://github.com/EdvinAlvarado/configs/blob/master/Arch/Encryption%20BTRFS%20subvolumes%20with%20swap.md)
 
 Assuming UEFI with GPT
-## Partition Table
+### Partition Table
 | partition | type | size | mount point |
 | --------- | ---- | ---- | ----------- |
 | /dev/sda1 | EFI  | 260M | /mnt/boot   |
@@ -26,8 +41,10 @@ Assuming UEFI with GPT
 | /dev/sda3 | root | 60G  | /mnt        |
 | /dev/sda4 | home | rest | /mnt/home   |
 
-## Format Partition
+### Format Partition
+Create partition as the table above
 ```
+fdisk /dev/sda
 fdisk /dev/sda
 mkfs.fat -F 32 -n "BOOT" /dev/sda1
 mkfs.ext4 -L "ROOT" /dev/sda3
@@ -37,17 +54,17 @@ swapon /dev/sda2
 ```
 
 
-# Mount
+## Mount
 ```
 mount /dev/sda3 /mnt
 mount /dev/sda4 /mnt/home
 mount /dev/sda1 /mnt/boot
 # Include the appriopiate CPU and GPU drivers
-pacstrap /mnt base base-devel linux-zen linux-firmware neovim opendoas ranger python intel-ucode xf86-video-intel grub efibootmgrzsh git
+pacstrap /mnt base base-devel linux-zen linux-firmware neovim opendoas ranger python intel-ucode xf86-video-intel grub efibootmgr zsh git
 genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt
 ```
-# General Configuration
+## General Configuration
 ```
 ln -sf /usr/share/zoneinfo/<region>/<city> /etc/localtime
 hwclock --systohc
@@ -55,28 +72,30 @@ echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 locale-gen
 echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 echo "<hostname>" >> /etc/hostname
-mkinitcpio -P
 passwd
 ```
 
-# GRUB Configuration
+## Bootloader
 ```
+mkinitcpio -P
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
-# Setup Network
+## install Desktop Enviroment
+There are various DEs and WMs that you can install. Most DEs already bring their own internet and wifi interface so the following chapter can be ignored.
 
-## minimal install
+## Setup Network
+
+### minimal install
 systemd-networkd is included in base. If you want a plug & play network config, check NetworkManager 
 ```
 systemctl enable systemd-networkd.service
 systemctl enable systemd-resolved.service
 ```
-### ethernet
+#### ethernet
 ```
-cd /etc/systemd/network/
-nvim wired.network
+nvim /etc/systemd/network/wired.network
 -------------------
 [Match]
 Type=ether
@@ -84,12 +103,10 @@ Type=ether
 [Network]
 DHCP=yes
 -------------------
-cd /
 ```
-### wireless
+#### wireless
 ```
-cd /etc/systemd/network/
-nvim wireless.network
+nvim /etc/systemd/network/wireless.network
 -------------------
 [Match]
 Type=wlan
@@ -97,19 +114,21 @@ Type=wlan
 [Network]
 DHCP=yes
 -------------------
-cd /
+```
+##### wifi software
+systemd-networkd requires another package for wifi connection.
+```
 pacman -S iwd
-iwctl
 ```
 
-## NetworkManager
+### NetworkManager
 It is a bigger package but it is much easier to config
 ```
 pacman -S networkmanager
 systemctl enable NetworkManager.service
 ```
 
-# Create non-sudo user
+## Create non-sudo user
 ```
 useradd -m <username>
 passwd <username>
@@ -119,7 +138,7 @@ EDITOR=nvim visudo
 # <username> ALL=(ALL) ALL
 ```
 
-# Reboot
+## Reboot
 ```
 exit
 umount -R /mnt
@@ -128,20 +147,25 @@ reboot
 
 # Post-Instalation
 login as your user
-```
-nmtui
-```
+
+## Connect Wifi
+if using a DE, use your DE's internet interface. Else use:
+
+| systemd-networkd | NetworkManager |
+| ---------------- | -------------- |
+| iwctl            | nmtui          |
 
 ## Getting configs
 ```
 git clone https://github.com/EdvinAlvarado/configs.git
 cd configs
-./nvim_setup.sh
 ./recover.sh
+./nvim_setup.sh
 cd ~
 ```
 
 ## AUR
+There are a many AUR wrappers to choose. Here we install one written on python.
 ```
 git clone https://aur.archlinux.org/pikaur.git
 cd pikaur
