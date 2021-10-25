@@ -1,5 +1,5 @@
 # Encrypted Btrfs on LUKS
-This method maintains unencrypted exposure to an asbolute minimum while also providing Btrfs ability for snapshots. Also included a /recovery to saves some LUKS header files and create a live cd like recovery(WIP).
+This method maintains unencrypted exposure to an asbolute minimum while also providing Btrfs ability for snapshots and dynamic "paritions". Also included a /recovery to saves some LUKS header files and create a live cd like recovery(WIP).
 
 ## Partition Table
 all paritions (including swap) besides the EFI boot will be made inside Btrfs as subvolumes.
