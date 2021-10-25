@@ -30,9 +30,8 @@ timedatectl set-ntp true
 
 ## Partition disk
 
-[For encrypted BTRFS](https://github.com/EdvinAlvarado/configs/blob/master/Arch/Encryption%20BTRFS%20subvolumes%20with%20swap.md)
+[For encrypted BTRFS](https://github.com/EdvinAlvarado/configs/blob/master/Arch/Encrypted%20Btrfs.md)
 
-Assuming UEFI with GPT
 ### Partition Table
 | partition | type | size | mount point |
 | --------- | ---- | ---- | ----------- |
