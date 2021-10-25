@@ -5,7 +5,7 @@ Btrfs provides recoverable snapshots and dynamic "partitions". Also included a /
 all paritions (including swap) besides the EFI boot will be made inside Btrfs as subvolumes.
 | partition | type 	   | size | mount point |
 | --------- | -------- | ---- | ----------- |
-| /dev/sda1 | EFI  	   | 260M | /efi        |
+| /dev/sda1 | EFI  	   | 260M | /boot       |
 | /dev/sda2 | Recovery | 1G   | /recovery   |
 | /dev/sda3 | root 	   | rest | /           |
 
