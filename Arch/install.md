@@ -36,12 +36,14 @@ mkswap /dev/sda2
 swapon /dev/sda2
 ```
 
+
 # Mount
 ```
 mount /dev/sda3 /mnt
 mount /dev/sda4 /mnt/home
 mount /dev/sda1 /mnt/boot
-pacstrap /mnt base base-devel linux-zen linux-firmware neovim opendoas ranger python intel-ucode grub efibootmgrzsh iwctl
+# Include the appriopiate CPU and GPU drivers
+pacstrap /mnt base base-devel linux-zen linux-firmware neovim opendoas ranger python intel-ucode xf86-video-intel grub efibootmgrzsh git
 genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt
 ```
@@ -107,6 +109,16 @@ pacman -S networkmanager
 systemctl enable NetworkManager.service
 ```
 
+# Create non-sudo user
+```
+useradd -m <username>
+passwd <username>
+echo "permit persist :<username>" >> /etc/doas.conf
+EDITOR=nvim visudo
+# uncomment
+# <username> ALL=(ALL) ALL
+```
+
 # Reboot
 ```
 exit
@@ -115,8 +127,24 @@ reboot
 ```
 
 # Post-Instalation
+login as your user
 ```
-useradd -m <username>
-passwd <username>
 nmtui
+```
+
+## Getting configs
+```
+git clone https://github.com/EdvinAlvarado/configs.git
+cd configs
+./nvim_setup.sh
+./recover.sh
+cd ~
+```
+
+## AUR
+```
+git clone https://aur.archlinux.org/pikaur.git
+cd pikaur
+makepkg -fsri
+cd ~
 ```
