@@ -64,9 +64,10 @@ mount /dev/sda1 /mnt/boot
 ## General Configuration
 check /usr/share/zoneinfo for available regions and cities.
 ```
+genfstab -U /mnt >> /mnt/etc/fstab
+
 pacstrap /mnt base base-devel linux-zen linux-firmware neovim opendoas ranger python intel-ucode xf86-video-intel grub efibootmgr zsh git
 
-genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt
 
 ln -sf /usr/share/zoneinfo/<region>/<city> /etc/localtime

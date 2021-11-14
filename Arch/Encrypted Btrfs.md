@@ -26,7 +26,7 @@ mkfs.ext4 -L "RECOVERY" /dev/sda2
 ### Encrypt Partition
 GRUB has limited support of LUKS2.
 ```
-cryptsetup --type luks1 --label="RECOVERY" luksFormat  /dev/sda3 
+cryptsetup --type luks1 --label="CRYPTROOT" luksFormat  /dev/sda3 
 cryptsetup luksDump /dev/sda3
 ```
 
@@ -136,8 +136,9 @@ mkinitcpio -P
 ---------------------------
 GRUB_DISABLE_RECOVERY=false
 GRUB_ENABLE_CRYPTODISK=y
-GRUB_CMDLINE_LINUX="cryptdevice:/dev/sda3:cryptroot:allow-discards"
+GRUB_CMDLINE_LINUX="cryptdevice=/dev/sda3:cryptroot:allow-discards"
 ```
+
 ```
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB
 grub-mkconfig -o /boot/grub/grub.cfg
