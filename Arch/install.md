@@ -51,11 +51,11 @@ mkfs.fat -F 32 -n "BOOT" /dev/sda1
 mkfs.ext4 -L "ROOT" /dev/sda3
 mkfs.ext4 -L "HOME" /dev/sda4
 mkswap /dev/sda2
-swapon /dev/sda2
 ```
 
-## Mount
+### Mount
 ```
+swapon /dev/sda2
 mount /dev/sda3 /mnt
 mount /dev/sda4 /mnt/home
 mount /dev/sda1 /mnt/boot
@@ -140,8 +140,11 @@ systemctl enable NetworkManager.service
 useradd -m <username>
 passwd <username>
 echo "permit persist :<username>" >> /etc/doas.conf
+```
+
+Add user to sudo
+```
 EDITOR=nvim visudo
-# uncomment
 # <username> ALL=(ALL) ALL
 ```
 

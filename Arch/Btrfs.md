@@ -88,4 +88,4 @@ mount /dev/sda1 /mnt/efi
 mount /dev/sda2 /mnt/recovery
 ```
 
-Continue from [General Configuration](https://github.com/EdvinAlvarado/configs/blob/master/Arch/install.md#general-configuration) but remember to add btrfs-progs to pacstrap.
+Continue from [General Configuration](https://github.com/EdvinAlvarado/configs/blob/master/Arch/install.md#general-configuration) but remember to add btrfs-progs and snapper to pacstrap.

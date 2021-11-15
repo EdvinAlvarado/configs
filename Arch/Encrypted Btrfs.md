@@ -122,7 +122,7 @@ cryptsetup luksAddKey /dev/sda3 /crypto_keyfile.bin
 -------------------
 FILES=(/crypto_keyfile.bin)
 BINARIES=(btrfs)
-HOOKS=(keymap consolefont encrypt)
+HOOKS=(... keyboard keymap consolefont encrypt fsck)
 ```
 
 ### Regenerate initramfs
@@ -136,7 +136,7 @@ mkinitcpio -P
 ---------------------------
 GRUB_DISABLE_RECOVERY=false
 GRUB_ENABLE_CRYPTODISK=y
-GRUB_CMDLINE_LINUX="cryptdevice:/dev/sda3:cryptroot:allow-discards"
+GRUB_CMDLINE_LINUX="cryptdevice=/dev/sda3:cryptroot:allow-discards"
 ```
 ```
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB
