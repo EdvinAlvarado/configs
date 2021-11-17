@@ -21,9 +21,9 @@ then
 fi
 
 # mount
-umount /mnt
+umount $1
 mount -o compress=zstd,subvol=@ /dev/mapper/cryptroot $1
-mkdir /mnt/{home,.snapshots,swap}
+mkdir $1/{home,.snapshots,swap}
 mount -o compress=zstd,subvol=@home /dev/mapper/cryptroot $1/home
 mount -o compress=zstd,subvol=@snapshots /dev/mapper/cryptroot $1/.snapshots
 mount -o subvol=@swap /dev/mapper/cryptroot $1/swap
