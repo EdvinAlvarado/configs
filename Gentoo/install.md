@@ -111,11 +111,16 @@ genfstab -U / >> /etc/fstab
 Follow [standard](https://github.com/EdvinAlvarado/configs/blob/master/Arch/install.md#general-configuration) or [Encrypted Btrfs](https://github.com/EdvinAlvarado/configs/blob/master/Arch/Encrypted%20Btrfs.md#configure-mkinitcpio) for bootloader and initramfs.
 
 the cmdline kernel parameters are different from Arch. You don't need the systemd parameter if using an initramfs made by dracut.
+
+Kernel parameters require reference by UUID (or device?). Let's copy the UUID and put them in the correct place
+```
+blkid | egrep "(crypto_LUKS|ROOT)" >> /etc/default/grub
+```
 ```
 /etc/default/grub
 ------------------------------
 GRUB_ENABLE_CRYPTODISK=y
-GRUB_CMDLINE_LINUX="init=/lib/systemd/systemd crypt_root=LABEL=CRYPTROOT root=/dev/mapper/cryptroot rootflags=subvol=@ root_trim=yes rd.luks=1 rd.luks.key=/crypto_keyfile.bin"
+GRUB_CMDLINE_LINUX="init=/lib/systemd/systemd crypt_root=UUID=<crypto_LUKLS-UUID> root=/dev/mapper/cryptroot rootflags=subvol=@ root_trim=yes rd.luks=1 rd.luks.key=/crypto_keyfile.bin"
 ```
 
 ```
