@@ -34,12 +34,20 @@ then
 	mount -o compress=zstd,subvol=@var_log /dev/mapper/cryptroot $1/var/log
 fi
 
-
-# swap
 mkdir $1/{efi,recovery}
 mount /dev/sda1 $1/efi
 mount /dev/sda2 $1/recovery
 cryptsetup luksHeaderBackup $2 --header-backup-file $1/recovery/LUKS_header_backup.img
+
+# swap
+truncate -s 0 $1/swap/swapfile
+chattr +C $1/swap/swapfile
+btrfs property set $1/swap/swapfile compression none
+
+dd if=/dev/zero of=$1/swap/swapfile bs=1M count=4096
+chmod 600 $1/swap/swapfile
+mkswap $1/swap/swapfile
+swapon $1/swap/swapfile
 
 # crypto keyfile
 dd bs=512 count=4 if=/dev/random of=/crypto_keyfile.bin iflag=fullblock
