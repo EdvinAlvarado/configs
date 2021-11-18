@@ -17,6 +17,7 @@ ntpd -q -g
 ## Install base
 Install the appropiate systemd stage3 tarball.
 ```
+cd /mnt/gentoo
 links https://www.gentoo.org/downloads/mirrors/
 tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
 ```
@@ -47,7 +48,7 @@ chmod 1777 /dev/shm
 ```
 If you are using the gentoo iso it will be /mnt/gentoo instead.
 ```
-mirrorselect -i -o >> /mnt/gentoo/etc/fstab
+mirrorselect -i -o >> /mnt/gentoo/etc/portage/make.conf
 chroot /mnt/gentoo /bin/bash
 source /etc/profile
 export PS1="(chroot) ${PS1}"
@@ -75,7 +76,7 @@ follow what is mentioned in the [Arch General Configuration](https://github.com/
 CFLAGS="-march=native ..."
 MAKEOPTS='-j<X>'
 VIDEO_CARDS="intel"
-ACCEPT_LICENSE="-* @BINARY_REDISTRITBUTABLE"
+ACCEPT_LICENSE="-* @BINARY-REDISTRITBUTABLE"
 USE="device-mapper mount cryptsetup initramfs"
 ```
 
@@ -84,7 +85,7 @@ For whatever reason gentoo default is to use /etc/portage/package.use as a direc
 ```
 rmdir /etc/portage/package.use
 touch /etc/portage/package.use
-echo "sys-fs/cryptsetup" static kernel -gcrypt >> /etc/portage/package.use
+echo "sys-fs/cryptsetup kernel -gcrypt -openssl -udev" >> /etc/portage/package.use
 ```
 
 ```
@@ -97,7 +98,7 @@ echo "sys-kernel/gentoo-sources ~amd64" >> /etc/portage/package.accept_keywords
 
 ```
 emerge -auDN @world
-emerge -a linux-firmware btrfs-progs snapper cryptsetup genfstab vim genkernel dracut gentoo-sources intel-microcode xf86-video-intel networkmanager xorg-server dev-vcs/git doas grub os-prober
+emerge -a linux-firmware btrfs-progs snapper cryptsetup genfstab vim genkernel dracut gentoo-sources intel-microcode xf86-video-intel networkmanager xorg-server dev-vcs/git sudo doas grub zsh ranger
 ```
 
 Generate fstab
