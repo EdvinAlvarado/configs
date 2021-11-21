@@ -7,7 +7,7 @@ echo 'LUKS="yes"' >> /etc/genkernel.conf
 echo 'BTRFS="yes"' >> /etc/genkernel.conf
 
 genkernel --btrfs --luks --symlink --menuconfig --bootloader=grub2 all
-dracut -f -I /crypto_keyfile.bin
+# dracut -f -I /crypto_keyfile.bin
 
 # GRUB
 grub-install --target=x86_64-efi --efi-directory=/efi
