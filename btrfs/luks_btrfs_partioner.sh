@@ -1,55 +1,62 @@
-# $1 == mount
-# $2 == device
-# $3 == distro
+read -p "mount point (e.g. /mnt/gentoo): " MOUNT
+lsblk
+read -p "Storage partition (e.g. /dev/sda3)" DEVICE
+while true; do
+	read -p "Are you installing Arch? " yn
+	case $yn in
+		[Yy]* ) DISTRO="arch"; break;;
+		[Nn]* ) DISTRO=""; break;;
+		*     ) echo "Answer yes or no...";;
+	esac
+done
+
 
 # create
-cryptsetup --type luks1 --label="CRYPTROOT" luksFormat $2
-cryptsetup open $2 cryptroot
+cryptsetup --type luks1 --label="CRYPTROOT" luksFormat $DEVICE
+cryptsetup open $DEVICE cryptroot
 mkfs.btrfs -L ROOT /dev/mapper/cryptroot
 
-mount /dev/mapper/cryptroot $1
-btrfs subvolume create $1/@
-btrfs subvolume create $1/@home
-btrfs subvolume create $1/@snapshots
-btrfs subvolume create $1/@swap
+mount /dev/mapper/cryptroot $MOUNT
+btrfs subvolume create $MOUNT/@
+btrfs subvolume create $MOUNT/@home
+btrfs subvolume create $MOUNT/@snapshots
+btrfs subvolume create $MOUNT/@swap
 
-if [ $3 == "arch" ]
-then
-	btrfs subvolume create $1/@var_log
-	mkdir -p $1/@/var/cache/pacman
-	btrfs subvolume create $1/@/var/cache/pacman/pkg
+if [ $DISTRO == "arch" ]; then
+	btrfs subvolume create $MOUNT/@var_log
+	mkdir -p $MOUNT/@/var/cache/pacman
+	btrfs subvolume create $MOUNT/@/var/cache/pacman/pkg
 fi
 
 # mount
-umount $1
-mount -o compress=zstd,subvol=@ /dev/mapper/cryptroot $1
-mkdir $1/{home,.snapshots,swap}
-mount -o compress=zstd,subvol=@home /dev/mapper/cryptroot $1/home
-mount -o compress=zstd,subvol=@snapshots /dev/mapper/cryptroot $1/.snapshots
-mount -o subvol=@swap /dev/mapper/cryptroot $1/swap
+umount $MOUNT
+mount -o compress=zstd,subvol=@ /dev/mapper/cryptroot $MOUNT
+mkdir $MOUNT/{home,.snapshots,swap}
+mount -o compress=zstd,subvol=@home /dev/mapper/cryptroot $MOUNT/home
+mount -o compress=zstd,subvol=@snapshots /dev/mapper/cryptroot $MOUNT/.snapshots
+mount -o subvol=@swap /dev/mapper/cryptroot $MOUNT/swap
 
-if [ $3 == "arch" ]
-then
-	mkdir -p $1/var/log
-	mount -o compress=zstd,subvol=@var_log /dev/mapper/cryptroot $1/var/log
+if [ $DISTRO == "arch" ]; then
+	mkdir -p $MOUNT/var/log
+	mount -o compress=zstd,subvol=@var_log /dev/mapper/cryptroot $MOUNT/var/log
 fi
 
-mkdir $1/{efi,recovery}
-mount /dev/sda1 $1/efi
-mount /dev/sda2 $1/recovery
-cryptsetup luksHeaderBackup $2 --header-backup-file $1/recovery/LUKS_header_backup.img
+mkdir $MOUNT/{efi,recovery}
+mount /dev/sda1 $MOUNT/efi
+mount /dev/sda2 $MOUNT/recovery
+cryptsetup luksHeaderBackup $DEVICE --header-backup-file $MOUNT/recovery/LUKS_header_backup.img
 
 # swap
-truncate -s 0 $1/swap/swapfile
-chattr +C $1/swap/swapfile
-btrfs property set $1/swap/swapfile compression none
+truncate -s 0 $MOUNT/swap/swapfile
+chattr +C $MOUNT/swap/swapfile
+btrfs property set $MOUNT/swap/swapfile compression none
 
-dd if=/dev/zero of=$1/swap/swapfile bs=1M count=4096
-chmod 600 $1/swap/swapfile
-mkswap $1/swap/swapfile
-swapon $1/swap/swapfile
+dd if=/dev/zero of=$MOUNT/swap/swapfile bs=1M count=4096
+chmod 600 $MOUNT/swap/swapfile
+mkswap $MOUNT/swap/swapfile
+swapon $MOUNT/swap/swapfile
 
 # crypto keyfile
 dd bs=512 count=4 if=/dev/random of=/crypto_keyfile.bin iflag=fullblock
 chmod 600 /crypto_keyfile.bin
-cryptsetup luksAddKey $2 /crypto_keyfile.bin
+cryptsetup luksAddKey $DEVICE /crypto_keyfile.bin
