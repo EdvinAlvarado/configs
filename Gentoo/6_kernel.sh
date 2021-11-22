@@ -6,6 +6,7 @@ echo 'MAKEOPTS="$(portageq envvar MAKEOPTS)"' >> /etc/genkernel.conf
 echo 'LUKS="yes"' >> /etc/genkernel.conf
 echo 'BTRFS="yes"' >> /etc/genkernel.conf
 
+#FIXME Find a way to avoid double key ask
 genkernel --btrfs --luks --symlink --menuconfig --bootloader=grub2 all
 # dracut -f -I /crypto_keyfile.bin
 

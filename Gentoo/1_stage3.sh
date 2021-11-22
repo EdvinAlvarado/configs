@@ -1,9 +1,10 @@
-# $1 == mount
+echo -n "Mount point: "
+read MOUNT
 
-cd $1
+cd $MOUNT
 links https://www.gentoo.org/downloads/mirrors/
 tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
 
-mkdir -p $1/etc/portage/repos.conf
-cp $1/usr/share/portage/config/repos.conf $1/etc/portage/repos.conf/gentoo.conf
-cp --dereference /etc/resolv.conf $1/etc/
+mkdir -p $MOUNT/etc/portage/repos.conf
+cp $MOUNT/usr/share/portage/config/repos.conf $MOUNT/etc/portage/repos.conf/gentoo.conf
+cp --dereference /etc/resolv.conf $MOUNT/etc/

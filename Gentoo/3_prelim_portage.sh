@@ -1,5 +1,5 @@
-# $1 == MAKEOPTS
-# $2 == VIDEO_CARDS
+read -p "# of MAKEOPTS: " MAKEOPTS
+read -p "VIDEO_CARDS: " VIDEO
 
 source /etc/profile
 export PS1="(chroot) ${PS1}"
@@ -26,8 +26,8 @@ echo "sys-fs/cryptsetup ~amd64" >> /etc/portage/package.accept_keywords
 echo "sys-kernel/gentoo-sources ~amd64" >> /etc/portage/package.accept_keywords
 
 # /etc/portage/make.conf
-echo 'MAKEOPTS="-j$1"' >> /etc/portage/make.conf
-echo 'VIDEO_CARDS="$2"' >> /etc/portage/make.conf
+echo 'MAKEOPTS="-j$MAKEOPTS"' >> /etc/portage/make.conf
+echo 'VIDEO_CARDS="$VIDEO"' >> /etc/portage/make.conf
 echo 'ACCEPT_LICENSE="-* @BINARY-REDISTRIBUTABLE"' >> /etc/portage/make.conf
 echo 'USE="device-mapper mount cryptsetup initramfs"' >> /etc/portage/make.conf
 

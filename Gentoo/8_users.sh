@@ -1,9 +1,10 @@
-# $1 == username
-
 passwd
 
-useradd -m $1
-passwd $1
+read -p "username: " NAME
+
+useradd -m $NAME
+passwd $NAME
+
 echo "permit persist :$1" >> /etc/doas.conf
 
 EDITOR=vim visudo
