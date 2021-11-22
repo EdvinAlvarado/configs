@@ -18,6 +18,7 @@ touch /etc/portage/package.use
 echo 'sys-fs/cryptsetup kernel -gcrypt -openssl -udev' >> /etc/portage/package.use
 
 # accept_keywords
+rm /etc/portage/package.accept_keywords
 touch /etc/portage/package.accept_keywords
 echo "sys-fs/btrfs-progs ~amd64" >> /etc/portage/package.accept_keywords
 echo "sys-boot/grub:2 ~amd64" >> /etc/portage/package.accept_keywords
