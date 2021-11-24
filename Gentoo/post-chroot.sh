@@ -36,20 +36,22 @@ done
 while true; do
 	read -p "Write a graphic driver: " VIDEO 
 	case $MAKEOPTS in
-		"inte\|amdgpu\|radeon\|nvidea\|nouveau\|virtualbox\|vmware" ) echo 'MAKEOPTS="-j$MAKEOPTS"' >> /etc/portage/make.conf; break;;
-		*        ) echo "write a number...";;
+		"inte\|amdgpu\|radeon\|nvidea\|nouveau\|virtualbox\|vmware" ) echo 'VIDEO_CARDS="$VIDEO"' >> /etc/portage/make.conf; break;;
+		*        ) echo "write an acceptable videoc card...";;
 	esac
 done
 
+echo 'GRUB_PLATFORMS="efi-64"' >> /etc/portage/make.conf
 echo 'ACCEPT_LICENSE="-* @BINARY-REDISTRIBUTABLE"' >> /etc/portage/make.conf
 echo 'USE="device-mapper mount cryptsetup initramfs"' >> /etc/portage/make.conf
 
+sed -i 's/CFLAGS="/CFLAGS="-march=native' /etc/portage/make.conf
 
 ### emerge -----------------------------------------------------------------------------------------
 emerge -auDN @world linux-firmware btrfs-progs snapper cryptsetup genfstab vim genkernel gentoo-sources networkmanager xorg-server dev-vcs/git doas grub zsh sudo ranger
 
 while true; do
-	read -p "Write CPU:" CPU
+	read -p "Write CPU: " CPU
 	case $CPU in
 		"intel" ) emerge -a intel-microcode; break;;
 		"amd"   ) emerge -a linux-firmware; break;;
