@@ -24,7 +24,7 @@ mount --bind /run $MOUNT/run
 while true; do
 	read -p "Live ISO is gentoo install medium? " DISTRO
 	case $DISTRO in
-		[Yy]* ) exit;;
+		[Yy]* ) break;;
 		[Nn]* ) test -L /dev/shm && rm /dev/shm && mkdir /dev/shm; mount --types tmpfs --options nosuid,nodev,noexec shm /dev/shm; chmod 1777 /dev/shm; break;;
 		*     ) echo "Please answer yer or no";;
 	esac

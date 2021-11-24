@@ -55,7 +55,7 @@ while true; do
 	case $CPU in
 		"intel" ) emerge -a intel-microcode; break;;
 		"amd"   ) emerge -a linux-firmware; break;;
-		"exit"  ) exit;;
+		"exit"  ) break;;
 		*       ) "Write CPU or exit";;
 	esac
 done
@@ -66,7 +66,7 @@ while true; do
 		"intel"  ) echo "x11-libs/libdrm video_cards_intel" >> /etc/portage/package.use; emerge -a xf86-video-intel; break;;
 		"nvidea" ) emerge -a nvidea-drivers; break;;
 		"amd"    ) emerge -a xf86-video-amdgpu; break;;
-		"exit"   ) exit;;
+		"exit"   ) break;;
 		*        ) "Write GPU or exit";;
 	esac
 done
