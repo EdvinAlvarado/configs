@@ -21,5 +21,4 @@ if [ $DISTRO != "yes" ]; then
 fi
 
 
-mirrorselect -i -o >> $MOUNT/etc/fstab
 chroot $MOUNT /bin/bash
