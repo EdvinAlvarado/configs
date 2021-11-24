@@ -60,3 +60,13 @@ swapon $MOUNT/swap/swapfile
 dd bs=512 count=4 if=/dev/random of=/crypto_keyfile.bin iflag=fullblock
 chmod 600 /crypto_keyfile.bin
 cryptsetup luksAddKey $DEVICE /crypto_keyfile.bin
+
+# File Configuration
+if [ $DISTRO == "arch" ]; then
+	sed -i "s/BINARIES=()/BINARIES=(btrfs)/g" $MOUNT/etc/mkinitcpio.conf
+	sed -i "s/FILES=()/FILES=(/crypto_keyfile.bin)/g" $MOUNT/etc/mkinitcpio.conf
+	sed -i "s/keyboard/keyboard keymap consolefont encrypt/g" $MOUNT/etc/mkinitcpio.conf
+
+	sed -i "s/#GRUB_ENABLE_CRYPTODISK=*$/GRUB_ENABLE_CRYPTODISK=y/g" $MOUNT/etc/default/grub
+	sed -i 's/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="cryptdevice=$DEVICE:cryptroot:allow-discards"/g' $MOUNT/etc/default/grub
+fi
