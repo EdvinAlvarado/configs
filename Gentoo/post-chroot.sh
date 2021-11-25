@@ -27,10 +27,11 @@ echo "sys-kernel/gentoo-sources ~amd64" >> /etc/portage/package.accept_keywords
 # /etc/portage/make.conf
 while true; do
 	read -p "Write the minimum of your cpu cores or RAM divided by 2: " MAKEOPTS
-	case $MAKEOPTS in
-		^[0-9]+$ ) echo 'MAKEOPTS="-j$MAKEOPTS"' >> /etc/portage/make.conf; break;;
-		*        ) echo "write a number...";;
-	esac
+	if [[ $MAKEOPTS =~ ^[0-9]+$ ]]; then
+		echo 'MAKEOPTS="-j$MAKEOPTS"' >> /etc/portage/make.conf; break
+	else
+		echo "write a number...";
+	fi
 done
 
 while true; do
