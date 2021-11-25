@@ -17,7 +17,7 @@ touch /etc/portage/package.use
 echo 'sys-fs/cryptsetup kernel -gcrypt -openssl -udev' >> /etc/portage/package.use
 
 # accept_keywords
-rm /etc/portage/package.accept_keywords
+rmdir /etc/portage/package.accept_keywords
 touch /etc/portage/package.accept_keywords
 echo "sys-fs/btrfs-progs ~amd64" >> /etc/portage/package.accept_keywords
 echo "sys-boot/grub:2 ~amd64" >> /etc/portage/package.accept_keywords
@@ -36,7 +36,7 @@ done
 
 while true; do
 	read -p "Write a graphic driver: " VIDEO 
-	case $MAKEOPTS in
+	case $VIDEO in
 		"inte\|amdgpu\|radeon\|nvidea\|nouveau\|virtualbox\|vmware" ) echo 'VIDEO_CARDS="$VIDEO"' >> /etc/portage/make.conf; break;;
 		*        ) echo "write an acceptable videoc card...";;
 	esac
