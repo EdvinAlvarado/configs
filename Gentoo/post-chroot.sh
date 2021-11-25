@@ -74,7 +74,7 @@ done
 echo "Check if there are any masking issues"
 etc-update
 read -p "Write packages impacted by masking: " MASKED
-if [ $MASKED != "" ]; then
+if [ "$MASKED" != "" ]; then
 	emerge -auDN $MASKED
 fi
 

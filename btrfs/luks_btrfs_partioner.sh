@@ -22,7 +22,7 @@ btrfs subvolume create $MOUNT/@home
 btrfs subvolume create $MOUNT/@snapshots
 btrfs subvolume create $MOUNT/@swap
 
-if [ $DISTRO == "arch" ]; then
+if [ "$DISTRO" == "arch" ]; then
 	btrfs subvolume create $MOUNT/@var_log
 	mkdir -p $MOUNT/@/var/cache/pacman
 	btrfs subvolume create $MOUNT/@/var/cache/pacman/pkg
@@ -36,7 +36,7 @@ mount -o compress=zstd,subvol=@home /dev/mapper/cryptroot $MOUNT/home
 mount -o compress=zstd,subvol=@snapshots /dev/mapper/cryptroot $MOUNT/.snapshots
 mount -o subvol=@swap /dev/mapper/cryptroot $MOUNT/swap
 
-if [ $DISTRO == "arch" ]; then
+if [ "$DISTRO" == "arch" ]; then
 	mkdir -p $MOUNT/var/log
 	mount -o compress=zstd,subvol=@var_log /dev/mapper/cryptroot $MOUNT/var/log
 fi
@@ -62,7 +62,7 @@ chmod 600 /crypto_keyfile.bin
 cryptsetup luksAddKey $DEVICE /crypto_keyfile.bin
 
 # File Configuration
-if [ $DISTRO == "arch" ]; then
+if [ "$DISTRO" == "arch" ]; then
 	sed -i "s/BINARIES=()/BINARIES=(btrfs)/g" $MOUNT/etc/mkinitcpio.conf
 	sed -i "s/FILES=()/FILES=(/crypto_keyfile.bin)/g" $MOUNT/etc/mkinitcpio.conf
 	sed -i "s/keyboard/keyboard keymap consolefont encrypt/g" $MOUNT/etc/mkinitcpio.conf
