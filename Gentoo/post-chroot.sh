@@ -28,7 +28,9 @@ echo "sys-kernel/gentoo-sources ~amd64" >> /etc/portage/package.accept_keywords
 while true; do
 	read -p "Write the minimum of your cpu cores or RAM divided by 2: " MAKEOPTS
 	if [[ $MAKEOPTS =~ ^[0-9]+$ ]]; then
-		echo 'MAKEOPTS="-j$MAKEOPTS"' >> /etc/portage/make.conf; break
+		echo -n 'MAKEOPTS="-j' >> /etc/portage/make.conf;
+		echo -n $MAKEOPTS >> /etc/portage/make.conf;
+		echo '"' >> /etc/portage/make.conf; break;;
 	else
 		echo "write a number...";
 	fi
@@ -37,7 +39,7 @@ done
 while true; do
 	read -p "Write a graphic driver: " VIDEO 
 	case $VIDEO in
-		intel|amdgpu|radeon|nvidea|nouveau|virtualbox|vmware ) echo 'VIDEO_CARDS="$VIDEO"' >> /etc/portage/make.conf; break;;
+		intel|amdgpu|radeon|nvidea|nouveau|virtualbox|vmware ) echo -n 'VIDEO_CARDS="' >> /etc/portage/make.conf; echo -n $VIDEO >> /etc/portage/make.conf; echo '"' >> /etc/portage/make.conf; break;;
 		*        ) echo "write an acceptable video card...";;
 	esac
 done
@@ -46,7 +48,7 @@ echo 'GRUB_PLATFORMS="efi-64"' >> /etc/portage/make.conf
 echo 'ACCEPT_LICENSE="-* @BINARY-REDISTRIBUTABLE"' >> /etc/portage/make.conf
 echo 'USE="device-mapper mount cryptsetup initramfs"' >> /etc/portage/make.conf
 
-sed -i 's/CFLAGS="/CFLAGS="-march=native' /etc/portage/make.conf
+sed -i 's/CFLAGS="/CFLAGS="-march=native/g' /etc/portage/make.conf
 
 ### emerge -----------------------------------------------------------------------------------------
 emerge -auDN @world linux-firmware btrfs-progs snapper cryptsetup genfstab vim genkernel gentoo-sources networkmanager xorg-server xorg-xinit dev-vcs/git doas grub zsh sudo ranger links
@@ -92,8 +94,11 @@ ROOT = $(blkid | egrep "ROOT" | egrep -o '\sUUID="[[:alnum:]\|-]*"' | egrep -o '
 
 #FIXME For now the rd commands do nothingvas far as I can notice
 echo "GRUB_ENABLE_CRYPTODISK=y" >> /etc/default/grub
-echo 'GRUB_CMDLINE_LINUX="init=/lib/systemd/systemd crypt_root=UUID=$CRYPTO root=UUID=$ROOT rootflags=subvol=@ root_trim=yes rd.luks=1 rd.luks.key=/crypto_keyfile.bin"
-' >> /etc/default/grub
+echo -n 'GRUB_CMDLINE_LINUX="init=/lib/systemd/systemd crypt_root=UUID=' >> /etc/default/grub
+echo -n $CRYPTO >> /etc/default/grub
+echo -n ' root=UUID=' >> /etc/default/grub
+echo -n $ROOT >> /etc/default/grub
+echo ' rootflags=subvol=@ root_trim=yes rd.luks=1 rd.luks.key=/crypto_keyfile.bin"' >> /etc/default/grub
 
 # Kernel
 eselect kernel list
