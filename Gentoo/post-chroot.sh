@@ -37,8 +37,8 @@ done
 while true; do
 	read -p "Write a graphic driver: " VIDEO 
 	case $VIDEO in
-		"inte\|amdgpu\|radeon\|nvidea\|nouveau\|virtualbox\|vmware" ) echo 'VIDEO_CARDS="$VIDEO"' >> /etc/portage/make.conf; break;;
-		*        ) echo "write an acceptable videoc card...";;
+		intel|amdgpu|radeon|nvidea|nouveau|virtualbox|vmware ) echo 'VIDEO_CARDS="$VIDEO"' >> /etc/portage/make.conf; break;;
+		*        ) echo "write an acceptable video card...";;
 	esac
 done
 
@@ -49,7 +49,7 @@ echo 'USE="device-mapper mount cryptsetup initramfs"' >> /etc/portage/make.conf
 sed -i 's/CFLAGS="/CFLAGS="-march=native' /etc/portage/make.conf
 
 ### emerge -----------------------------------------------------------------------------------------
-emerge -auDN @world linux-firmware btrfs-progs snapper cryptsetup genfstab vim genkernel gentoo-sources networkmanager xorg-server dev-vcs/git doas grub zsh sudo ranger
+emerge -auDN @world linux-firmware btrfs-progs snapper cryptsetup genfstab vim genkernel gentoo-sources networkmanager xorg-server xorg-xinit dev-vcs/git doas grub zsh sudo ranger links
 
 while true; do
 	read -p "Write CPU: " CPU
@@ -65,7 +65,7 @@ while true; do
 	read -p "Write GPU: " GPU
 	case $GPU in
 		"intel"  ) echo "x11-libs/libdrm video_cards_intel" >> /etc/portage/package.use; emerge -a xf86-video-intel; break;;
-		"nvidea" ) emerge -a nvidea-drivers; break;;
+		"nvidia" ) emerge -a nvidia-drivers; break;;
 		"amd"    ) emerge -a xf86-video-amdgpu; break;;
 		"exit"   ) break;;
 		*        ) "Write GPU or exit";;
@@ -128,13 +128,14 @@ echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 read -p "hostname: " HOSTNAME
 echo "$HOSTNAME" >> /etc/hostname
 
+echo "root password"
 passwd
 
 read -p "username: " NAME
 useradd -m $NAME
 passwd $NAME
 
-echo "permit persist :$1" >> /etc/doas.conf
+echo "permit persist :$NAME" >> /etc/doas.conf
 
 echo "add $NAME ALL=(ALL) ALL"
 EDITOR=vim visudo
