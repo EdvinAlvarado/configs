@@ -118,14 +118,22 @@ echo 'BTRFS="yes"' >> /etc/genkernel.conf
 genkernel --btrfs --luks --symlink --menuconfig --bootloader=grub2 all
 
 # FIXME grub-install will not show on boot
-grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB
-echo "HOTFIX: Either a motherboard issue or a distro issue but grub-install creates an unbootable system. To fix this please fill in the following"
+grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=BOOT
+echo "HOTFIX: Some Motherboards refuse to search for custom named boot entries. To fix this please fill in the following"
 read -p "    Write EFI partition (e.g. /dev/sda1): " EFIPART
 read -p "    Write EFI mount (e.g. /efi, /boot/efi): " EFIMOUNT
-mkdir $EFIMOUNT/EFI/BOOT
-cp $EFIMOUNT/EFI/GRUB/* $EFIMOUNT/EFI/BOOT/BOOTx64.EFI
-echo "If your system does not have this bug, you might see two boots in your system. Both should direct to the same place."
-echo "WARNING: While this bug is unresolved, running grub-install will not update the system without manually copying over the efi file to EFI/BOOT/BOOTx64.EFI"
+if [ "$EFIPART" != "" ]; then
+	if [ "$EFIMOUNT" != "" ]; then
+		mkdir $EFIMOUNT/EFI/BOOT
+		cp $EFIMOUNT/EFI/GRUB/* $EFIMOUNT/EFI/BOOT/BOOTx64.EFI
+		echo "    If your system does not have this bug, you might see two boots in your system. Both should direct to the same place."
+		echo "    WARNING: While this bug is unresolved, running grub-install will not update the system without manually copying over the efi file to EFI/BOOT/BOOTx64.EFI"
+	else
+		echo "    EFI mount was not given. Copy grub efi file to 'ESP'/EFI/BOOT/BOOTx64.efi."
+	fi
+else
+	echo "    EFI partition was not given. Copy grub efi file to 'ESP'/EFI/BOOT/BOOTx64.efi"
+fi
 grub-mkconfig -o /boot/grub/grub.cfg
 
 
