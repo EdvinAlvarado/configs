@@ -6,7 +6,14 @@ ln -sf /proc/self/mounts /etc/mtab
 # update repo
 emerge --sync
 
-
+while true; do
+	read -p "This script assumes your arch is amd64. Will you be installing amd64? " AMD64
+	case $AMD64 in
+		[Yy]* ) echo "script will continue."; break;;
+		[Nn]* ) echo "script will stop here. Continue Installation yourself."; break;;
+		*     ) echo "Yes or no?";;
+	esac
+done
 ### Portage ---------------------------------------------------------------------------------------
 # Confirm appropiate profile
 eselect profile list
