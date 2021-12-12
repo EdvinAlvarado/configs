@@ -139,6 +139,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 ### General Configuration -------------------------------------------------------------------------
 systemctl enable NetworkManager
+systemd-machine-id-setup
 
 #FIXME add loop
 ls /usr/share/zoneinfo/
