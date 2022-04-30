@@ -30,8 +30,6 @@ mkdir -p $MOUNT/etc/portage/repos.conf
 cp $MOUNT/usr/share/portage/config/repos.conf $MOUNT/etc/portage/repos.conf/gentoo.conf
 cp --dereference /etc/resolv.conf $MOUNT/etc/
 
-# Get Mirrors
-mirrorselect -i -o >> $MOUNT/etc/fstab
 
 # chroot
 mount --types proc /proc $MOUNT/proc
@@ -41,8 +39,13 @@ mount --rbind /dev $MOUNT/dev
 mount --make-rslave $MOUNT/dev
 mount --bind /run $MOUNT/run
 
-
 case $DISTRO in
-	[Yy]* ) chroot $MOUNT /bin/bash; break;;
-	[Nn]* ) chroot $MOUNT /usr/bin/bash; break;;
+	[Yy]* ) mirroselect -i -o >> $MOUNT/etc/portage/make.conf; break;; 
+	[Nn]* ) echo "Mirror not written"; break;;
 
+
+
+echo "RUN THE FOLLOWING COMMANDS"
+echo "source /etc/profile"
+echo "export PS1="(chroot) ${PS1}""
+chroot $MOUNT /bin/bash

@@ -37,9 +37,8 @@ echo "acct-group/flatpak ~amd64" >> /etc/portage/package.accept_keywords/flatpak
 while true; do
 	read -p "Write the minimum of your cpu cores or RAM divided by 2: " MAKEOPTS
 	if [[ $MAKEOPTS =~ ^[0-9]+$ ]]; then
-		echo -n 'MAKEOPTS="-j' >> /etc/portage/make.conf;
-		echo -n $MAKEOPTS >> /etc/portage/make.conf;
-		echo '"' >> /etc/portage/make.conf; break;;
+		MAKE='MAKEOPTS="-j${MAKEOPTS}"';
+		echo "$MAKE" >> /etc/portage/make.conf; break;;
 	else
 		echo "write a number...";
 	fi
