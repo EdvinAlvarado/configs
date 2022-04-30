@@ -38,7 +38,7 @@ while true; do
 	read -p "Write the minimum of your cpu cores or RAM divided by 2: " MAKEOPTS
 	if [[ $MAKEOPTS =~ ^[0-9]+$ ]]; then
 		MAKE='MAKEOPTS="-j${MAKEOPTS}"';
-		echo "$MAKE" >> /etc/portage/make.conf; break;;
+		echo "$MAKE" >> /etc/portage/make.conf; break;
 	else
 		echo "write a number...";
 	fi
@@ -59,8 +59,7 @@ echo 'USE="device-mapper mount cryptsetup initramfs"' >> /etc/portage/make.conf
 sed -i 's/CFLAGS="/CFLAGS="-march=native/g' /etc/portage/make.conf
 
 ### packages -----------------------------------------------------------------------------------------
-emerge -auDN @world linux-firmware btrfs-progs snapper cryptsetup genfstab vim genkernel gentoo-sources networkmanager xorg-server xorg-xinit dev-vcs/git doas grub zsh sudo ranger links sys-apps/flatpak
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+emerge -uDN @world linux-firmware btrfs-progs snapper cryptsetup genfstab vim genkernel gentoo-sources networkmanager xorg-server dev-vcs/git doas grub zsh sudo ranger links 
 
 while true; do
 	read -p "Write CPU: " CPU
@@ -98,8 +97,8 @@ eselect news read
 genfstab -U / >> /etc/fstab
 
 # GRUB
-CRYPTO = $(blkid | egrep "crypto_LUKS" | egrep -o '\sUUID="[[:alnum:]\|-]*"' | egrep -o '[[:alnum:]\|-]*' | tail -n1)
-ROOT = $(blkid | egrep "ROOT" | egrep -o '\sUUID="[[:alnum:]\|-]*"' | egrep -o '[[:alnum:]\|-]*' | tail -n1)
+CRYPTO=$(blkid | egrep "crypto_LUKS" | egrep -o '\sUUID="[[:alnum:]\|-]*"' | egrep -o '[[:alnum:]\|-]*' | tail -n1)
+ROOT=$(blkid | egrep "ROOT" | egrep -o '\sUUID="[[:alnum:]\|-]*"' | egrep -o '[[:alnum:]\|-]*' | tail -n1)
 
 #FIXME For now the rd commands do nothingvas far as I can notice
 echo "GRUB_ENABLE_CRYPTODISK=y" >> /etc/default/grub
@@ -171,3 +170,6 @@ echo "permit persist :$NAME" >> /etc/doas.conf
 
 echo "add $NAME ALL=(ALL) ALL"
 EDITOR=vim visudo
+
+emerge sys-apps/flatpak
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
