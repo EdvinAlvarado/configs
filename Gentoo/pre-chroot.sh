@@ -1,5 +1,25 @@
+lsblk
+read -p "drive (e.g. /dev/sda): " DRIVE
+fdisk $DRIVE
+
+while true; do
+	read -p "encrypted Btrfs?" yn
+	case $yn in
+		[Yy]* ) ~/configs/btrfs/efi_fat_partion.sh && ~/configs/btrfs/luks_btrfs_partition.sh; break;;
+		[Nn]* ) read -p "write script for partitions: " ALT; $ALT; break;;
+	esac
+done
+
 read -p "Mount point: " MOUNT
 
+while true; do
+	read -p "Live ISO is gentoo install medium? " DISTRO
+	case $DISTRO in
+		[Yy]* ) break;;
+		[Nn]* ) test -L /dev/shm && rm /dev/shm && mkdir /dev/shm; mount --types tmpfs --options nosuid,nodev,noexec shm /dev/shm; chmod 1777 /dev/shm; pacman -S links; break;;
+		*     ) echo "Please answer yer or no";;
+	esac
+done
 # getting stage3
 cd $MOUNT
 links https://www.gentoo.org/downloads/mirrors/
@@ -21,13 +41,8 @@ mount --rbind /dev $MOUNT/dev
 mount --make-rslave $MOUNT/dev
 mount --bind /run $MOUNT/run
 
-while true; do
-	read -p "Live ISO is gentoo install medium? " DISTRO
-	case $DISTRO in
-		[Yy]* ) break;;
-		[Nn]* ) test -L /dev/shm && rm /dev/shm && mkdir /dev/shm; mount --types tmpfs --options nosuid,nodev,noexec shm /dev/shm; chmod 1777 /dev/shm; break;;
-		*     ) echo "Please answer yer or no";;
-	esac
-done
 
-chroot $MOUNT /bin/bash
+case $DISTRO in
+	[Yy]* ) chroot $MOUNT /bin/bash; break;;
+	[Nn]* ) chroot $MOUNT /usr/bin/bash; break;;
+
