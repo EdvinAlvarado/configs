@@ -44,7 +44,8 @@ case $DISTRO in
 	[Nn]* ) echo "Mirror not written"; break;;
 
 
-
+mkdir $MOUNT/configs
+cp -r ~/configs $MOUNT/configs
 echo "RUN THE FOLLOWING COMMANDS"
 echo "source /etc/profile"
 echo "export PS1="(chroot) ${PS1}""
