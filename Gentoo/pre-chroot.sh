@@ -5,7 +5,7 @@ fdisk $DRIVE
 while true; do
 	read -p "encrypted Btrfs?" yn
 	case $yn in
-		[Yy]* ) cd ~/configs/btrfs; ./efi_fat_partion.sh && ./luks_btrfs_partition.sh; break;;
+		[Yy]* ) cd ~/configs/btrfs; ./efi_fat_partition.sh && ./luks_btrfs_partition.sh; break;;
 		[Nn]* ) read -p "write script for partitions: " ALT; $ALT; break;;
 	esac
 done
