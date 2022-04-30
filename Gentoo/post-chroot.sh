@@ -19,17 +19,19 @@ done
 eselect profile list
 
 # package.use
-rmdir /etc/portage/package.use
-touch /etc/portage/package.use
-echo 'sys-fs/cryptsetup kernel -gcrypt -openssl -udev' >> /etc/portage/package.use
+touch /etc/portage/package.use/main
+echo 'sys-fs/cryptsetup kernel -gcrypt -openssl -udev' >> /etc/portage/package.use/main
 
 # accept_keywords
-rmdir /etc/portage/package.accept_keywords
-touch /etc/portage/package.accept_keywords
-echo "sys-fs/btrfs-progs ~amd64" >> /etc/portage/package.accept_keywords
-echo "sys-boot/grub:2 ~amd64" >> /etc/portage/package.accept_keywords
-echo "sys-fs/cryptsetup ~amd64" >> /etc/portage/package.accept_keywords
-echo "sys-kernel/gentoo-sources ~amd64" >> /etc/portage/package.accept_keywords
+touch /etc/portage/package.accept_keywords/main
+echo "sys-fs/btrfs-progs ~amd64" >> /etc/portage/package.accept_keywords/main
+echo "sys-boot/grub:2 ~amd64" >> /etc/portage/package.accept_keywords/main
+echo "sys-fs/cryptsetup ~amd64" >> /etc/portage/package.accept_keywords/main
+echo "sys-kernel/gentoo-sources ~amd64" >> /etc/portage/package.accept_keywords/main
+touch /etc/portage/package.accept_keywords/flatpak
+echo "sys-apps/flatpak ~amd64" >> /etc/portage/package.accept_keywords/flatpak
+echo "acct-user/flatpak ~amd64" >> /etc/portage/package.accept_keywords/flatpak
+echo "acct-group/flatpak ~amd64" >> /etc/portage/package.accept_keywords/flatpak
 
 # /etc/portage/make.conf
 while true; do
@@ -57,8 +59,9 @@ echo 'USE="device-mapper mount cryptsetup initramfs"' >> /etc/portage/make.conf
 
 sed -i 's/CFLAGS="/CFLAGS="-march=native/g' /etc/portage/make.conf
 
-### emerge -----------------------------------------------------------------------------------------
-emerge -auDN @world linux-firmware btrfs-progs snapper cryptsetup genfstab vim genkernel gentoo-sources networkmanager xorg-server xorg-xinit dev-vcs/git doas grub zsh sudo ranger links
+### packages -----------------------------------------------------------------------------------------
+emerge -auDN @world linux-firmware btrfs-progs snapper cryptsetup genfstab vim genkernel gentoo-sources networkmanager xorg-server xorg-xinit dev-vcs/git doas grub zsh sudo ranger links sys-apps/flatpak
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 while true; do
 	read -p "Write CPU: " CPU
