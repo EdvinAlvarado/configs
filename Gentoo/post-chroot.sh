@@ -59,7 +59,9 @@ echo 'USE="device-mapper mount cryptsetup initramfs"' >> /etc/portage/make.conf
 sed -i 's/CFLAGS="/CFLAGS="-march=native/g' /etc/portage/make.conf
 
 ### packages -----------------------------------------------------------------------------------------
-emerge -uDN @world linux-firmware btrfs-progs snapper cryptsetup genfstab vim genkernel gentoo-sources networkmanager xorg-server dev-vcs/git doas grub zsh sudo ranger links 
+emerge -uDN --autounmask-write @world linux-firmware btrfs-progs snapper cryptsetup genfstab vim genkernel gentoo-sources networkmanager xorg-server dev-vcs/git doas grub zsh sudo ranger links 
+etc-update
+emerge -auDN --autounmask-write @world linux-firmware btrfs-progs snapper cryptsetup genfstab vim genkernel gentoo-sources networkmanager xorg-server dev-vcs/git doas grub zsh sudo ranger links 
 
 while true; do
 	read -p "Write CPU: " CPU
