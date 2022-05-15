@@ -18,9 +18,9 @@ RPROMPT='%*'
 alias ls='ls --color=auto'
 alias lsa='ls -a'
 # alias vpn='cyberghostvpn --connect --country-code'
-export PATH="$HOME/.local/bin/:$HOME/bin/:$PATH"
+export PATH="$HOME/.local/bin/:$HOME/bin/:$HOME/.ghcup/bin:$HOME/.cabal/bin:$PATH"
 export EDITOR=nvim
 export VISUAL=nvim
-
+export LFS="/home/edvin/mnt/lfs"
 autoload -Uz promptinit
 promptinit
