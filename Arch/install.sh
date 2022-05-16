@@ -11,7 +11,7 @@ then
 fi
 
 # Partition
-read -p "Storage partition (e.g. /dev/sda)" DEVICE
+read -p "Storage partition (e.g. /dev/sda): " DEVICE
 sfdisk $DEVICE < arch.sfdisk
 mkfs.fat -F 32 -n "EFI" "${DEVICE}1"
 mkfs.ext4 -L "RECOVERY" "${DEVICE}2"
