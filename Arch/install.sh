@@ -22,4 +22,8 @@ lsblk
 ./arch-pre-chroot.sh $MOUNT
 
 # Chroot
+cp arch-post.chroot.sh $MOUNT/arch-post.chroot.sh
 arch-chroot $MOUNT ./arch-post-chroot.sh
+
+umount -f -l -R $MOUNT
+reboot

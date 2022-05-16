@@ -28,6 +28,7 @@ echo "add $NAME ALL=(ALL) ALL"
 EDITOR=nvim visudo
 
 
+echo "Installing grub"
 mkinitcpio -P
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB
 grub-mkconfig -o /boot/grub/grub.cfg
@@ -36,8 +37,3 @@ systemctl enable NetworkManager
 
 
 chsh -s $(which zsh)
-
-echo "Do any configurations needed. When finished do:"
-echo "1. exit"
-echo "2. umount -R /mnt"
-echo "3. reboot"
