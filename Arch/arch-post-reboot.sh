@@ -15,6 +15,10 @@ chmod 750 /.snapshots
 # Setup home config
 snapper -c home create-config /home
 
+# Activate automatic snapshots
+systemctl enable --now snapper-timeline.timer
+systemctl enable --now snapper-cleanup.timer
+
 # Setup pre/post root snapshots for pacman transactions
 sed -i -e 's/#[root]/[root]/' /etc/snap-pac.ini
 sed -i -e 's/#desc_limit/desc_limit/' /etc/snap-pac.ini

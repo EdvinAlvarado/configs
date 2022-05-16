@@ -16,7 +16,7 @@ while true; do
 	read -p "Write GPU: " GPU
 	case $GPU in
 		"intel"   ) VIDEOCARD="xf86-video-intel"; break;;
-		"nvidia"  ) VIDEOCARD="nvidia-dkms"; break;;
+		"nvidia"  ) VIDEOCARD="nvidia"; break;;
 		"amdgpu"  ) VIDEOCARD="xf86-video-amdgpu"; break;;
 		"ati"     ) VIDEOCARD="xf86-video-ati"; break;;
 		"nouveau" ) VIDEOCARD="xf86-video-nouveau"; break;;
@@ -25,6 +25,22 @@ while true; do
 	esac
 done
 
+while true; do
+	read -p "Write kernel: " KERN
+	case $KERNEL in
+		"linux"   			) KERNEL=KERN; break;;
+		"linux-zen"  		) KERNEL=KERN; break;;
+		"linux-lts"  		) KERNEL=KERN; break;;
+		"linux-hardened"	) KERNEL=KERN; break;;
+		"exit"    			) KERNEL=""; break;;
+		*         			) "Write KERNEL or exit";;
+	esac
+done
 
-pacstrap $MOUNT base base-devel linux-zen linux-firmware btrfs-progs snapper snap-pac cryptsetup networkmanager neovim opendoas ranger python grub efibootmgr zsh git $CPUCODE $VIDEOCARD
+if [[ $KERNEL != "linux" ]] && [[ $VIDEOCARD = "nvidia" ]]
+then
+	VIDEOCARD="nvidia-dkms"
+fi
+
+pacstrap $MOUNT base base-devel $KERNEL linux-firmware btrfs-progs snapper snap-pac cryptsetup networkmanager neovim opendoas ranger python grub efibootmgr zsh git $CPUCODE $VIDEOCARD
 
