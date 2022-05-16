@@ -30,6 +30,6 @@ while true; do
 done
 
 
-pacstrap /mnt base base-devel linux-zen linux-firmware btrfs-progs snapper cryptsetup networkmanager neovim opendoas ranger python grub efibootmgr zsh git $CPUCODE $VIDEOCARD
+pacstrap /mnt base base-devel linux-zen linux-firmware btrfs-progs snapper snap-pac cryptsetup networkmanager neovim opendoas ranger python grub efibootmgr zsh git $CPUCODE $VIDEOCARD
 
 arch-chroot /mnt
