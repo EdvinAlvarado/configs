@@ -4,8 +4,6 @@ This guide is mostly to document my [arch install](https://wiki.archlinux.org/ti
 | types          | software          |
 | -----          | --------          |
 | kernel         | linux-zen         |
-| CPU            | intel-ucode       | 
-| GPU   		 | xf86-video-intel  |
 | editor         | neovim            |
 | bootloader     | grub,efibootmgr   |
 | root privilege | sudo,opendoas     |
@@ -30,27 +28,25 @@ timedatectl set-ntp true
 
 ## Partition disk
 
-[For encrypted Btrfs](https://github.com/EdvinAlvarado/configs/blob/master/Arch/Encrypted%20Btrfs.md)
-
-[For Btrfs](https://github.com/EdvinAlvarado/configs/blob/master/Arch/Btrfs.md)
-
 ### Partition Table
-| partition | type | size | mount point |
-| --------- | ---- | ---- | ----------- |
-| /dev/sda1 | EFI  | 260M | /mnt/boot   |
-| /dev/sda2 | swap | 4G   |             |
-| /dev/sda3 | root | 60G  | /mnt        |
-| /dev/sda4 | home | rest | /mnt/home   |
+| partition | type  		| size | mount point			|
+| --------- | ------------	| ---- | ---------------------	|
+| /dev/sda1 | FAT32 		| 500M | /boot					|
+| /dev/sda2 | ext4			| 1G   | /recovery				|
+| /dev/sda3 | Btrfs/crypt	| rest | /						|
+|           |       		|      | /home					|
+|           |       		|      | /var/log				|
+|           |       		|      | /var/cache/pacman/pkg	|
+|           |       		|      | /.snapshots			|
+|           |       		|      | /swap					|
 
 ### Format Partition
 Create partition as the table above
 ```
 fdisk /dev/sda
-fdisk /dev/sda
 mkfs.fat -F 32 -n "BOOT" /dev/sda1
 mkfs.ext4 -L "ROOT" /dev/sda3
 mkfs.ext4 -L "HOME" /dev/sda4
-mkswap /dev/sda2
 ```
 
 ### Mount
@@ -152,7 +148,7 @@ EDITOR=nvim visudo
 ## Reboot
 ```
 exit
-umount -R /mnt
+umount -f -l -R /mnt
 reboot
 ```
 

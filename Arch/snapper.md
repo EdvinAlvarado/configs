@@ -3,25 +3,8 @@
 
 ## Snapper Config
 
-the default snapper config fails as it requires making @snapshots. As it is existing, we have to do it manually.
-```
-cp /usr/share/snapper/config-templates/default /etc/snapper/configs/root
-```
+run arch-post-reboot.sh
 
-You must also add config with the same name as the file to the following folder.
-```
-/etc/conf.d/snapper
--------------------
-SNAPPER_CONFIGS="root"
-```
-
-Enable systemd automatic snapshots (or set cron daemon)
-```
-systemctl enable snapper-timeline.timer
-systemctl start snapper-timeline.timer
-systemctl enable snapper-cleanup.timer
-systemctl start snapper-cleanup.timer
-```
 
 ## Manually rollback
 Boot from a liveusb and mount the the btrfs partition NOT the subvols. This example is assuming root and that the snapshot is number #.
