@@ -1,10 +1,6 @@
-# Connect internet
-iwctl
-ping -c 3 www.google.ecom
-timedatectl set-ntp true
+MOUNT=$1
 
-
-genfstab -U >> /mnt/etc/fstab
+genfstab -U >> $MOUNT/etc/fstab
 
 while true; do
 	read -p "Write CPU: " CPU
@@ -20,7 +16,7 @@ while true; do
 	read -p "Write GPU: " GPU
 	case $GPU in
 		"intel"   ) VIDEOCARD="xf86-video-intel"; break;;
-		"nvidia"  ) VIDEOCARD="nvidia"; break;;
+		"nvidia"  ) VIDEOCARD="nvidia-dkms"; break;;
 		"amdgpu"  ) VIDEOCARD="xf86-video-amdgpu"; break;;
 		"ati"     ) VIDEOCARD="xf86-video-ati"; break;;
 		"nouveau" ) VIDEOCARD="xf86-video-nouveau"; break;;
@@ -30,6 +26,5 @@ while true; do
 done
 
 
-pacstrap /mnt base base-devel linux-zen linux-firmware btrfs-progs snapper snap-pac cryptsetup networkmanager neovim opendoas ranger python grub efibootmgr zsh git $CPUCODE $VIDEOCARD
+pacstrap $MOUNT base base-devel linux-zen linux-firmware btrfs-progs snapper snap-pac cryptsetup networkmanager neovim opendoas ranger python grub efibootmgr zsh git $CPUCODE $VIDEOCARD
 
-arch-chroot /mnt

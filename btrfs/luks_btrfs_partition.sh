@@ -1,19 +1,7 @@
-read -p "mount point (e.g. /mnt/gentoo): " MOUNT
-if [ ! -d $MOUNT ]
-then
-	mkdir $MOUNT
-fi
-lsblk
-read -p "Storage partition (e.g. /dev/sda3)" DEVICE
-while true; do
-	read -p "Are you installing Arch? " yn
-	case $yn in
-		[Yy]* ) DISTRO="arch"; break;;
-		[Nn]* ) DISTRO=""; break;;
-		*     ) echo "Answer yes or no...";;
-	esac
-done
 
+DEVICE=$1
+MOUNT=$2
+DISTRO=$3
 
 # create
 cryptsetup --type luks1 --label="CRYPTROOT" luksFormat $DEVICE

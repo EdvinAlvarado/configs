@@ -1,0 +1,7 @@
+label: gpt
+unit: sectors
+sector-size: 512
+
+start=	2048,	size=	976563,	type=83
+start=	978612,	size=	1953125,type=83
+start=	2931737,				type=83
