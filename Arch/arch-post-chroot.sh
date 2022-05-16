@@ -25,7 +25,7 @@ passwd $NAME
 echo "permit persist :$NAME" >> /etc/doas.conf
 
 echo "add $NAME ALL=(ALL) ALL"
-EDITOR=vim visudo
+EDITOR=nvim visudo
 
 
 mkinitcpio -P
@@ -34,6 +34,8 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 systemctl enable NetworkManager
 
+
+chsh -s $(which zsh)
 
 echo "Do any configurations needed. When finished do:"
 echo "1. exit"
