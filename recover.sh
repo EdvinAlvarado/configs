@@ -16,7 +16,7 @@ while true; do
 	read -p "Install zsh configs? " yn
 	case $yn in
 		[Yy]* ) cp .zshrc ~/.zshrc; 
-				chsh -s /usr/bin/zsh; break;;
+			chsh -s $(which zsh); break;;
 		[Nn]* ) break;;
 		*     ) echo "Yes or No?";;
 	esac
