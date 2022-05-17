@@ -16,7 +16,7 @@ while true; do
 	read -p "Write GPU: " GPU
 	case $GPU in
 		"intel"   ) VIDEOCARD="xf86-video-intel"; break;;
-		"nvidia"  ) VIDEOCARD="nvidia"; break;;
+		"nvidia"  ) VIDEOCARD="nvidia nvidia-settings"; break;;
 		"amdgpu"  ) VIDEOCARD="xf86-video-amdgpu"; break;;
 		"ati"     ) VIDEOCARD="xf86-video-ati"; break;;
 		"nouveau" ) VIDEOCARD="xf86-video-nouveau"; break;;
@@ -37,9 +37,9 @@ while true; do
 	esac
 done
 
-if [[ $KERNEL != "linux" ]] && [[ $VIDEOCARD = "nvidia" ]]
+if [[ $KERNEL != "linux" ]] && [[ $VIDEOCARD = "nvidia nvidia-settings" ]]
 then
-	VIDEOCARD="nvidia-dkms"
+	VIDEOCARD="nvidia-dkms nvidia-settings"
 fi
 
 pacstrap $MOUNT base base-devel $KERNEL linux-firmware btrfs-progs snapper snap-pac cryptsetup networkmanager neovim opendoas ranger python grub efibootmgr zsh git $CPUCODE $VIDEOCARD
