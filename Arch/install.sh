@@ -61,16 +61,17 @@ w
 # Partition Formatting
 mkfs.fat -F 32 -n "BOOT" "${DEVICE}1"
 mkfs.ext4 -L "RECOVERY" "${DEVICE}2"
-../btrfs/luks_btrfs_partition.sh "${DEVICE}3" $MOUNT $DISTRO
-mkdir $MOUNT/{boot,recovery}
-mount /dev/sda1 $MOUNT/boot
+../btrfs/luks_btrfs_partition.sh "${DEVICE}3" $MOUNT $DISTRO 0
+mkdir $MOUNT/{efi,recovery}
+mount /dev/sda1 $MOUNT/efi
 mount /dev/sda2 $MOUNT/recovery
 cryptsetup luksHeaderBackup "${DEVICE}3" --header-backup-file $MOUNT/recovery/LUKS_header_backup.img
 lsblk
 sleep 5
-# Arch Preparation
+
+# pacstrap
 ./$PRE_CHROOT_SCRIPT $MOUNT
-# File Configuration
+# Mount Configuration
 genfstab -U $MOUNT >> $MOUNT/etc/fstab
 vim $MOUNT/etc/fstab
 # Chroot
