@@ -1,7 +1,5 @@
 MOUNT=$1
 
-genfstab -U >> $MOUNT/etc/fstab
-
 while true; do
 	read -p "Write CPU: " CPU
 	case $CPU in
@@ -27,13 +25,12 @@ done
 
 while true; do
 	read -p "Write kernel: " KERN
-	case $KERNEL in
-		"linux"   			) KERNEL=KERN; break;;
-		"linux-zen"  		) KERNEL=KERN; break;;
-		"linux-lts"  		) KERNEL=KERN; break;;
-		"linux-hardened"	) KERNEL=KERN; break;;
-		"exit"    			) KERNEL=""; break;;
-		*         			) "Write KERNEL or exit";;
+	case $KERN in
+		"linux"   			) KERNEL=$KERN; break;;
+		"linux-zen"  		) KERNEL=$KERN; break;;
+		"linux-lts"  		) KERNEL=$KERN; break;;
+		"linux-hardened"	) KERNEL=$KERN; break;;
+		*         			) "Write KERNEL";;
 	esac
 done
 
@@ -42,5 +39,6 @@ then
 	VIDEOCARD="nvidia-dkms nvidia-settings"
 fi
 
-pacstrap $MOUNT base base-devel $KERNEL linux-firmware btrfs-progs snapper snap-pac cryptsetup networkmanager neovim opendoas ranger python grub efibootmgr zsh git $CPUCODE $VIDEOCARD
+pacman -Sy
+pacstrap $MOUNT base base-devel arch-install-scripts $KERNEL linux-firmware zram-generator btrfs-progs snapper snap-pac cryptsetup networkmanager neovim opendoas ranger python grub efibootmgr zsh git $CPUCODE $VIDEOCARD
 

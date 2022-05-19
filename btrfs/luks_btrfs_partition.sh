@@ -15,9 +15,8 @@ btrfs subvolume create $MOUNT/@snapshots
 btrfs subvolume create $MOUNT/@swap
 
 if [ "$DISTRO" == "arch" ]; then
-	btrfs subvolume create $MOUNT/@var_log
-	mkdir -p $MOUNT/@/var/cache/pacman
-	btrfs subvolume create $MOUNT/@/var/cache/pacman/pkg
+	btrfs subvolume create $MOUNT/@log
+	btrfs subvolume create $MOUNT/@pkg
 fi
 
 # mount
@@ -30,13 +29,11 @@ mount -o subvol=@swap /dev/mapper/cryptroot $MOUNT/swap
 
 if [ "$DISTRO" == "arch" ]; then
 	mkdir -p $MOUNT/var/log
-	mount -o compress=zstd,subvol=@var_log /dev/mapper/cryptroot $MOUNT/var/log
+	mount -o compress=zstd,subvol=@log /dev/mapper/cryptroot $MOUNT/var/log
+	mkdir -p $MOUNT/var/cache/pacman/pkg
+	mount -o compress=zstd,subvol=@pkg /dev/mapper/cryptroot $MOUNT/var/cache/pacman/pkg
 fi
 
-mkdir $MOUNT/{efi,recovery}
-mount /dev/sda1 $MOUNT/efi
-mount /dev/sda2 $MOUNT/recovery
-cryptsetup luksHeaderBackup $DEVICE --header-backup-file $MOUNT/recovery/LUKS_header_backup.img
 
 # swap
 truncate -s 0 $MOUNT/swap/swapfile
@@ -49,16 +46,6 @@ mkswap $MOUNT/swap/swapfile
 swapon $MOUNT/swap/swapfile
 
 # crypto keyfile
-dd bs=512 count=4 if=/dev/random of=/crypto_keyfile.bin iflag=fullblock
-chmod 600 /crypto_keyfile.bin
-cryptsetup luksAddKey $DEVICE /crypto_keyfile.bin
-
-# File Configuration
-if [ "$DISTRO" == "arch" ]; then
-	sed -i "s/BINARIES=()/BINARIES=(btrfs)/g" $MOUNT/etc/mkinitcpio.conf
-	sed -i "s/FILES=()/FILES=(/crypto_keyfile.bin)/g" $MOUNT/etc/mkinitcpio.conf
-	sed -i "s/keyboard/keyboard keymap consolefont encrypt/g" $MOUNT/etc/mkinitcpio.conf
-
-	sed -i "s/#GRUB_ENABLE_CRYPTODISK=*$/GRUB_ENABLE_CRYPTODISK=y/g" $MOUNT/etc/default/grub
-	sed -i 's/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="cryptdevice=$DEVICE:cryptroot:allow-discards"/g' $MOUNT/etc/default/grub
-fi
+dd bs=512 count=4 if=/dev/random of=$MOUNT/crypto_keyfile.bin iflag=fullblock
+chmod 600 $MOUNT/crypto_keyfile.bin
+cryptsetup luksAddKey $DEVICE $MOUNT/crypto_keyfile.bin
