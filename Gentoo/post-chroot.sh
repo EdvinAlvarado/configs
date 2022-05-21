@@ -1,73 +1,28 @@
+DEVICE=$1
+
 # finish chrooting
 source /etc/profile
 export PS1="(chroot) ${PS1}"
 ln -sf /proc/self/mounts /etc/mtab
 
+# Portage TMPDIR on tmpfs: build files run on RAM
+echo "tmpfs\t/var/tmp/portage\ttmpfs\tsize=8G,uid=portage,gid=portage,mode=775,nosuid,noatime,nodev\t0 0" >> /etc/fstab
+mount /var/tm/portage
+
 # update repo
 emerge --sync
-
-while true; do
-	read -p "This script assumes your arch is amd64. Will you be installing amd64? " AMD64
-	case $AMD64 in
-		[Yy]* ) echo "script will continue."; break;;
-		[Nn]* ) echo "script will stop here. Continue Installation yourself."; break;;
-		*     ) echo "Yes or no?";;
-	esac
-done
-### Portage ---------------------------------------------------------------------------------------
-# Confirm appropiate profile
-eselect profile list
-
-# package.use
-touch /etc/portage/package.use/main
-echo 'sys-fs/cryptsetup kernel -gcrypt -openssl -udev' >> /etc/portage/package.use/main
-
-# accept_keywords
-touch /etc/portage/package.accept_keywords/main
-echo "sys-fs/btrfs-progs ~amd64" >> /etc/portage/package.accept_keywords/main
-echo "sys-boot/grub:2 ~amd64" >> /etc/portage/package.accept_keywords/main
-echo "sys-fs/cryptsetup ~amd64" >> /etc/portage/package.accept_keywords/main
-echo "sys-kernel/gentoo-sources ~amd64" >> /etc/portage/package.accept_keywords/main
-touch /etc/portage/package.accept_keywords/flatpak
-echo "sys-apps/flatpak ~amd64" >> /etc/portage/package.accept_keywords/flatpak
-echo "acct-user/flatpak ~amd64" >> /etc/portage/package.accept_keywords/flatpak
-echo "acct-group/flatpak ~amd64" >> /etc/portage/package.accept_keywords/flatpak
-
-# /etc/portage/make.conf
-while true; do
-	read -p "Write the minimum of your cpu cores or RAM divided by 2: " MAKEOPTS
-	if [[ $MAKEOPTS =~ ^[0-9]+$ ]]; then
-		MAKE='MAKEOPTS="-j${MAKEOPTS}"';
-		echo "$MAKE" >> /etc/portage/make.conf; break;
-	else
-		echo "write a number...";
-	fi
-done
-
-while true; do
-	read -p "Write a graphic driver: " VIDEO 
-	case $VIDEO in
-		intel|amdgpu|radeon|nvidea|nouveau|virtualbox|vmware ) echo -n 'VIDEO_CARDS="' >> /etc/portage/make.conf; echo -n $VIDEO >> /etc/portage/make.conf; echo '"' >> /etc/portage/make.conf; break;;
-		*        ) echo "write an acceptable video card...";;
-	esac
-done
-
-echo 'GRUB_PLATFORMS="efi-64"' >> /etc/portage/make.conf
-echo 'ACCEPT_LICENSE="-* @BINARY-REDISTRIBUTABLE"' >> /etc/portage/make.conf
-echo 'USE="device-mapper mount cryptsetup initramfs"' >> /etc/portage/make.conf
-
-sed -i 's/CFLAGS="/CFLAGS="-march=native/g' /etc/portage/make.conf
-
+eselect news read
 ### packages -----------------------------------------------------------------------------------------
-emerge -uDN --autounmask-write @world linux-firmware btrfs-progs snapper cryptsetup genfstab vim genkernel gentoo-sources networkmanager xorg-server dev-vcs/git doas grub zsh sudo ranger links 
+emerge -auDN --autounmask-contine @world linux-firmware btrfs-progs snapper cryptsetup genfstab neovim genkernel gentoo-sources networkmanager xorg-server dev-vcs/git doas grub zsh sudo ranger links sys-apps/flatpak zram-generator
 etc-update
-emerge -auDN --autounmask-write @world linux-firmware btrfs-progs snapper cryptsetup genfstab vim genkernel gentoo-sources networkmanager xorg-server dev-vcs/git doas grub zsh sudo ranger links 
+sleep 5
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 while true; do
 	read -p "Write CPU: " CPU
 	case $CPU in
-		"intel" ) emerge -a intel-microcode; break;;
-		"amd"   ) emerge -a linux-firmware; break;;
+		"intel" ) emerge intel-microcode; break;;
+		"amd"   ) emerge linux-firmware; break;;
 		"exit"  ) break;;
 		*       ) "Write CPU or exit";;
 	esac
@@ -76,45 +31,31 @@ done
 while true; do
 	read -p "Write GPU: " GPU
 	case $GPU in
-		"intel"  ) echo "x11-libs/libdrm video_cards_intel" >> /etc/portage/package.use; emerge -a xf86-video-intel; break;;
-		"nvidia" ) emerge -a nvidia-drivers; break;;
-		"amd"    ) emerge -a xf86-video-amdgpu; break;;
+		"intel"  ) echo "x11-libs/libdrm video_cards_intel" >> /etc/portage/package.use/main; emerge xf86-video-intel; break;;
+		"nvidia" ) emerge nvidia-drivers; break;;
+		"amd"    ) emerge xf86-video-amdgpu; break;;
 		"exit"   ) break;;
 		*        ) "Write GPU or exit";;
 	esac
 done
 
-echo "Check if there are any masking issues"
-etc-update
-read -p "Write packages impacted by masking: " MASKED
-if [ "$MASKED" != "" ]; then
-	emerge -auDN $MASKED
-fi
-
-eselect news read
-
-
 ### fstab, GRUB, kernel ---------------------------------------------------------------------------
 # /etc/fstab
 genfstab -U / >> /etc/fstab
-
 # GRUB
 CRYPTO=$(blkid | egrep "crypto_LUKS" | egrep -o '\sUUID="[[:alnum:]\|-]*"' | egrep -o '[[:alnum:]\|-]*' | tail -n1)
 ROOT=$(blkid | egrep "ROOT" | egrep -o '\sUUID="[[:alnum:]\|-]*"' | egrep -o '[[:alnum:]\|-]*' | tail -n1)
 
 #FIXME For now the rd commands do nothingvas far as I can notice
 echo "GRUB_ENABLE_CRYPTODISK=y" >> /etc/default/grub
-echo -n 'GRUB_CMDLINE_LINUX="init=/lib/systemd/systemd crypt_root=UUID=' >> /etc/default/grub
-echo -n $CRYPTO >> /etc/default/grub
-echo -n ' root=UUID=' >> /etc/default/grub
-echo -n $ROOT >> /etc/default/grub
-echo ' rootflags=subvol=@ root_trim=yes rd.luks=1 rd.luks.key=/crypto_keyfile.bin"' >> /etc/default/grub
+echo "GRUB_CMDLINE_LINUX=\"init=/lib/systemd/systemd crypt_root=UUID=${CRYPTO} root=UUID=${ROOT} rootflags=subvol=@ root_trim=yes rd.luks=1 rd.luks.key=/crypto_keyfile.bin\"" >> /etc/default/grub
 
 # Kernel
 eselect kernel list
+sleep 5
 eselect kernel set 1
 
-echo 'MAKEOPTS="$(portageq envvar MAKEOPTS)"' >> /etc/genkernel.conf
+echo "MAKEOPTS=\"\$(portageq envvar MAKEOPTS)\"" >> /etc/genkernel.conf
 echo 'LUKS="yes"' >> /etc/genkernel.conf
 echo 'BTRFS="yes"' >> /etc/genkernel.conf
 
@@ -122,28 +63,22 @@ genkernel --btrfs --luks --symlink --menuconfig --bootloader=grub2 all
 
 # FIXME grub-install will not show on boot
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=BOOT
-echo "HOTFIX: Some Motherboards refuse to search for custom named boot entries. To fix this please fill in the following"
-read -p "    Write EFI partition (e.g. /dev/sda1): " EFIPART
-read -p "    Write EFI mount (e.g. /efi, /boot/efi): " EFIMOUNT
-if [ "$EFIPART" != "" ]; then
-	if [ "$EFIMOUNT" != "" ]; then
-		mkdir $EFIMOUNT/EFI/BOOT
-		cp $EFIMOUNT/EFI/GRUB/* $EFIMOUNT/EFI/BOOT/BOOTx64.EFI
-		echo "    If your system does not have this bug, you might see two boots in your system. Both should direct to the same place."
-		echo "    WARNING: While this bug is unresolved, running grub-install will not update the system without manually copying over the efi file to EFI/BOOT/BOOTx64.EFI"
-	else
-		echo "    EFI mount was not given. Copy grub efi file to 'ESP'/EFI/BOOT/BOOTx64.efi."
-	fi
-else
+read -p "did grub did not boot last time? " yn
+if [ $yn in [Yy]* ]; then
+	 echo "HOTFIX: Some Motherboards refuse to search for custom named boot entries. To fix this please fill in the following"
+	 sleep 5
+	#mkdir /efi/EFI/BOOT
+	 cp /efi/EFI/GRUB/* /efi/EFI/BOOT/BOOTx64.EFI
+	 echo "    If your system does not have this bug, you might see two boots in your system. Both should direct to the same place."
+	echo "    WARNING: While this bug is unresolved, running grub-install will not update the system without manually copying over the efi file to EFI/BOOT/BOOTx64.EFI"
+	echo "    EFI mount was not given. Copy grub efi file to 'ESP'/EFI/BOOT/BOOTx64.efi."
 	echo "    EFI partition was not given. Copy grub efi file to 'ESP'/EFI/BOOT/BOOTx64.efi"
+	sleep 10
 fi
 grub-mkconfig -o /boot/grub/grub.cfg
 
 
 ### General Configuration -------------------------------------------------------------------------
-systemctl enable NetworkManager
-systemd-machine-id-setup
-
 #FIXME add loop
 ls /usr/share/zoneinfo/
 read -p "Write Region: " REGION
@@ -153,9 +88,16 @@ read -p "Write city: " CITY
 ln -sf /usr/share/zoneinfo/$REGION/$CITY /etc/localtime
 hwclock --systohc
 
-vim /etc/locale.gen
+sed -i -e "s/#en_US.UTF-8/en_US.UTF-8/" /etc/locale.gen
+while true; do
+	read -p "Edit language? (default: en_US.UTF-8) " yn
+	case $yn in
+		[Yy]* 	) nvim /etc/locale.gen; break;;
+		[Nn]*|"") break;;
+		*    	) echo "Yes or No?";;
+	esac
+done
 locale-gen
-
 echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 
 read -p "hostname: " HOSTNAME
@@ -168,10 +110,15 @@ read -p "username: " NAME
 useradd -m $NAME
 passwd $NAME
 
+# Security
 echo "permit persist :$NAME" >> /etc/doas.conf
-
 echo "add $NAME ALL=(ALL) ALL"
-EDITOR=vim visudo
+sleep 2
+echo "${NAME} ALL=(ALL:ALL) ALL" | sudo EDITOR='tee -a' visudo
+EDITOR=nvim visudo
 
-emerge sys-apps/flatpak
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+systemctl enable NetworkManager
+systemd-machine-id-setup
+echo "[zram0]" | sudo tee -a /etc/systemd/zram-generator.conf
+chsh -s $(which zsh)
+sleep 20
