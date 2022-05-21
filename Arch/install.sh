@@ -74,6 +74,7 @@ sleep 5
 # Mount Configuration
 genfstab -U $MOUNT >> $MOUNT/etc/fstab
 vim $MOUNT/etc/fstab
+sed -i -e "s/#ParallelDownloads = 5/ParallelDownloads = 10/" >> $MOUNT/etc/pacman.conf
 # Chroot
 cp $POST_CHROOT_SCRIPT $MOUNT/$POST_CHROOT_SCRIPT
 arch-chroot $MOUNT ./$POST_CHROOT_SCRIPT "${DEVICE}3"
