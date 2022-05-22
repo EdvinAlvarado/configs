@@ -50,8 +50,16 @@ sed -i -e "s/keyboard/keyboard keymap consolefont encrypt/g" /etc/mkinitcpio.con
 sed -i -e "s/#GRUB_ENABLE_CRYPTODISK=/GRUB_ENABLE_CRYPTODISK=/g" /etc/default/grub
 sed -i -e "s/GRUB_DISABLE_RECOVERY=/#GRUB_DISABLE_RECOVERY=/g" /etc/default/grub
 sed -i -e "s|GRUB_CMDLINE_LINUX=\"\"|GRUB_CMDLINE_LINUX=\"cryptdevice=UUID=${CRYPTO}:cryptroot:allow-discards cryptkey=rootfs:/crypto_keyfile.bin\"|g" /etc/default/grub
-nvim /etc/mkinitcpio.conf
-nvim /etc/default/grub
+
+while true; do
+	read -p "Do you have another OS or would you like to automatically detect one? " yn
+	case $yn in
+		[Yy]* 	) sed -i -e "s/#GRUB_DISABLE_OS_PROBER=/GRUB_DISABLE_OS_PROBER=/g" /etc/default/grub; break;;
+		[Nn]*|"") break;;
+		*    	) echo "Yes or No?";;
+	esac
+done
+
 mkinitcpio -P
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB
 grub-mkconfig -o /boot/grub/grub.cfg
