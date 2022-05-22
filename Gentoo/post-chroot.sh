@@ -12,8 +12,22 @@ mount /var/tm/portage
 # update repo
 emerge --sync
 eselect news read
+
+# Profile and DE/WM installation
+DEWM_PKG=""
+while true; do
+	read -p "DE or WM: " DEWM
+	case $DEWM in
+		plasma|kde	) DEWM_PKG="plasma-meta kdeaccessibility-meta kdeadmin-meta kdecore-meta kdegraphics-meta kdenetwork-meta kdeutils-meta"; eselect profile set $(eselect profile list | egrep "plasma/systemd" | egrep -o "[0-9]+" | head -n1); touch /etc/portage/package.use/kde; echo "kde-plasma/plasma-meta bluetooth browser-integration colord crash-handler crypt desktop-portal discover display-manager grub gtk handbook kwallet legacy-systray networkmanager sddm smart systemd wallpapers" >> /etc/portage/package.accept_keywords/kde; break;;
+		xmonad		) DEWM_PKG="xmonad xmonad-contrb xmobar"; eselect profile set $(eselect profile list | egrep "desktop" | egrep -o "[0-9]+" | head -n1); break;;
+		*			) echo "not a supported DE or WM";;
+		exit|[q]*	) break;;
+	esac
+done
+
+
 ### packages -----------------------------------------------------------------------------------------
-emerge -auDN --autounmask-contine @world linux-firmware btrfs-progs snapper cryptsetup genfstab neovim genkernel gentoo-sources networkmanager xorg-server dev-vcs/git doas grub zsh sudo ranger links sys-apps/flatpak zram-generator
+emerge -auDN --autounmask-contine @world euses gentoolkit linux-firmware btrfs-progs snapper cryptsetup genfstab neovim nodejs genkernel gentoo-sources networkmanager xorg-server dev-vcs/git doas grub zsh sudo ranger links sys-apps/flatpak zram-generator $DEWM_PKG
 etc-update
 sleep 5
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -117,6 +131,9 @@ sleep 2
 echo "${NAME} ALL=(ALL:ALL) ALL" | sudo EDITOR='tee -a' visudo
 EDITOR=nvim visudo
 
+if [ $DEWM in plasma|kde ]; then
+	systemctl enable sddm
+fi
 systemctl enable NetworkManager
 systemd-machine-id-setup
 echo "[zram0]" | sudo tee -a /etc/systemd/zram-generator.conf
