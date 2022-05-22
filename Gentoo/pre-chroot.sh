@@ -90,25 +90,7 @@ eselect profile list
 touch $MOUNT/etc/portage/package.use/main
 echo 'sys-fs/cryptsetup kernel -gcrypt -openssl -udev' >> $MOUNT/etc/portage/package.use/main
 
-# accept_keywords
-touch $MOUNT/etc/portage/package.accept_keywords/main
-echo "sys-fs/btrfs-progs ~amd64" >> $MOUNT/etc/portage/package.accept_keywords/main
-echo "sys-boot/grub:2 ~amd64" >> $MOUNT/etc/portage/package.accept_keywords/main
-echo "sys-fs/cryptsetup ~amd64" >> $MOUNT/etc/portage/package.accept_keywords/main
-echo "sys-kernel/gentoo-sources ~amd64" >> $MOUNT/etc/portage/package.accept_keywords/main
-
-touch $MOUNT/etc/portage/package.accept_keywords/zram
-echo "sys-apps/zram-generator ~amd64" >> $MOUNT/etc/portage/package.accept_keywords/zram
-echo "app-text/ronn-ng ~amd64" >> $MOUNT/etc/portage/package.accept_keywords/zram
-echo "dev-ruby/kramdown ~amd64" >> $MOUNT/etc/portage/package.accept_keywords/zram
-echo "dev-ruby/stringex ~amd64" >> $MOUNT/etc/portage/package.accept_keywords/zram
-
-touch $MOUNT/etc/portage/package.accept_keywords/flatpak
-echo "sys-apps/flatpak ~amd64" >> $MOUNT/etc/portage/package.accept_keywords/flatpak
-echo "acct-user/flatpak ~amd64" >> $MOUNT/etc/portage/package.accept_keywords/flatpak
-echo "acct-group/flatpak ~amd64" >> $MOUNT/etc/portage/package.accept_keywords/flatpak
-
-# $MOUNT/etc/portage/make.conf
+# /etc/portage/make.conf
 while true; do
 	read -p "Write the minimum of your cpu cores or RAM divided by 2: " MAKEOPTS
 	if [[ $MAKEOPTS =~ ^[0-9]+$ ]]; then
@@ -129,7 +111,8 @@ done
 
 echo 'GRUB_PLATFORMS="efi-64"' >> $MOUNT/etc/portage/make.conf
 echo 'ACCEPT_LICENSE="-* @BINARY-REDISTRIBUTABLE"' >> $MOUNT/etc/portage/make.conf
-echo 'USE="device-mapper mount cryptsetup initramfs"' >> $MOUNT/etc/portage/make.conf
+echo 'ACCEPT_KEYWORDS="~amd64"' >> $MOUNT/etc/portage/make.conf
+echo 'USE="device-mapper mount cryptsetup initramfs pulseaudio"' >> $MOUNT/etc/portage/make.conf
 
 sed -i 's/COMMON_FLAGS="/COMMON_FLAGS="-march=native /g' $MOUNT/etc/portage/make.conf
 
