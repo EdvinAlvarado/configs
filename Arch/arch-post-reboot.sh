@@ -29,3 +29,15 @@ sed -i -e 's/#post/post/' /etc/snap-pac.ini
 sed -i -e 's/#important/important/g' /etc/snap-pac.ini
 sed -i -e 's/"pacman -Syu"/"pacman -Syu", "pikaur -Syu"/' /etc/snap-pac.ini
 sed -i -e 's/"linux"/"linux", "linux-zen", "nvidia-utils", "nvidia-dkms", "systemd", "systemd-libs", "zram-generator", "amd-ucode", "intel-ucode", "networkmanager", "linux-firmware", "btrfs-progs"/' /etc/snap-pac.ini
+
+## Network Printing
+
+# You must disable the systemd DNS resolver
+systemctl stop systemd-resolved.service
+systemctl disable systemd-resolved.service
+
+# and use avahi and mdns for it to work.
+pacman -S nss-mdns avahi samba
+systemctl enable --now avahi-daemon.service
+sed -i -e 's/mymachines/mymachines mdns_minimal [NOTFOUND=return]/g' /etc/nsswitch.conf
+systemctl restart cups.service
