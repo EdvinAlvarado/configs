@@ -18,6 +18,8 @@ while true; do
 	esac
 done
 locale-gen
+
+#TODO change to sed
 echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 
 read -p "hostname: " HOSTNAME
@@ -34,10 +36,7 @@ passwd $NAME
 
 # Security
 echo "permit persist :$NAME" >> /etc/doas.conf
-echo "add $NAME ALL=(ALL) ALL"
-sleep 2
 echo "${NAME} ALL=(ALL:ALL) ALL" | sudo EDITOR='tee -a' visudo
-EDITOR=nvim visudo
 
 
 # Grub Configuration
