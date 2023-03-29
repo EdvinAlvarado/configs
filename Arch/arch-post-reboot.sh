@@ -20,7 +20,8 @@ rm -rf pikaur
 
 ## Applications 
 # KDE
-sudo pacman -S kde-accessibility-meta kde-graphiics-meta kde-multimedia-meta kdeconnect kdenetwork-filesharing kget kio-extras kio-gdrive kio-zeroconf krdc krfb kde-pim-meta kde-system-meta ark filelight kate kbackup kcalc kcharselect kdf kdialog kfind kgpg print-manager skanpage sweeper yakuake klatexformula kdiff3 kompare dolphin-plugins 
+sudo pacman -S kde-accessibility-meta kde-graphics-meta kde-multimedia-meta kdeconnect kdenetwork-filesharing kget kio-extras kio-gdrive kio-zeroconf krdc krfb kde-pim-meta kde-system-meta ark filelight kate kbackup kcalc kcharselect kdf kdialog kfind kgpg print-manager skanpage sweeper yakuake kdiff3 kompare dolphin-plugins
+pikaur -S klatexformula
 # GUI
 sudo pacman -S mkvtoolnix-cli mkvtoolnix-gui deluge deluge-gtk code libreoffice vlc texlive-bin ghostwriter firefox
 # Flatpak
@@ -29,6 +30,7 @@ flatpak install discord flatseal geogebra komikku monero signal spotify thinkors
 flatpak install steam lutris minecraft
 # Pikaur
 pikaur -S sublime-merge anki frame-eth ledger-live 
+sudo pacman -S mkvtoolnix-cli mkvtoolnix-gui deluge deluge-gtk code libreoffice vlc texlive-bin ghostwriter firefox keepass
 
 
 ## Japanese
