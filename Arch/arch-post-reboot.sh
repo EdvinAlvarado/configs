@@ -1,9 +1,10 @@
 # Run this before running this scritpy
 # sudo pacman -S --needed git base-devel
 
+
 ## System Packages
 # CLI
-sudo pacman -S neovim nodejs ranger htop glances flatpak rustup zsh
+sudo pacman -S neovim nodejs npm ranger htop glances flatpak rustup zsh 
 # Rust
 rustup default stable
 # bluetooth
