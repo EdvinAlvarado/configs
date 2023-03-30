@@ -32,8 +32,6 @@ sudo pacman -S mkvtoolnix-cli mkvtoolnix-gui deluge deluge-gtk code libreoffice 
 sudo pacman -S adobe-source-han-sans-jp-fonts adobe-source-han-sans-jp-fonts otf-ipafont ttf-hanazono ttf-sazanami
 sudo pacman -S fcitx5-im
 pikaur -S fcitx5-mozc-ut fctix5-breeze
-# TODO does not do anything
-fcitx5-configtool &&
 
 
 ## Snapper
@@ -96,3 +94,4 @@ pikaur -S ledger-live
 echo ""
 echo "Finished"
 echo "run recover.sh for neovim and zsh setup"
+echo "Run fcitx5-configtool to setup mozc"
