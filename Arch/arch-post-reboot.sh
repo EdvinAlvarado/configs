@@ -21,11 +21,9 @@ makepkg -fsri
 cd ..
 rm -rf pikaur
 
-
 ## Applications 
 # KDE
 sudo pacman -S kde-accessibility-meta kde-graphics-meta kde-multimedia-meta kdeconnect kdenetwork-filesharing kget kio-extras kio-gdrive kio-zeroconf krdc krfb kde-pim-meta kde-system-meta ark filelight kate kbackup kcalc kcharselect kdf kdialog kfind kgpg print-manager skanpage sweeper yakuake kdiff3 kompare dolphin-plugins
-pikaur -S klatexformula
 # GUI
 sudo pacman -S mkvtoolnix-cli mkvtoolnix-gui deluge deluge-gtk code libreoffice vlc texlive-bin ghostwriter firefox keepass
 
@@ -63,7 +61,8 @@ sudo sed -i -e 's/#post/post/' /etc/snap-pac.ini
 sudo sed -i -e 's/#important/important/g' /etc/snap-pac.ini
 sudo sed -i -e 's/"pacman -Syu"/"pacman -Syu", "pikaur -Syu"/' /etc/snap-pac.ini
 sudo sed -i -e 's/"linux"/"linux", "linux-zen", "nvidia-utils", "nvidia-dkms", "systemd", "systemd-libs", "zram-generator", "amd-ucode", "intel-ucode", "networkmanager", "linux-firmware", "btrfs-progs"/' /etc/snap-pac.ini
-sudo vi /etc/snap-pac.ini
+sudo nvim /etc/snap-pac.ini
+
 
 ## Network Printing
 # You must disable the systemd DNS resolver
@@ -96,4 +95,5 @@ pikaur -S ledger-live
 echo ""
 echo "Finished"
 echo "run recover.sh for neovim and zsh setup"
+echo "Running KDE Wayland might require disabling saving sessions"
 echo "Run fcitx5-configtool to setup mozc"
