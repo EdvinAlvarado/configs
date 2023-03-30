@@ -10,7 +10,7 @@ echo "WantedBy=multi-user.target" | sudo tee -a /usr/lib/systemd/system/fprintd.
 sudo systemctl restart fprintd.service
 sudo systemctl enable fprintd.service
 fprintd-delete $USER
-frpintd-enroll
+fprintd-enroll
 fprintd-verify
 # Assumes kde
 sudo sed -i '1s/^/auth\t\sufficient\tpam_fprintd.so\n/' /etc/pam.d/sddm

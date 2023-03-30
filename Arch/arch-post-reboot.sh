@@ -81,7 +81,7 @@ sudo systemctl restart cups.service
 
 ## Extra Applications 
 # Flatpak
-flatpak install discord flatseal geogebra komikku monero signal spotify thinkorswim whatsapp googleChrome keepasxc chrome
+flatpak install discord flatseal geogebra komikku monero signal spotify thinkorswim whatsapp keepassxc chrome
 # Games
 flatpak install steam lutris minecraft
 pikaur -S game-devices-udev
