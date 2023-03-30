@@ -11,7 +11,7 @@ source "$HOME/.cargo/env"
 rustup component add rust-analyzer rustfmt rust-src clippy
 # bluetooth
 sudo pacman -S bluez bluez-utils
-systemctl enable --now bluetooth.service
+sudo systemctl enable --now bluetooth.service
 # pikaur
 git clone https://aur.archlinux.org/pikaur.git
 cd pikaur
@@ -50,8 +50,8 @@ sudo chmod 750 /.snapshots
 # Setup home config
 sudo snapper -c home create-config /home
 # Activate automatic snapshots
-systemctl enable --now snapper-timeline.timer
-systemctl enable --now snapper-cleanup.timer
+sudo systemctl enable --now snapper-timeline.timer
+sudo systemctl enable --now snapper-cleanup.timer
 # Setup pre/post root snapshots for pacman transactions
 # TODO root command did not work. added fix. not tested
 sudo sed -i -e 's/#\[root\]/\[root\]/' /etc/snap-pac.ini
@@ -67,16 +67,16 @@ sudo vi /etc/snap-pac.ini
 
 ## Network Printing
 # You must disable the systemd DNS resolver
-systemctl stop systemd-resolved.service
-systemctl disable systemd-resolved.service
+sudo systemctl stop systemd-resolved.service
+sudo systemctl disable systemd-resolved.service
 # and use avahi and mdns for it to work.
 sudo pacman -S nss-mdns avahi samba
-systemctl enable --now avahi-daemon.service
+sudo systemctl enable --now avahi-daemon.service
 sudo sed -i -e 's/mymachines/mymachines mdns_minimal [NOTFOUND=return]/g' /etc/nsswitch.conf
 # CUPS
 sudo pacman -S cups cups-pdf
-systemctl enable --now cups.service
-systemctl restart cups.service
+sudo systemctl enable --now cups.service
+sudo systemctl restart cups.service
 
 
 ## Extra Applications 

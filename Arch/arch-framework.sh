@@ -7,8 +7,8 @@ sudo pacman -S fprintd
 echo "" | sudo tee -a /usr/lib/systemd/system/fprintd.service
 echo "[Install]" | sudo tee -a /usr/lib/systemd/system/fprintd.service
 echo "WantedBy=multi-user.target" | sudo tee -a /usr/lib/systemd/system/fprintd.service
-systemctl restart fprintd.service
-systemctl enable fprintd.service
+sudo systemctl restart fprintd.service
+sudo systemctl enable fprintd.service
 fprintd-delete $USER
 frpintd-enroll
 fprintd-verify
