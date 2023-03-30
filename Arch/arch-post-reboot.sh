@@ -1,6 +1,8 @@
 # Run this before running this scritpy
 # sudo pacman -S --needed git base-devel
 
+# Pacman Config
+sudo sed -i -e "s/#ParallelDownloads = 5/ParallelDownloads = 10/" /etc/pacman.conf
 
 ## System Packages
 # CLI
