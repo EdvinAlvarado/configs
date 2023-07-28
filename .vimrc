@@ -1,9 +1,10 @@
 " Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
-call plug#begin('~/.vim/plugged')
+call plug#begin('~\vimfiles\plugged')
 Plug 'vim-airline/vim-airline'
 Plug 'preservim/nerdtree'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
@@ -12,9 +13,8 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'patstockwell/vim-monokai-tasty'
 Plug 'frazrepo/vim-rainbow'
 Plug 'astoff/digestif'
-Plug 'ap/vim-css-color'
-Plug 'PyGamer0/vim-apl'
-Plug 'neovimhaskell/haskell-vim' 
+Plug 'nvie/vim-flake8'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Initialize plugin system
 call plug#end()
 
@@ -43,6 +43,10 @@ let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
 let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
 let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
 let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
+
+" fatih/vim-go
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls
 
 "frazrepo/vim-rainbow
 let g:rainbow_active = 1
