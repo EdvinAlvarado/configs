@@ -40,31 +40,15 @@ while true; do
 		*     ) echo "Yes or No?";;
 	esac
 done
-'''
-fdisk $DEVICE << EOF
-g
-n
 
-
-+500M
-n
-
-
-+1G
-n
-
-
-
-w
-'''
 
 # Partition Formatting
 mkfs.fat -F 32 -n "BOOT" "${DEVICE}1"
 mkfs.ext4 -L "RECOVERY" "${DEVICE}2"
 ../btrfs/luks_btrfs_partition.sh "${DEVICE}3" $MOUNT $DISTRO 0
 mkdir $MOUNT/{efi,recovery}
-mount /dev/sda1 $MOUNT/efi
-mount /dev/sda2 $MOUNT/recovery
+mount "${DEVICE}1" $MOUNT/efi
+mount "${DEVICE}2" $MOUNT/recovery
 cryptsetup luksHeaderBackup "${DEVICE}3" --header-backup-file $MOUNT/recovery/LUKS_header_backup.img
 lsblk
 sleep 5
