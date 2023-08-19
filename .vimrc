@@ -1,7 +1,7 @@
 " Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
-call plug#begin('~\vimfiles\plugged')
+call plug#begin('~/.vim/plugged')
 Plug 'vim-airline/vim-airline'
 Plug 'preservim/nerdtree'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -13,6 +13,9 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'patstockwell/vim-monokai-tasty'
 Plug 'frazrepo/vim-rainbow'
 Plug 'astoff/digestif'
+Plug 'ap/vim-css-color'
+Plug 'PyGamer0/vim-apl'
+Plug 'neovimhaskell/haskell-vim' 
 Plug 'nvie/vim-flake8'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Initialize plugin system
@@ -46,7 +49,7 @@ let g:haskell_backpack = 1                " to enable highlighting of backpack k
 
 " fatih/vim-go
 let g:go_def_mode='gopls'
-let g:go_info_mode='gopls
+let g:go_info_mode='gopls'
 
 "frazrepo/vim-rainbow
 let g:rainbow_active = 1
@@ -103,3 +106,4 @@ autocmd FileType nroff nnoremap <expr> <c-b> ":w<CR>" . ":make<CR><CR><CR>"
 ""autocmd FileType apl nnoremap <expr> <c-b> ":w<CR>" . ":!apl -q -f % --OFF<CR>"
 autocmd FileType apl nnoremap <expr> <c-b> ":w<CR>" . ":!dyalog -script DYALOG_LINEEDITOR_MODE=1 %<CR>"
 autocmd FileType haskell nnoremap <expr> <c-b> ":w<CR>" . "!ghc -dynamic %<CR>" 
+autocmd FileType go	nnoremap <expr> <c-b> ":w<CR>" .":!go build<ESC>"
