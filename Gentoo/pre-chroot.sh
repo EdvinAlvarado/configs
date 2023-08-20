@@ -117,7 +117,7 @@ echo 'USE="device-mapper mount cryptsetup initramfs pulseaudio"' >> $MOUNT/etc/p
 sed -i 's/COMMON_FLAGS="/COMMON_FLAGS="-march=native /g' $MOUNT/etc/portage/make.conf
 
 
-
+cp $POST_CHROOT_SCRIPT $MOUNT/#POST_CHROOT_SCRIPT
 chroot $MOUNT /bin/bash -c "./${POST_CHROOT_SCRIPT} ${DEVICE}"
 sleep 10
 umount -f -l -R $MOUNT

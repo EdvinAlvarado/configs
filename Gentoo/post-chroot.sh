@@ -154,10 +154,7 @@ passwd $NAME
 
 # Security
 echo "permit persist :$NAME" >> /etc/doas.conf
-echo "add $NAME ALL=(ALL) ALL"
-sleep 2
 echo "${NAME} ALL=(ALL:ALL) ALL" | sudo EDITOR='tee -a' visudo
-EDITOR=nvim visudo
 
 if [ $DEWM in plasma|kde ]; then
 	systemctl enable sddm
@@ -166,4 +163,3 @@ systemctl enable NetworkManager
 systemd-machine-id-setup
 echo "[zram0]" | sudo tee -a /etc/systemd/zram-generator.conf
 chsh -s $(which zsh)
-sleep 20
