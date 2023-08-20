@@ -93,13 +93,33 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 
 ### General Configuration -------------------------------------------------------------------------
-#FIXME add loop
-ls /usr/share/zoneinfo/
-read -p "Write Region: " REGION
-ls /usr/share/zoneinfo/$REGION
-read -p "Write city: " CITY
-
-ln -sf /usr/share/zoneinfo/$REGION/$CITY /etc/localtime
+ZONEINFO="/usr/share/zoneinfo"
+# System Configuration
+while true; do
+	ls $ZONEINFO
+	read -p "Write Region: " REGION
+	if [ -f $ZONEINFO/$REGION ]; then
+		break
+	elif [ -d $ZONEINFO/$REGION ]; then
+		while true; do
+			ls $ZONEINFO/$REGION
+			read -p "Choose a sub region or city: " SUBREGION
+			if [ -f $ZONEINFO/$REGION/$SUBREGION ]; then
+				REGION=$REGION/$SUBREGION
+				break
+			elif [ -d $ZONEINFO/$REGION/$SUBREGION ]; then
+				REGION=$REGION/$SUBREGION
+				echo "Seems there are sub sub regions..."
+			else
+				echo "not a sub region or city..."
+			fi
+		done
+		break
+	else
+		echo "Region doesn't exist in zoneinfo..."
+	fi
+done
+ln -sf $ZONEINFO/$REGION /etc/localtime
 hwclock --systohc
 
 sed -i -e "s/#en_US.UTF-8/en_US.UTF-8/" /etc/locale.gen
@@ -114,8 +134,16 @@ done
 locale-gen
 echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 
-read -p "hostname: " HOSTNAME
+while true; do
+	read -p "hostname: " HOSTNAME
+	read -p "is $HOSTNAME correct? " yn
+	case $yn in
+		[Yy]*	) break;;
+		*		) echo "let's try again";;
+	esac
+done
 echo "$HOSTNAME" >> /etc/hostname
+
 
 echo "root password"
 passwd
