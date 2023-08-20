@@ -45,7 +45,7 @@ done
 # Partition Formatting
 mkfs.fat -F 32 -n "BOOT" "${DEVICE}1"
 mkfs.ext4 -L "RECOVERY" "${DEVICE}2"
-../btrfs/luks_btrfs_partition.sh "${DEVICE}3" $MOUNT $DISTRO 0
+../btrfs/luks_btrfs_partition.sh "${DEVICE}3" $MOUNT $DISTRO
 mkdir $MOUNT/{efi,recovery}
 mount "${DEVICE}1" $MOUNT/efi
 mount "${DEVICE}2" $MOUNT/recovery
