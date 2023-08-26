@@ -5,7 +5,9 @@ while true; do
 		[Yy]* ) cp .vimrc ~/.vimrc; 
 			    mkdir -p ~/.config/nvim; 
 				cp .config/nvim/init.vim ~/.config/nvim/init.vim; 
-				./nvim_setup.sh; break;;
+				curl -fLo ~/.vim/autoload/plug.vim --create-dirs \https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim;
+				nvim -c ':PlugInstall';
+				break;;
 		[Nn]* ) break;;
 		*     ) echo "Yes or No?";;
 	esac
