@@ -19,6 +19,16 @@ while true; do
 	esac
 done
 
+# tmux
+while true; do
+	read -p "Backup tmux configs? " yn
+	case $yn in
+		[Yy]* ) cp ~/.tmux.conf .tmux.conf; break;;
+		[Nn]* ) break;;
+		*     ) echo "Yes or No?";;
+	esac
+done
+
 # ranger
 while true; do
 	read -p "Backup ranger configs? " yn

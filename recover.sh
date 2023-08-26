@@ -23,6 +23,16 @@ while true; do
 		*     ) echo "Yes or No?";;
 	esac
 done
+
+# tmux
+while true; do
+	read -p "Install tmux configs? " yn
+	case $yn in
+		[Yy]* ) mkdir -p ~/.config/tmux;
+				cp .config/tmux/tmux.conf ~/.tmux.conf;
+				git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm;
+				tmux;
+				break;;
 		[Nn]* ) break;;
 		*     ) echo "Yes or No?";;
 	esac
