@@ -16,7 +16,13 @@ while true; do
 	read -p "Install zsh configs? " yn
 	case $yn in
 		[Yy]* ) cp .zshrc ~/.zshrc; 
-			chsh -s $(which zsh); break;;
+			chsh -s $(which zsh); 
+			sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)";
+			break;;
+		[Nn]* ) break;;
+		*     ) echo "Yes or No?";;
+	esac
+done
 		[Nn]* ) break;;
 		*     ) echo "Yes or No?";;
 	esac
