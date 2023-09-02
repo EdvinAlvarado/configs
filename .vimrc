@@ -54,6 +54,9 @@ let g:go_info_mode='gopls'
 "frazrepo/vim-rainbow
 let g:rainbow_active = 1
 
+"rust.vim ftplugin
+let g:rust_recommended_style = 0
+
 " NERDTree mapping
 nnoremap <c-f> :NERDTreeToggle<CR>
 
