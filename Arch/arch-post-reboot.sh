@@ -7,6 +7,8 @@
 sudo pacman -S neovim nodejs npm ranger htop glances flatpak rustup zsh 
 # Rust
 rustup default stable
+source "$HOME/.cargo/env"
+rustup component add rust-analyzer rustfmt rust-src clippy
 # bluetooth
 sudo pacman -S bluez bluez-utils
 systemctl enable --now bluetooth.service
