@@ -1,9 +1,12 @@
+NEOVIM_DIR=.config/nvim
+NEOVIM_LUA_DIR=$NEOVIM_DIR/lua
+
 # neovim
 while true; do
 	read -p "Backup neovim configs? " yn
 	case $yn in
-		[Yy]* ) cp ~/.vimrc .vimrc; 
-				cp ~/.config/nvim/init.vim .config/nvim/init.vim; break;;
+		[Yy]* ) cp ~/$NEOVIM_DIR/init.vim $NEOVIM_DIR/init.vim; 
+				cp ~/$NEOVIM_LUA_DIR/config.lua $NEOVIM_LUA_DIR/config.lua; break;;
 		[Nn]* ) break;;
 		*     ) echo "Yes or No?";;
 	esac
