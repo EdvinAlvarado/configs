@@ -84,6 +84,7 @@ systemctl restart cups.service
 flatpak install discord flatseal geogebra komikku monero signal spotify thinkorswim whatsapp googleChrome keepasxc chrome
 # Games
 flatpak install steam lutris minecraft
+pikaur -S game-devices-udev
 # Pikaur
 pikaur -S insync 
 pikaur -S sublime-merge
