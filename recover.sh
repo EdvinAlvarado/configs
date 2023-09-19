@@ -1,5 +1,5 @@
 NEOVIM_DIR=.config/nvim
-NEOVIM_LUA_DIR=$NEOVIM_DIR/init
+NEOVIM_LUA_DIR=$NEOVIM_DIR/lua
 
 # neovim
 while true; do
