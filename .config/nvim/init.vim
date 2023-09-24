@@ -104,6 +104,8 @@ let g:tex_flavor = "latex"
 " Neotree
 nnoremap <c-f> :Neotree<CR>
 
+" fzf
+nnoremap <M-f> :FZF<CR>
 
 
 "" Shortcuts
@@ -124,7 +126,6 @@ inoremap {;<CR> {<CR>};<ESC>O
 " Find and Replace
 vnoremap <expr> <c-h> ":s/\\%V" . input("find: ") . "/" . input("replace: ") . "/g\<ESC>"
 " File Type remaps
-filetype on
 autocmd FileType cpp	nnoremap <expr> <c-b> ":make<CR>"
 autocmd FileType cpp	nnoremap <expr> <c-c> "I// <ESC>"
 autocmd FileType cpp	nnoremap <expr> <c-x> <HOME><Del><Del><Del><ESC>
