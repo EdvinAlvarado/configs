@@ -19,6 +19,8 @@ Plug 'nvie/vim-flake8'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'neovim/nvim-lspconfig'
 Plug 'simrat39/rust-tools.nvim'
+" Go lang support
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Initialize plugin system
 " - Automatically executes `filetype plugin indent on` and `syntax enable`.
 " - Sets runtimepath.
