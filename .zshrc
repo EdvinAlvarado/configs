@@ -108,7 +108,7 @@ INSERT_MODE_INDICATOR='%*'
 bindkey -v
 alias ls='ls --color=auto'
 # alias vpn='cyberghostvpn --connect --country-code'
-export PATH="$HOME/.local/bin/:$HOME/bin/:$HOME/.ghcup/bin:$HOME/.cabal/bin:$PATH"
+export PATH="$HOME/.local/bin/:$HOME/bin/:$HOME/.ghcup/bin:$HOME/.cabal/bin:$PATH:$GOPATH/bin"
 export EDITOR=nvim
 export VISUAL=nvim
 export XDG_CONFIG_HOME=~/.config
