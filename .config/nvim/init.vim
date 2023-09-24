@@ -11,21 +11,29 @@ Plug 'nvim-neo-tree/neo-tree.nvim', {'on': 'Neotree'}
 	Plug 'nvim-lua/plenary.nvim'
 	Plug 'nvim-tree/nvim-web-devicons'
 	Plug 'MunifTanjim/nui.nvim'
+" fuzzy finder
+" depends on fzf
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+	Plug 'junegunn/fzf.vim'
+" Add gutter with git status
 Plug 'airblade/vim-gitgutter'
+" git commandsm :Git
 Plug 'tpope/vim-fugitive'
+" Use CocInstall coc-<language> to isntall extensions.
+" Depends on nodejs
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'patstockwell/vim-monokai-tasty'
+" Colored brackets
 Plug 'frazrepo/vim-rainbow'
-Plug 'astoff/digestif'
+" highlight colors in css
 Plug 'ap/vim-css-color'
-Plug 'PyGamer0/vim-apl'
 Plug 'neovimhaskell/haskell-vim' 
-Plug 'nvie/vim-flake8'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" Add lua config per language
 Plug 'neovim/nvim-lspconfig'
+" Requires neovim-nvim-treesitter package
+" TSUpdate berifies parsers are updated so it doesn't break.
+" Use TSInstall <language> to install parser
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+" Rust Support
 Plug 'simrat39/rust-tools.nvim'
 " Go lang support
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -35,7 +43,16 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 call plug#end()
 lua require('config')
 
-" TODO add archlinux.vim
+
+"" User settings
+set mouse=a
+set clipboard+=unnamedplus
+"syntax on
+set autoindent noexpandtab tabstop=4 shiftwidth=4
+set number " line numbering
+set autochdir " vim directory same as where open from
+set foldmethod=syntax " folding will be based on syntax. TODO find solution for python
+
 
 "" Theme Settings
 let g:gruvbox_italic=1
@@ -60,13 +77,8 @@ if (empty($TMUX) && getenv('TERM_PROGRAM') != 'Apple_Terminal')
   endif
 endif
 
-"vim-cpp-enhanced-highlight
-let g:cpp_class_scope_highlight = 1
-let g:cpp_member_variable_highlight = 1
-let g:cpp_class_decl_highlight = 1
-let g:cpp_experimental_simple_template_highlight = 1
-let g:cpp_concepts_highlight = 1
 
+"" Plugin Specific Settings
 "neovimhaskell/haskell-vim
 let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
 let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
@@ -86,19 +98,15 @@ let g:rainbow_active = 1
 "rust.vim ftplugin
 let g:rust_recommended_style = 0
 
-" NERDTree mapping
-nnoremap <c-f> :NERDTreeToggle<CR>
+"coc-texlab
+let g:tex_flavor = "latex"
+
+" Neotree
+nnoremap <c-f> :Neotree<CR>
 
 
-" User setting
-set mouse=a
-set clipboard+=unnamedplus
-set autoindent noexpandtab tabstop=4 shiftwidth=4
-set number " line numbering
-set autochdir " vim directory same as where open from
-set foldmethod=syntax " folding will be based on syntax. TODO find solution for python
 
-
+"" Shortcuts
 " eliminate current search highlight
 if has('unix')
 	nnoremap <c-_> :noh<ESC> 
@@ -117,23 +125,23 @@ inoremap {;<CR> {<CR>};<ESC>O
 vnoremap <expr> <c-h> ":s/\\%V" . input("find: ") . "/" . input("replace: ") . "/g\<ESC>"
 " File Type remaps
 filetype on
-autocmd FileType cpp nnoremap <expr> <c-b> ":make<CR>"
-autocmd FileType cpp nnoremap <expr> <c-c> "I// <ESC>"
-autocmd FileType cpp nnoremap <expr> <c-x> <HOME><Del><Del><Del><ESC>
-autocmd FileType cpp vnoremap <expr> <c-c>  "<c-V>" . "I// <ESC>"
-autocmd FileType cpp vnoremap <expr> <c-x>  "<c-V>" . "I<Del><Del><Del><ESC>"
-autocmd FileType python nnoremap <expr> <c-c> "I# <ESC>"
-autocmd FileType python nnoremap <expr> <c-x> "I<Del><Del><ESC>"
-autocmd FileType python vnoremap <expr> <c-c>  "<c-V>" . "<HOME>I# <ESC>"
-autocmd FileType python vnoremap <expr> <c-x>  "<c-V>" . "<HOME>I<Del><Del><ESC>"
-autocmd FileType python nnoremap <expr> <c-b>  ":w<CR>" . ":!python %<CR>"
+autocmd FileType cpp	nnoremap <expr> <c-b> ":make<CR>"
+autocmd FileType cpp	nnoremap <expr> <c-c> "I// <ESC>"
+autocmd FileType cpp	nnoremap <expr> <c-x> <HOME><Del><Del><Del><ESC>
+autocmd FileType cpp	vnoremap <expr> <c-c>  "<c-V>" . "I// <ESC>"
+autocmd FileType cpp	vnoremap <expr> <c-x>  "<c-V>" . "I<Del><Del><Del><ESC>"
+autocmd FileType python	nnoremap <expr> <c-c> "I# <ESC>"
+autocmd FileType python	nnoremap <expr> <c-x> "I<Del><Del><ESC>"
+autocmd FileType python	vnoremap <expr> <c-c>  "<c-V>" . "<HOME>I# <ESC>"
+autocmd FileType python	vnoremap <expr> <c-x>  "<c-V>" . "<HOME>I<Del><Del><ESC>"
+autocmd FileType python	nnoremap <expr> <c-b>  ":w<CR>" . ":!python %<CR>"
 autocmd FileType rust	nnoremap <expr> <c-b> ":w<CR>" .":!cargo run<ESC>"
-autocmd FileType rust nnoremap <expr> <c-c> "I// <ESC>"
-autocmd FileType rust nnoremap <expr> <c-x> <HOME><Del><Del><Del><ESC>
-autocmd FileType rust vnoremap <expr> <c-c>  "<c-V>" . "I// <ESC>"
-autocmd FileType rust vnoremap <expr> <c-x>  "<c-V>" . "I<Del><Del><Del><ESC>"
-autocmd FileType nroff nnoremap <expr> <c-b> ":w<CR>" . ":make<CR><CR><CR>"
-"autocmd FileType apl nnoremap <expr> <c-b> ":w<CR>" . ":!apl -q -f % --OFF<CR>"
-autocmd FileType apl nnoremap <expr> <c-b> ":w<CR>" . ":!dyalog -script DYALOG_LINEEDITOR_MODE=1 %<CR>"
+autocmd FileType rust	nnoremap <expr> <c-c> "I// <ESC>"
+autocmd FileType rust	nnoremap <expr> <c-x> <HOME><Del><Del><Del><ESC>
+autocmd FileType rust 	vnoremap <expr> <c-c>  "<c-V>" . "I// <ESC>"
+autocmd FileType rust 	vnoremap <expr> <c-x>  "<c-V>" . "I<Del><Del><Del><ESC>"
+autocmd FileType nroff	nnoremap <expr> <c-b> ":w<CR>" . ":make<CR><CR><CR>"
+"autocmd FileType apl	nnoremap <expr> <c-b> ":w<CR>" . ":!apl -q -f % --OFF<CR>"
+autocmd FileType apl	nnoremap <expr> <c-b> ":w<CR>" . ":!dyalog -script DYALOG_LINEEDITOR_MODE=1 %<CR>"
 autocmd FileType haskell nnoremap <expr> <c-b> ":w<CR>" . "!ghc -dynamic %<CR>" 
 a
