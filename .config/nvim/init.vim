@@ -106,7 +106,9 @@ nnoremap <c-f> :Neotree<CR>
 
 " fzf
 nnoremap <M-f> :FZF<CR>
-
+nnoremap <leader>f :Files<CR>
+nnoremap <leader>l :Lines<CR>
+nnoremap <leader>w :Windows<CR>
 
 "" Shortcuts
 " eliminate current search highlight
