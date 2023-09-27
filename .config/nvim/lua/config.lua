@@ -1,3 +1,4 @@
+-- nvim-lspconfig
 local lspconfig = require('lspconfig')
 lspconfig.gopls.setup {}
 
@@ -24,7 +25,11 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	group = format_sync_grp,
 })
 
+-- Mason LSP Package Manager
+require("mason").setup()
 
+-- pest-vim
+require('pest-vim').setup {}
 
 -- Neotree default config
 -- lua require("neo-tree").paste_default_config()
