@@ -19,6 +19,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'airblade/vim-gitgutter'
 " git commandsm :Git
 Plug 'tpope/vim-fugitive'
+" Vscode like extensions
 " Use CocInstall coc-<language> to isntall extensions.
 " Depends on nodejs
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -27,6 +28,7 @@ Plug 'frazrepo/vim-rainbow'
 " highlight colors in css
 Plug 'ap/vim-css-color'
 Plug 'neovimhaskell/haskell-vim' 
+" Official configs for LSPs
 " Add lua config per language
 Plug 'neovim/nvim-lspconfig'
 " Requires neovim-nvim-treesitter package
@@ -37,6 +39,15 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'simrat39/rust-tools.nvim'
 " Go lang support
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" pest parser LSP and syntax highlighting
+" Prerequisite for LSP features
+" 	cargo install pest-language-server
+" 		Requires openssl
+" Config - lua
+" 	require('pest-vim').setup {}
+Plug 'pest-parser/pest.vim'
+" Package manager for LSPs, DAPs, linters, and formatters
+Plug 'williamboman/mason.nvim'
 " Initialize plugin system
 " - Automatically executes `filetype plugin indent on` and `syntax enable`.
 " - Sets runtimepath.
@@ -147,4 +158,3 @@ autocmd FileType nroff	nnoremap <expr> <c-b> ":w<CR>" . ":make<CR><CR><CR>"
 "autocmd FileType apl	nnoremap <expr> <c-b> ":w<CR>" . ":!apl -q -f % --OFF<CR>"
 autocmd FileType apl	nnoremap <expr> <c-b> ":w<CR>" . ":!dyalog -script DYALOG_LINEEDITOR_MODE=1 %<CR>"
 autocmd FileType haskell nnoremap <expr> <c-b> ":w<CR>" . "!ghc -dynamic %<CR>" 
-a
