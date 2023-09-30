@@ -5,13 +5,10 @@ NEOVIM_LUA_DIR=$NEOVIM_DIR/lua
 while true; do
 	read -p "Install neovim configs? " yn
 	case $yn in
-		[Yy]* ) mkdir -p ~/.config/nvim/lua; 
-				cp $NEOVIM_DIR/init.vim ~/$NEOVIM_DIR/init.vim;
-				cp $NEOVIM_LUA_DIR/config.lua ~/$NEOVIM_LUA_DIR/config.lua;
-sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim';
-				nvim -c ':PlugInstall';
-				nvim -c ':CocInstall coc-json coc-rust-analyzer coc-pyright';
+		[Yy]* ) 
+				cp $NEOVIM_DIR/init.lua ~/$NEOVIM_DIR/init.lua;
+				cp $NEOVIM_DIR/config.vim ~/$NEOVIM_DIR/config.vim;
+				nvim;
 				break;;
 		[Nn]* ) break;;
 		*     ) echo "Yes or No?";;
