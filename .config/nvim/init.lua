@@ -207,7 +207,6 @@ require("lazy").setup({
 	dependencies = {
 			'williamboman/mason-lspconfig.nvim',
 			'hrsh7th/nvim-cmp',
-			'folke/neodev.nvim',
 	},
 	event = { "BufReadPost", "BufNewFile" },
 	cmd = { "LspInfo", "LspInstall", "LspUninstall" },
@@ -393,6 +392,7 @@ require("lazy").setup({
 {
 -- fixes global vim missing from neovim init.lua by the lua_ls
 	"folke/neodev.nvim",
+	event = {"BufRead *.lua"},
 	dependencies = { 'hrsh7th/nvim-cmp' },
 	opts = {},
 	config = function ()
