@@ -283,16 +283,13 @@ require("lazy").setup({
 			mapping = cmp.mapping.preset.cmdline(),
 			sources = {{name = 'buffer'}}
 		})
-
-
-
 	end,
 },
 {
 -- Cargo crate versions and features
     'saecki/crates.nvim',
     event = { "BufRead Cargo.toml" },
-	branch = 'v0.3.0',
+	tag = 'v0.3.0',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
         require('crates').setup()
