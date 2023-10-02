@@ -217,6 +217,7 @@ require("lazy").setup({
 		{']d', vim.diagnostic.goto_next, desc="diagnostics goto next"},
 		{'<space>d', vim.diagnostic.setloclist, desc="diagnostics list"},
 	},
+	opts = {inlay_hints = {enabled = true},},
 	config = function()
 		local lspconfig = require('lspconfig')
 		-- lspconfig.rust_analyzer.setup {}
