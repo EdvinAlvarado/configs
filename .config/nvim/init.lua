@@ -308,6 +308,11 @@ require("lazy").setup({
 	dependencies = { 'williamboman/mason.nvim' },
 	config = function()
 		require('pest-vim').setup {}
+		require('mason-lspconfig').setup_handlers {
+		['pest_ls'] = function ()
+			require('pest-vim').setup {}
+		end
+		}
 	end,
 },
 {
