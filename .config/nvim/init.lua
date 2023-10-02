@@ -77,9 +77,6 @@ vim.api.nvim_create_autocmd("FileType", { pattern = 'haskell', callback = functi
 
 
 
-
-
-
 -- Automatically install lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -224,12 +221,6 @@ require("lazy").setup({
 		-- lspconfig.pyright.setup {}
 		-- lspconfig.gopls.setup {}
 		-- lspconfig.lua_ls.setup {}
-		-- lspconfig.texlab.setup {}
-		-- lspconfig.taplo.setup {}
-		-- lspconfig.yamlls.setup {}
-		-- lspconfig.clangd.setup {}
-		-- lspconfig.jsonls.setup {}
-		-- lspconfig.html.setup {}
 		local capabilities = require('cmp_nvim_lsp').default_capabilities()
 		for _,lsp in pairs(Lsps) do
 			lspconfig[lsp].setup {
@@ -328,15 +319,14 @@ require("lazy").setup({
 			server = {
 			on_attach = function(_, bufnr)
 				-- Hover actions
-				vim.keymap.set("n", "<C-s>", rt.hover_actions.hover_actions, { buffer = bufnr })
+				vim.keymap.set("n", "<C-s>", rt.hover_actions.hover_actions, { buffer = bufnr, desc="hover actions"})
 				-- Code action groups
-				vim.keymap.set("n", "<C-a>", rt.code_action_group.code_action_group, { buffer = bufnr })
+				vim.keymap.set("n", "<C-a>", rt.code_action_group.code_action_group, { buffer = bufnr, desc="code actions" })
 			end,
 			},
 		})
 	end,
 },
-{
 --{
 -- Adds go language support: e.g.
 		-- :GoBuild
@@ -378,7 +368,6 @@ require("lazy").setup({
 	ft = {"go", 'gomod'},
 	build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
 },
-
 {
 	'neovimhaskell/haskell-vim',
 	event = {"BufRead *.hs"},
