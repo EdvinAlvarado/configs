@@ -109,10 +109,10 @@ require("lazy").setup({
 	end,
 },
 {
-	'vim-airline/vim-airline',
-	dependencies = { 'vim-airline/vim-airline-themes' },
+	'nvim-lualine/lualine.nvim',
+	dependencies = { 'nvim-tree/nvim-web-devicons' }, -- optional
 	config = function()
-		vim.g.airline_powerline_fonts = 1
+		require('lualine').setup()
 	end,
 },
 {
