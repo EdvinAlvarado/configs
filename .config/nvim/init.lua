@@ -77,6 +77,11 @@ vim.api.nvim_create_autocmd("FileType", { pattern = 'haskell', callback = functi
 
 
 
+-- LSP
+-- Doesn't work?
+vim.lsp.inlay_hint(0, true)
+
+
 -- Automatically install lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
