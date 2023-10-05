@@ -1,5 +1,5 @@
 -- supress undefined-gloval vim while woring on init.lua
--- vim = vim
+vim = vim
 
 --vim.cmd('source $HOME/.config/nvim/config.vim')
 
