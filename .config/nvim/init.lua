@@ -97,7 +97,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- referred in nvim-lspconfig and mason.
-Lsps = { "rust_analyzer", "pyright", "gopls", "lua_ls", "texlab", "taplo", "yamlls", "clangd", "jsonls", "html", "pest_ls" }
+Lsps = { "rust_analyzer", "pyright", "gopls", "lua_ls", "texlab", "taplo", "yamlls", "clangd", "jsonls", "html", "pest_ls", "zls" }
 
 -- plugins is a table that has tables which are plugin specs
 require("lazy").setup({
