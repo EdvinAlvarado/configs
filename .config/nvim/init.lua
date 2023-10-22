@@ -398,7 +398,7 @@ require("lazy").setup({
 				group = format_sync_grp,
 			})
 		end,
-		event = { "CmdlineEnter" },
+		event = { "BufRead *.go" },
 		ft = { "go", 'gomod' },
 		build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
 	},
@@ -428,6 +428,7 @@ require("lazy").setup({
 	{
 		-- zig file detection and syntaz highlighing
 		'ziglang/zig.vim',
+		event = { "BufRead *.zig" },
 		ft = "zig",
 		config = function()
 			vim.keymap.set('n', '<c-b>', '<cmd>w<cr>' .. '<cmd>compiler zig_build<cr>')
