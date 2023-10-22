@@ -7,7 +7,6 @@ while true; do
 	case $yn in
 		[Yy]* ) 
 				cp $NEOVIM_DIR/init.lua ~/$NEOVIM_DIR/init.lua;
-				cp $NEOVIM_DIR/config.vim ~/$NEOVIM_DIR/config.vim;
 				nvim;
 				break;;
 		[Nn]* ) break;;

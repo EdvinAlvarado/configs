@@ -6,7 +6,6 @@ while true; do
 	read -p "Backup neovim configs? " yn
 	case $yn in
 		[Yy]* ) cp ~/$NEOVIM_DIR/init.lua $NEOVIM_DIR/init.lua; 
-				cp ~/$NEOVIM_DIR/config.vim $NEOVIM_DIR/config.vim; 
 				break;;
 		[Nn]* ) break;;
 		*     ) echo "Yes or No?";;
