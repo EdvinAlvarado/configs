@@ -109,7 +109,7 @@ bindkey -v
 alias ls='ls --color=auto'
 alias tmux="tmux -2" #force tmux to assume terminal supports 256 colors
 # alias vpn='cyberghostvpn --connect --country-code'
-export PATH="$HOME/.local/bin/:$HOME/bin/:$HOME/.ghcup/bin:$HOME/.cabal/bin:$PATH:$GOPATH/bin"
+export PATH="$HOME/.local/bin/:$HOME/bin/:$HOME/.ghcup/bin:$HOME/.cabal/bin:$PATH:$GOPATH/bin:$HOME/go/bin:$HOME/.cargo/bin"
 export EDITOR=nvim
 export VISUAL=nvim
 export XDG_CONFIG_HOME=~/.config
