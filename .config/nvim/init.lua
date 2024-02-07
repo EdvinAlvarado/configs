@@ -83,13 +83,19 @@ vim.api.nvim_create_autocmd("FileType",
 -- apl
 -- autocmd FileType apl	nnoremap <expr> <c-b> ":w<CR>" . ":!apl -q -f % --OFF<CR>"
 vim.api.nvim_create_autocmd("FileType",
-	{ pattern = 'apl',
-		callback = function() vim.keymap.set('n', '<c-r>',
-				'<cmd>w<cr>' .. '<cmd>!dyalog -script DYALOG_LINEEDITOR_MODE=1 %<cr>') end })
+	{
+		pattern = 'apl',
+		callback = function()
+			vim.keymap.set('n', '<c-r>',
+				'<cmd>w<cr>' .. '<cmd>!dyalog -script DYALOG_LINEEDITOR_MODE=1 %<cr>')
+		end
+	})
 -- haskell
 vim.api.nvim_create_autocmd("FileType",
-	{ pattern = 'haskell',
-		callback = function() vim.keymap.set('n', '<c-r>', '<cmd>w<cr>' .. '<cmd>!cghc -dynamic %<cr>') end })
+	{
+		pattern = 'haskell',
+		callback = function() vim.keymap.set('n', '<c-r>', '<cmd>w<cr>' .. '<cmd>!cghc -dynamic %<cr>') end
+	})
 
 
 
@@ -412,7 +418,7 @@ require("lazy").setup({
 			vim.g.haskell_enable_pattern_synonyms = 1 -- to enable highlighting of `pattern`
 			vim.g.haskell_enable_typeroles = 1 -- to enable highlighting of type roles
 			vim.g.haskell_enable_static_pointers = 1 -- to enable highlighting of `static`
-			vim.g.haskell_backpack = 1      -- to enable highlighting of backpack keywords
+			vim.g.haskell_backpack = 1       -- to enable highlighting of backpack keywords
 		end,
 	},
 	{
