@@ -79,7 +79,7 @@ vim.api.nvim_create_autocmd("FileType", { pattern = 'haskell', callback = functi
 
 -- LSP
 -- Doesn't work?
--- vim.lsp.inlay_hint(0, true)
+vim.lsp.inlay_hint(0, true)
 
 
 -- Automatically install lazy.nvim
