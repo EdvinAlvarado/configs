@@ -103,8 +103,10 @@ vim.api.nvim_create_autocmd("FileType",
 -- Covered in nvim-lspconfig with green colorscheme
 -- This one defaults to grey color.
 -- If you have both you will have duplicates
+-- <v0.10
 -- vim.lsp.inlay_hint(0, true)
-
+-- v0.10
+vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
 
 -- Automatically install lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
