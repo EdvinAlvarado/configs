@@ -6,7 +6,7 @@ sudo sed -i -e "s/#ParallelDownloads = 5/ParallelDownloads = 10/" /etc/pacman.co
 
 ## System Packages
 # CLI
-sudo pacman -S neovim nodejs npm ranger htop glances flatpak rustup zsh 
+sudo pacman -S neovim nodejs npm ranger htop glances flatpak rustup zsh dos2unix expac fd fzf go gopls hdparm links neofetch nushell namcap postgresql rsync tree-sitter wget which vorbis-tools zig zls zip unzip rar clang upx
 # Rust
 rustup default stable
 source "$HOME/.cargo/env"
@@ -23,10 +23,9 @@ rm -rf pikaur
 
 ## Applications 
 # KDE
-sudo pacman -S kde-accessibility-meta kde-graphics-meta kde-multimedia-meta kdeconnect kdenetwork-filesharing kget kio-extras kio-gdrive kio-zeroconf krdc krfb kde-pim-meta kde-system-meta ark filelight kate kbackup kcalc kcharselect kdf kdialog kfind kgpg print-manager skanpage sweeper yakuake kdiff3 kompare dolphin-plugins
+sudo pacman -S kde-accessibility-meta kde-graphics-meta kde-multimedia-meta kdeconnect kdenetwork-filesharing kget kio-extras kio-gdrive kio-zeroconf krdc krfb kde-pim-meta kde-system-meta ark filelight kate kbackup kcalc kcharselect kdf kdialog kfind kgpg print-manager skanpage sweeper yakuake kdiff3 kompare dolphin-plugins elisa
 # GUI
-sudo pacman -S mkvtoolnix-cli mkvtoolnix-gui deluge deluge-gtk code libreoffice vlc texlive-bin ghostwriter firefox keepass
-
+sudo pacman -S mkvtoolnix-cli mkvtoolnix-gui deluge deluge-gtk code libreoffice-fresh libreoffice-fresh-ja vlc texlive-bin ghostwriter firefox keepass aegisub audiacity calibre texlab virtualbox
 
 ## Japanese
 sudo pacman -S adobe-source-han-sans-jp-fonts adobe-source-han-sans-jp-fonts otf-ipafont ttf-hanazono ttf-sazanami
@@ -90,6 +89,8 @@ pikaur -S sublime-merge
 pikaur -S anki
 pikaur -S frame-eth
 pikaur -S ledger-live
+pikaur -S google-chrome
+pikaur -S ventoy-bin
 
 
 echo ""
