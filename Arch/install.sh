@@ -29,7 +29,6 @@ fi
 # TODO make recovery directory actuall useful
 echo "will have three partitions:"
 echo "1) efi partition"
-echo "2) recovery partition (WIP)"
 echo "1) the rest of the system"
 read -p "Storage partition (e.g. /dev/sda): " DEVICE
 while true; do
@@ -44,12 +43,10 @@ done
 
 # Partition Formatting
 mkfs.fat -F 32 -n "BOOT" "${DEVICE}1"
-mkfs.ext4 -L "RECOVERY" "${DEVICE}2"
-../btrfs/luks_btrfs_partition.sh "${DEVICE}3" $MOUNT $DISTRO
-mkdir $MOUNT/{efi,recovery}
+../btrfs/luks_btrfs_partition.sh "${DEVICE}2" $MOUNT $DISTRO
+mkdir $MOUNT/{efi}
 mount "${DEVICE}1" $MOUNT/efi
-mount "${DEVICE}2" $MOUNT/recovery
-cryptsetup luksHeaderBackup "${DEVICE}3" --header-backup-file $MOUNT/recovery/LUKS_header_backup.img
+cryptsetup luksHeaderBackup "${DEVICE}2" --header-backup-file $MOUNT/recovery/LUKS_header_backup.img
 lsblk
 sleep 5
 
@@ -61,7 +58,7 @@ vim $MOUNT/etc/fstab
 sed -i -e "s/#ParallelDownloads = 5/ParallelDownloads = 10/" >> $MOUNT/etc/pacman.conf
 # Chroot
 cp $POST_CHROOT_SCRIPT $MOUNT/$POST_CHROOT_SCRIPT
-arch-chroot $MOUNT ./$POST_CHROOT_SCRIPT "${DEVICE}3"
+arch-chroot $MOUNT ./$POST_CHROOT_SCRIPT "${DEVICE}2"
 echo "Complete!"
 sleep 10
 umount -f -l -R $MOUNT
