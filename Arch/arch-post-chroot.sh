@@ -98,4 +98,10 @@ grub-mkconfig -o /boot/grub/grub.cfg
 # System inits
 systemctl enable NetworkManager
 echo "[zram0]" | sudo tee -a /etc/systemd/zram-generator.conf
+echo "zram-size = max(ram / 2, 4096)" | sudo tee -a /etc/systemd/zram-generator.conf
+echo "compression-algorithm = zstd" | sudo tee -a /etc/systemd/zram-generator.conf
+echo "vm.swappiness = 180" | sudo tee -a /etc/sysctl.d/99-vm-zram-parameters.conf
+echo "vm.watermark_boost_factor = 0" | sudo tee -a /etc/sysctl.d/99-vm-zram-parameters.conf
+echo "vm.watermark_scale_factor = 125" | sudo tee -a /etc/sysctl.d/99-vm-zram-parameters.conf
+echo "vm.page-cluster = 0" | sudo tee -a /etc/sysctl.d/99-vm-zram-parameters.conf
 chsh -s $(which zsh)

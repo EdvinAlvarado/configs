@@ -11,7 +11,7 @@ mount /dev/mapper/cryptroot $MOUNT
 btrfs subvolume create $MOUNT/@
 btrfs subvolume create $MOUNT/@home
 btrfs subvolume create $MOUNT/@snapshots
-if [ $SWAPFILE -eq 1 ]; then btrfs subvolume create $MOUNT/@swap; fi
+# if [ $SWAPFILE -eq 1 ]; then btrfs subvolume create $MOUNT/@swap; fi
 
 if [ "$DISTRO" == "arch" ]; then
 	btrfs subvolume create $MOUNT/@log
