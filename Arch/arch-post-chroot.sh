@@ -70,31 +70,35 @@ passwd $NAME
 echo "permit persist :$NAME" >> /etc/doas.conf
 echo "${NAME} ALL=(ALL:ALL) ALL" | sudo EDITOR='tee -a' visudo
 
-
-# Grub Configuration
-CRYPTO=$(blkid $DEVICE | egrep -o '\sUUID="[[:alnum:]\|-]*"' | egrep -o '[[:alnum:]\|-]*' | tail -n1)
-# ROOT=$(blkid | egrep "ROOT" | egrep -o '\sUUID="[[:alnum:]\|-]*"' | egrep -o '[[:alnum:]\|-]*' | tail -n1)
+clear
+# initramfs setup for encrypted drive
 sed -i -e "s/MODULES=()/MODULES=(btrfs)/g" /etc/mkinitcpio.conf
 sed -i -e "s|BINARIES=()|BINARIES=(/usr/bin/btrfs)|g" /etc/mkinitcpio.conf
 sed -i -e 's/FILES=()/FILES=(\/crypto_keyfile.bin)/g' /etc/mkinitcpio.conf
 sed -i -e "s/keyboard/keyboard keymap consolefont encrypt/g" /etc/mkinitcpio.conf
-sed -i -e "s/#GRUB_ENABLE_CRYPTODISK=/GRUB_ENABLE_CRYPTODISK=/g" /etc/default/grub
-sed -i -e "s/GRUB_DISABLE_RECOVERY=/#GRUB_DISABLE_RECOVERY=/g" /etc/default/grub
-sed -i -e "s|GRUB_CMDLINE_LINUX=\"\"|GRUB_CMDLINE_LINUX=\"cryptdevice=UUID=${CRYPTO}:cryptroot:allow-discards cryptkey=rootfs:/crypto_keyfile.bin\"|g" /etc/default/grub
-
-while true; do
-	read -p "Do you have another OS or would you like to automatically detect one? " yn
-	case $yn in
-		[Yy]* 	) sed -i -e "s/#GRUB_DISABLE_OS_PROBER=/GRUB_DISABLE_OS_PROBER=/g" /etc/default/grub; break;;
-		[Nn]*|"") break;;
-		*    	) echo "Yes or No?";;
-	esac
-done
-
 mkinitcpio -P
-grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
-grub-mkconfig -o /boot/grub/grub.cfg
 
+# system-boot install and configuration
+CRYPTO_PART=$(blkid $DEVICE | egrep -o '\sPARTUUID="[[:alnum:]\|-]*"' | egrep -o '[[:alnum:]\|-]*' | tail -n1)
+bootctl install
+systemctl enable systemd-boot-update.service
+echo "default @saved" | sudo tee /boot/loader/loader.conf
+echo "timeout 4" | sudo tee -a /boot/loader/loader.conf
+echo "console-mode max" | sudo tee -a /boot/loader/loader.conf
+echo "editor no" | sudo tee -a /boot/loader/loader.conf
+cp /repos/loader/* /boot/loader/entries/
+for f in /boot/loader/entries/*.conf; do
+	echo "options cryptdevice=PARTUUID=${CRYPTO}:luksdev root=/dev/mapper/luksdev zswap.enabled=0 rootflags=subvol=@ rw rootfstype-btrfs nvme.noacpi=1" | sudo tee -a $f
+done
+# TODO assumes linux and linux-zen
+# TODO Assumes amducode
+# Sanity Check
+bootctl list
+echo "Current loaders assume amd-ucode. If you are running intel, you should update the loaders for better support."
+echo "WARNING: linux-zen loaders were added. If you did not choose linux-zen at the beginning, these loaders won't work. If you want to use a kernel besides linux or linux-zen, you will have to boot with linux and configure them yourself."
+sleep 3
+
+clear
 # System inits
 systemctl enable NetworkManager
 echo "[zram0]" | sudo tee -a /etc/systemd/zram-generator.conf

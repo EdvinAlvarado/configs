@@ -59,6 +59,7 @@ vim $MOUNT/etc/fstab
 sed -i -e "s/#ParallelDownloads = 5/ParallelDownloads = 10/" >> $MOUNT/etc/pacman.conf
 # Chroot
 cp $POST_CHROOT_SCRIPT $MOUNT/$POST_CHROOT_SCRIPT
+cp -r repos $MOUNT/repos
 arch-chroot $MOUNT ./$POST_CHROOT_SCRIPT "${DEVICE}2"
 echo "Complete!"
 sleep 10

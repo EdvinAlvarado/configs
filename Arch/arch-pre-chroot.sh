@@ -40,5 +40,5 @@ then
 fi
 
 pacman -Sy
-pacstrap $MOUNT base base-devel arch-install-scripts $KERNEL linux-firmware zram-generator btrfs-progs snapper snap-pac cryptsetup networkmanager neovim opendoas ranger python grub efibootmgr zsh git $CPUCODE $VIDEOCARD
+pacstrap $MOUNT base base-devel arch-install-scripts linux $KERNEL linux-firmware zram-generator btrfs-progs snapper snap-pac cryptsetup networkmanager neovim opendoas ranger python efibootmgr zsh git $CPUCODE $VIDEOCARD
 
