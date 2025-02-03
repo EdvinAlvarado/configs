@@ -44,8 +44,8 @@ done
 # Partition Formatting
 mkfs.fat -F 32 -n "BOOT" "${DEVICE}1"
 ../btrfs/luks_btrfs_partition.sh "${DEVICE}2" $MOUNT $DISTRO
-mkdir $MOUNT/{efi}
-mount "${DEVICE}1" $MOUNT/efi
+mkdir $MOUNT/{boot}
+mount "${DEVICE}1" $MOUNT/boot
 cryptsetup luksHeaderBackup "${DEVICE}2" --header-backup-file $MOUNT/recovery/LUKS_header_backup.img
 lsblk
 sleep 5
