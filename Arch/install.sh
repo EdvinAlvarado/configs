@@ -26,12 +26,8 @@ fi
 
 # Partition
 # Btrfs with luks1 and a swapfile with a separate efi dir.
-# TODO make recovery directory actuall useful
-# TODO DEVICE only works with /dev/sda right now. Doesn't work for nvme.
-echo "will have three partitions:"
-echo "1) efi partition"
-echo "1) the rest of the system"
-read -p "Storage partition (e.g. /dev/sda): " DEVICE
+# TODO nvme only works id they put the "p".
+read -p "Which is the drive device to install linux on? (e.g. /dev/sda or /dev/nvme0n1p): " DEVICE
 while true; do
 	read -p "Default partition table? " yn
 	case $yn in
