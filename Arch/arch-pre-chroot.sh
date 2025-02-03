@@ -26,11 +26,11 @@ done
 while true; do
 	read -p "Write kernel: " KERN
 	case $KERN in
-		"linux"   			) KERNEL=$KERN; break;;
-		"linux-zen"  		) KERNEL=$KERN; break;;
-		"linux-lts"  		) KERNEL=$KERN; break;;
-		"linux-hardened"	) KERNEL=$KERN; break;;
-		*         			) "Write KERNEL";;
+		"linux"   			) KERNEL="linux"; break;;
+		"linux-zen"  		) KERNEL="linux-zen linux-zen-headers"; break;;
+		"linux-lts"  		) KERNEL="linux-lts linux-lts-headers"; break;;
+		"linux-hardened"	) KERNEL="linux-hardened linux-hardened-headers"; break;;
+		*         			) "Write a kernel type";;
 	esac
 done
 
