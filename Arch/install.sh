@@ -27,6 +27,7 @@ fi
 # Partition
 # Btrfs with luks1 and a swapfile with a separate efi dir.
 # TODO make recovery directory actuall useful
+# TODO DEVICE only works with /dev/sda right now. Doesn't work for nvme.
 echo "will have three partitions:"
 echo "1) efi partition"
 echo "1) the rest of the system"
