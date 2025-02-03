@@ -91,6 +91,7 @@ pikaur -S frame-eth
 pikaur -S ledger-live
 pikaur -S google-chrome
 pikaur -S ventoy-bin
+pikaur -S libation 
 
 
 echo ""
