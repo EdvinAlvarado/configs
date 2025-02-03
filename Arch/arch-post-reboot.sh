@@ -38,7 +38,7 @@ pikaur --noconfirm -S fcitx5-mozc-ut fctix5-breeze
 
 ## Snapper
 sudo pacman --noconfirm -S snapper snap-pac
-pikaur -S snapper-gui-git
+pikaur --noconfirm -S btrfs-assistant
 # Setup root config (recommended by Arch wiki)
 sudo umount /.snapshots
 sudo rm -r /.snapshots
