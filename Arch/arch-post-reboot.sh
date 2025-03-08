@@ -63,8 +63,7 @@ pikaur --noconfirm -S fcitx5-mozc-ut fctix5-breeze
 
 
 ## Snapper
-sudo pacman --noconfirm -S snapper snap-pac
-pikaur --noconfirm -S btrfs-assistant
+sudo pacman --noconfirm -S snapper snap-pac btrfs-assistant
 # Setup root config (recommended by Arch wiki)
 sudo umount /.snapshots
 sudo rm -r /.snapshots
@@ -106,13 +105,10 @@ sudo systemctl restart cups.service
 
 
 ## Extra Applications 
+# AUR
 sudo pacman --noconfirm -S insync anki ledger-live ventoy-bin
 pikaur --noconfirm -S frame-eth
-pikaur --noconfirm -S ledger-live
-pikaur --noconfirm -S google-chrome
-pikaur --noconfirm -S ventoy-bin
 pikaur --noconfirm -S libation 
-
 
 if ($XDG_SESSION_TYPE = "wayland"); then
 	$ESPANSO = "espanso-wayland"
