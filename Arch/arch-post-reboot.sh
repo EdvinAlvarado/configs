@@ -42,12 +42,8 @@ rustup component add rust-analyzer rustfmt rust-src clippy
 # bluetooth
 sudo pacman --noconfirm -S bluez bluez-utils
 sudo systemctl enable --now bluetooth.service
-# pikaur
-git clone https://aur.archlinux.org/pikaur.git
-cd pikaur
-makepkg --noconfirm -fsri
-cd ..
-rm -rf pikaur
+# hyprland
+sudo pacman --noconfirm -S hyprland wayland slurp hyprpaper hyprpicker hypridle hyprlock hyprcusror xdg-desktop-portal-hyprland hyprpolkitagent hyprsunsent ghostty swww wofi
 
 
 ## Applications 
