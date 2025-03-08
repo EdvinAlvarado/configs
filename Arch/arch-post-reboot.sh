@@ -6,6 +6,16 @@
 sudo sed -i -e "s/#ParallelDownloads = 5/ParallelDownloads = 10/" /etc/pacman.conf
 
 
+## chaotic-aur
+sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
+sudo pacman-key --lsign-key 3056513887B78AEB
+sudo pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst'
+sudo pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
+sudo echo "[chaotic-aur]" >> /etc/pacman.conf
+sudo echo "Include = /etc/pacman.d/chaotic-mirrorlist" >> /etc/pacman.conf
+sudo pacman --noconfirm -Syu
+
+
 ## System Packages
 # CLI
 sudo pacman --noconfirm -S neovim nodejs npm ranger htop glances flatpak rustup zsh dos2unix expac fd fzf go gopls hdparm links neofetch nushell namcap postgresql rsync tree-sitter wget which vorbis-tools zig zls zip unzip rar clang upx tealdeer wikiman fdupes duperemove btop
@@ -89,15 +99,7 @@ sudo systemctl restart cups.service
 
 
 ## Extra Applications 
-# Flatpak
-flatpak install discord flatseal geogebra komikku monero signal thinkorswim keepassxc chrome app.zen_browser.zen
-# Games
-flatpak install steam lutris minecraft
-pikaur --noconfirm -S game-devices-udev
-# Pikaur
-pikaur --noconfirm -S insync 
-pikaur --noconfirm -S sublime-merge
-pikaur --noconfirm -S anki
+sudo pacman --noconfirm -S insync anki ledger-live ventoy-bin
 pikaur --noconfirm -S frame-eth
 pikaur --noconfirm -S ledger-live
 pikaur --noconfirm -S google-chrome
@@ -112,6 +114,8 @@ else
 pikaur -S $ESPANSO
 espanso service register
 espanso start
+sudo pacman --noconfirm -S game-devices-udev
+
 
 echo ""
 echo "Finished"
