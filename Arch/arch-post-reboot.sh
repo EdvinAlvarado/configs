@@ -109,7 +109,7 @@ if ($XDG_SESSION_TYPE = "wayland"); then
 	$ESPANSO = "espanso-wayland"
 else
 	$ESPANSO = "espanso-x11"
-pikaur -S $ESPANSO
+pikaur --noconfirm -S $ESPANSO espanso-gui
 espanso service register
 espanso start
 
