@@ -1,42 +1,52 @@
 # Run this before running this scritpy
 # sudo pacman -S --needed git base-devel
 
+
 # Pacman Config
 sudo sed -i -e "s/#ParallelDownloads = 5/ParallelDownloads = 10/" /etc/pacman.conf
 
+
 ## System Packages
 # CLI
-sudo pacman -S neovim nodejs npm ranger htop glances flatpak rustup zsh 
+sudo pacman --noconfirm -S neovim nodejs npm ranger htop glances flatpak rustup zsh dos2unix expac fd fzf go gopls hdparm links neofetch nushell namcap postgresql rsync tree-sitter wget which vorbis-tools zig zls zip unzip rar clang upx tealdeer wikiman fdupes duperemove btop
+# Tealdeer
+tldr --update
+# wikiman
+curl -L 'https://raw.githubusercontent.com/filiparag/wikiman/master/Makefile' -o 'wikiman-makefile'
+make -f ./wikiman-makefile source-arch
+make -f ./wikiman-makefile source-tldr
+sudo make -f ./wikiman-makefile source-install
+sudo make -f ./wikiman-makefile clean
 # Rust
 rustup default stable
 source "$HOME/.cargo/env"
 rustup component add rust-analyzer rustfmt rust-src clippy
 # bluetooth
-sudo pacman -S bluez bluez-utils
+sudo pacman --noconfirm -S bluez bluez-utils
 sudo systemctl enable --now bluetooth.service
 # pikaur
 git clone https://aur.archlinux.org/pikaur.git
 cd pikaur
-makepkg -fsri
+makepkg --noconfirm -fsri
 cd ..
 rm -rf pikaur
 
+
 ## Applications 
 # KDE
-sudo pacman -S kde-accessibility-meta kde-graphics-meta kde-multimedia-meta kdeconnect kdenetwork-filesharing kget kio-extras kio-gdrive kio-zeroconf krdc krfb kde-pim-meta kde-system-meta ark filelight kate kbackup kcalc kcharselect kdf kdialog kfind kgpg print-manager skanpage sweeper yakuake kdiff3 kompare dolphin-plugins
+sudo pacman --noconfirm -S kde-accessibility-meta kde-graphics-meta kde-multimedia-meta kdeconnect kdenetwork-filesharing kget kio-extras kio-gdrive kio-zeroconf krdc krfb kde-pim-meta kde-system-meta ark filelight kate kbackup kcalc kcharselect kdf kdialog kfind kgpg print-manager skanpage sweeper yakuake kdiff3 kompare dolphin-plugins elisa
 # GUI
-sudo pacman -S mkvtoolnix-cli mkvtoolnix-gui deluge deluge-gtk code libreoffice vlc texlive-bin ghostwriter firefox keepass
-
+sudo pacman --noconfirm -S mkvtoolnix-cli mkvtoolnix-gui deluge deluge-gtk code libreoffice-fresh libreoffice-fresh-ja vlc texlive-bin ghostwriter handbrake keepass aegisub audiacity calibre texlab virtualbox
 
 ## Japanese
-sudo pacman -S adobe-source-han-sans-jp-fonts adobe-source-han-sans-jp-fonts otf-ipafont ttf-hanazono ttf-sazanami
-sudo pacman -S fcitx5-im
-pikaur -S fcitx5-mozc-ut fctix5-breeze
+sudo pacman --noconfirm -S adobe-source-han-sans-jp-fonts adobe-source-han-sans-jp-fonts otf-ipafont ttf-hanazono ttf-sazanami
+sudo pacman --noconfirm -S fcitx5-im
+pikaur --noconfirm -S fcitx5-mozc-ut fctix5-breeze
 
 
 ## Snapper
-sudo pacman -S snapper snap-pac
-pikaur -S snapper-gui-git
+sudo pacman --noconfirm -S snapper snap-pac
+pikaur --noconfirm -S btrfs-assistant
 # Setup root config (recommended by Arch wiki)
 sudo umount /.snapshots
 sudo rm -r /.snapshots
@@ -69,27 +79,30 @@ sudo nvim /etc/snap-pac.ini
 sudo systemctl stop systemd-resolved.service
 sudo systemctl disable systemd-resolved.service
 # and use avahi and mdns for it to work.
-sudo pacman -S nss-mdns avahi samba
+sudo pacman --noconfirm -S nss-mdns avahi samba
 sudo systemctl enable --now avahi-daemon.service
 sudo sed -i -e 's/mymachines/mymachines mdns_minimal [NOTFOUND=return]/g' /etc/nsswitch.conf
 # CUPS
-sudo pacman -S cups cups-pdf
+sudo pacman --noconfirm -S cups cups-pdf
 sudo systemctl enable --now cups.service
 sudo systemctl restart cups.service
 
 
 ## Extra Applications 
 # Flatpak
-flatpak install discord flatseal geogebra komikku monero signal spotify thinkorswim whatsapp keepassxc chrome
+flatpak install discord flatseal geogebra komikku monero signal thinkorswim keepassxc chrome app.zen_browser.zen
 # Games
 flatpak install steam lutris minecraft
-pikaur -S game-devices-udev
+pikaur --noconfirm -S game-devices-udev
 # Pikaur
-pikaur -S insync 
-pikaur -S sublime-merge
-pikaur -S anki
-pikaur -S frame-eth
-pikaur -S ledger-live
+pikaur --noconfirm -S insync 
+pikaur --noconfirm -S sublime-merge
+pikaur --noconfirm -S anki
+pikaur --noconfirm -S frame-eth
+pikaur --noconfirm -S ledger-live
+pikaur --noconfirm -S google-chrome
+pikaur --noconfirm -S ventoy-bin
+pikaur --noconfirm -S libation 
 
 
 if ($XDG_SESSION_TYPE = "wayland"); then

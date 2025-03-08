@@ -3,5 +3,4 @@ unit: sectors
 sector-size: 512
 
 start=	2048,		size=	1024000	
-start=	1026048,	size=	2097152
-start=	3145728
+start=	1026048

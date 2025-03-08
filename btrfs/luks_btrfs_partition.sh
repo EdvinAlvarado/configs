@@ -11,7 +11,7 @@ mount /dev/mapper/cryptroot $MOUNT
 btrfs subvolume create $MOUNT/@
 btrfs subvolume create $MOUNT/@home
 btrfs subvolume create $MOUNT/@snapshots
-if [ $SWAPFILE -eq 1 ]; then btrfs subvolume create $MOUNT/@swap; fi
+# if [ $SWAPFILE -eq 1 ]; then btrfs subvolume create $MOUNT/@swap; fi
 
 if [ "$DISTRO" == "arch" ]; then
 	btrfs subvolume create $MOUNT/@log
@@ -24,7 +24,7 @@ umount $MOUNT
 mount -o compress=zstd,subvol=@ /dev/mapper/cryptroot $MOUNT
 mkdir $MOUNT/{home,.snapshots,swap}
 mount -o compress=zstd,subvol=@home /dev/mapper/cryptroot $MOUNT/home
-mount -o compress=zstd,subvol=@snapshots /dev/mapper/cryptroot $MOUNT/.snapshots
+mount -o compress=zstd,subvol=@.snapshots /dev/mapper/cryptroot $MOUNT/.snapshots
 
 if [ "$DISTRO" == "arch" ]; then
 	mkdir -p $MOUNT/var/log

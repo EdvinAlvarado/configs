@@ -112,6 +112,7 @@ alias tmux="tmux -2" #force tmux to assume terminal supports 256 colors
 export PATH="$HOME/.local/bin/:$HOME/bin/:$HOME/.ghcup/bin:$HOME/.cabal/bin:$PATH:$GOPATH/bin:$HOME/go/bin:$HOME/.cargo/bin"
 export EDITOR=nvim
 export VISUAL=nvim
+export MANPAGER='nvim +Man!'
 export XDG_CONFIG_HOME=~/.config
 # export LFS="/home/edvin/mnt/lfs"
 autoload -Uz promptinit

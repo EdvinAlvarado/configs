@@ -26,11 +26,11 @@ done
 while true; do
 	read -p "Write kernel: " KERN
 	case $KERN in
-		"linux"   			) KERNEL=$KERN; break;;
-		"linux-zen"  		) KERNEL=$KERN; break;;
-		"linux-lts"  		) KERNEL=$KERN; break;;
-		"linux-hardened"	) KERNEL=$KERN; break;;
-		*         			) "Write KERNEL";;
+		"linux"   			) KERNEL="linux"; break;;
+		"linux-zen"  		) KERNEL="linux-zen linux-zen-headers"; break;;
+		"linux-lts"  		) KERNEL="linux-lts linux-lts-headers"; break;;
+		"linux-hardened"	) KERNEL="linux-hardened linux-hardened-headers"; break;;
+		*         			) "Write a kernel type";;
 	esac
 done
 
@@ -40,5 +40,5 @@ then
 fi
 
 pacman -Sy
-pacstrap $MOUNT base base-devel arch-install-scripts $KERNEL linux-firmware zram-generator btrfs-progs snapper snap-pac cryptsetup networkmanager neovim opendoas ranger python grub efibootmgr zsh git $CPUCODE $VIDEOCARD
+pacstrap $MOUNT base base-devel arch-install-scripts linux $KERNEL linux-firmware zram-generator btrfs-progs snapper snap-pac cryptsetup networkmanager neovim opendoas ranger python efibootmgr zsh git $CPUCODE $VIDEOCARD
 
