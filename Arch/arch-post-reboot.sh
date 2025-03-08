@@ -8,7 +8,15 @@ sudo sed -i -e "s/#ParallelDownloads = 5/ParallelDownloads = 10/" /etc/pacman.co
 
 ## System Packages
 # CLI
-sudo pacman --noconfirm -S neovim nodejs npm ranger htop glances flatpak rustup zsh dos2unix expac fd fzf go gopls hdparm links neofetch nushell namcap postgresql rsync tree-sitter wget which vorbis-tools zig zls zip unzip rar clang upx
+sudo pacman --noconfirm -S neovim nodejs npm ranger htop glances flatpak rustup zsh dos2unix expac fd fzf go gopls hdparm links neofetch nushell namcap postgresql rsync tree-sitter wget which vorbis-tools zig zls zip unzip rar clang upx tealdeer wikiman fdupes duperemove
+# Tealdeer
+tldr --update
+# wikiman
+curl -L 'https://raw.githubusercontent.com/filiparag/wikiman/master/Makefile' -o 'wikiman-makefile'
+make -f ./wikiman-makefile source-arch
+make -f ./wikiman-makefile source-tldr
+sudo make -f ./wikiman-makefile source-install
+sudo make -f ./wikiman-makefile clean
 # Rust
 rustup default stable
 source "$HOME/.cargo/env"
@@ -28,7 +36,7 @@ rm -rf pikaur
 # KDE
 sudo pacman --noconfirm -S kde-accessibility-meta kde-graphics-meta kde-multimedia-meta kdeconnect kdenetwork-filesharing kget kio-extras kio-gdrive kio-zeroconf krdc krfb kde-pim-meta kde-system-meta ark filelight kate kbackup kcalc kcharselect kdf kdialog kfind kgpg print-manager skanpage sweeper yakuake kdiff3 kompare dolphin-plugins elisa
 # GUI
-sudo pacman --noconfirm -S mkvtoolnix-cli mkvtoolnix-gui deluge deluge-gtk code libreoffice-fresh libreoffice-fresh-ja vlc texlive-bin ghostwriter firefox handbrake keepass aegisub audiacity calibre texlab virtualbox
+sudo pacman --noconfirm -S mkvtoolnix-cli mkvtoolnix-gui deluge deluge-gtk code libreoffice-fresh libreoffice-fresh-ja vlc texlive-bin ghostwriter handbrake keepass aegisub audiacity calibre texlab virtualbox
 
 ## Japanese
 sudo pacman --noconfirm -S adobe-source-han-sans-jp-fonts adobe-source-han-sans-jp-fonts otf-ipafont ttf-hanazono ttf-sazanami
@@ -82,7 +90,7 @@ sudo systemctl restart cups.service
 
 ## Extra Applications 
 # Flatpak
-flatpak install discord flatseal geogebra komikku monero signal thinkorswim keepassxc chrome
+flatpak install discord flatseal geogebra komikku monero signal thinkorswim keepassxc chrome app.zen_browser.zen
 # Games
 flatpak install steam lutris minecraft
 pikaur --noconfirm -S game-devices-udev
