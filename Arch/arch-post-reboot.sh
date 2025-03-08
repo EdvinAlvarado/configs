@@ -1,4 +1,4 @@
-# Run this before running this scritpy
+# Run this before running this script
 # sudo pacman -S --needed git base-devel
 
 
@@ -14,6 +14,14 @@ sudo pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg
 sudo echo "[chaotic-aur]" >> /etc/pacman.conf
 sudo echo "Include = /etc/pacman.d/chaotic-mirrorlist" >> /etc/pacman.conf
 sudo pacman --noconfirm -Syu
+
+
+## pikaur
+git clone https://aur.archlinux.org/pikaur.git
+cd pikaur
+makepkg --noconfirm -fsri
+cd ..
+rm -rf pikaur
 
 
 ## System Packages
@@ -81,7 +89,6 @@ sudo sed -i -e 's/#post/post/' /etc/snap-pac.ini
 sudo sed -i -e 's/#important/important/g' /etc/snap-pac.ini
 sudo sed -i -e 's/"pacman -Syu"/"pacman -Syu", "pikaur -Syu"/' /etc/snap-pac.ini
 sudo sed -i -e 's/"linux"/"linux", "linux-zen", "nvidia-utils", "nvidia-dkms", "systemd", "systemd-libs", "zram-generator", "amd-ucode", "intel-ucode", "networkmanager", "linux-firmware", "btrfs-progs"/' /etc/snap-pac.ini
-sudo nvim /etc/snap-pac.ini
 
 
 ## Network Printing
@@ -114,6 +121,11 @@ else
 pikaur -S $ESPANSO
 espanso service register
 espanso start
+
+# Flatpak
+flatpak install discord flatseal geogebra komikku monero signal thinkorswim keepassxc com.Google.Chrome app.zen_browser.zen
+# Games
+flatpak install steam lutris minecraft
 sudo pacman --noconfirm -S game-devices-udev
 
 
