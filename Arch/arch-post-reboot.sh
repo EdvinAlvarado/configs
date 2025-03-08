@@ -92,6 +92,14 @@ pikaur -S frame-eth
 pikaur -S ledger-live
 
 
+if ($XDG_SESSION_TYPE = "wayland"); then
+	$ESPANSO = "espanso-wayland"
+else
+	$ESPANSO = "espanso-x11"
+pikaur -S $ESPANSO
+espanso service register
+espanso start
+
 echo ""
 echo "Finished"
 echo "run recover.sh for neovim and zsh setup"
