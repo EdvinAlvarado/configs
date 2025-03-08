@@ -50,9 +50,8 @@ sudo pacman --noconfirm -S hyprland wayland slurp hyprpaper hyprpicker hypridle 
 # KDE
 sudo pacman --noconfirm -S kde-accessibility-meta kde-graphics-meta kde-multimedia-meta kdeconnect kdenetwork-filesharing kget kio-extras kio-gdrive kio-zeroconf krdc krfb kde-pim-meta kde-system-meta ark filelight kate kbackup kcalc kcharselect kdf kdialog kfind kgpg print-manager skanpage sweeper yakuake kdiff3 kompare dolphin-plugins elisa
 # GUI
-sudo pacman --noconfirm -S mkvtoolnix-cli mkvtoolnix-gui deluge deluge-gtk code libreoffice-fresh libreoffice-fresh-ja vlc texlive-bin ghostwriter handbrake keepass aegisub audiacity calibre texlab virtualbox
-
-## Japanese
+sudo pacman --noconfirm -S mkvtoolnix-cli mkvtoolnix-gui deluge deluge-gtk code libreoffice-freshlibreoffice-fresh-ja vlc texlive-bin obsidian handbrake keepass aegisub audacity calibre texlab virtualbox
+# Japanese
 sudo pacman --noconfirm -S adobe-source-han-sans-jp-fonts adobe-source-han-sans-jp-fonts otf-ipafont ttf-hanazono ttf-sazanami
 sudo pacman --noconfirm -S fcitx5-im
 pikaur --noconfirm -S fcitx5-mozc-ut fctix5-breeze
