@@ -26,7 +26,7 @@ rm -rf pikaur
 
 ## System Packages
 # CLI
-sudo pacman --noconfirm -S neovim nodejs npm ranger htop glances flatpak rustup zsh dos2unix expac fd fzf go gopls hdparm links neofetch nushell namcap postgresql rsync tree-sitter wget which vorbis-tools zig zls zip unzip rar clang upx tealdeer wikiman fdupes duperemove btop nfs-utils uutils-coreutils
+sudo pacman --noconfirm -S neovim nodejs npm htop glances flatpak rustup zsh dos2unix expac fd fzf go gopls hdparm links neofetch nushell namcap postgresql rsync tree-sitter wget which vorbis-tools zig zls zip unzip rar clang upx tealdeer wikiman fdupes duperemove btop nfs-utils uutils-coreutils zoxide zellij yazi kitty p7zip bat borg cava feh hyperfine syncthing tailscale
 # Tealdeer
 tldr --update
 # wikiman
@@ -50,11 +50,15 @@ sudo pacman --noconfirm -S hyprland wayland slurp hyprpaper hyprpicker hypridle 
 # KDE
 sudo pacman --noconfirm -S kde-accessibility-meta kde-graphics-meta kde-multimedia-meta kdeconnect kdenetwork-filesharing kget kio-extras kio-gdrive kio-zeroconf krdc krfb kde-pim-meta kde-system-meta ark filelight kate kbackup kcalc kcharselect kdf kdialog kfind kgpg print-manager skanpage sweeper yakuake kdiff3 kompare dolphin-plugins elisa
 # GUI
-sudo pacman --noconfirm -S mkvtoolnix-cli mkvtoolnix-gui deluge deluge-gtk code libreoffice-freshlibreoffice-fresh-ja vlc texlive-bin obsidian handbrake keepass aegisub audacity calibre texlab virtualbox
+sudo pacman --noconfirm -S mkvtoolnix-cli mkvtoolnix-gui deluge deluge-gtk code libreoffice-freshlibreoffice-fresh-ja vlc texlive-bin obsidian handbrake aegisub audacity calibre texlab virtualbox thunderbirb systray-x-kde
+pikaur --noconfirm -S proton-mail proton-vpn-gtk-app protonmail-bridge
 # Japanese
 sudo pacman --noconfirm -S adobe-source-han-sans-jp-fonts adobe-source-han-sans-jp-fonts otf-ipafont ttf-hanazono ttf-sazanami
 sudo pacman --noconfirm -S fcitx5-im
 pikaur --noconfirm -S fcitx5-mozc-ut fctix5-breeze
+pikaur --noconfirm -S wike-tui 
+pikaur --noconfirm -S rusty-man 
+pikaur --noconfirm -S cargo-info 
 
 
 ## Snapper
@@ -101,9 +105,10 @@ sudo systemctl restart cups.service
 
 ## Extra Applications 
 # AUR
-sudo pacman --noconfirm -S insync anki ledger-live ventoy-bin
+sudo pacman --noconfirm -S insync anki ledger-live ventoy-bin bambustudio-bin orca-slicer-bin ocrmypdf qdirstat subtitleedit trayscale
 pikaur --noconfirm -S frame-eth
 pikaur --noconfirm -S libation 
+pikaur --noconfirm -S audiobookconverter-bin 
 
 if ($XDG_SESSION_TYPE = "wayland"); then
 	$ESPANSO = "espanso-wayland"
