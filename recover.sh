@@ -45,7 +45,7 @@ while true; do
 	read -p "Install ranger configs? " yn
 	case $yn in
 		[Yy]* ) mkdir -p ~/.config/ranger; 
-				cp .config/ranger/rifle.conf ~/.config/ranger/rifle.conf; break;;
+				cp -a .config/ranger ~/.config/ranger; break;;
 		[Nn]* ) break;;
 		*     ) echo "Yes or No?";;
 	esac

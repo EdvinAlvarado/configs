@@ -36,7 +36,7 @@ done
 while true; do
 	read -p "Backup ranger configs? " yn
 	case $yn in
-		[Yy]* ) cp ~/.config/ranger/rifle.conf .config/ranger/rifle.conf; break;;
+		[Yy]* ) cp -a ~/.config/ranger .config/ranger; break;;
 		[Nn]* ) break;;
 		*     ) echo "Yes or No?";;
 	esac
