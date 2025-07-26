@@ -70,7 +70,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git tmux aliases colored-man-pages colorize command-not-found dircycle extract history vi-mode cabal docker gitignore golang python archlinux systemd themes)
+plugins=(git tmux aliases colored-man-pages colorize command-not-found dircycle extract history vi-mode cabal docker gitignore golang python archlinux systemd themes fzf eza)
 ## command-not-found not working
 
 source $ZSH/oh-my-zsh.sh
@@ -106,15 +106,22 @@ MODE_INDICATOR='%F{red}<<<%f %*'
 INSERT_MODE_INDICATOR='%*'
 
 bindkey -v
-alias ls='ls --color=auto'
+#alias ls='ls --color=auto'
 alias tmux="tmux -2" #force tmux to assume terminal supports 256 colors
 alias fzf="fzf --tmux"
+alias cat="bat"
 # alias vpn='cyberghostvpn --connect --country-code'
 export PATH="$HOME/.local/bin/:$HOME/bin/:$HOME/.ghcup/bin:$HOME/.cabal/bin:$PATH:$GOPATH/bin:$HOME/go/bin:$HOME/.cargo/bin"
 export EDITOR=nvim
 export VISUAL=nvim
 export MANPAGER='nvim +Man!'
 export XDG_CONFIG_HOME=~/.config
+source <(fzf --zsh)
+# eza
+zstyle ':omz:plugins:eza' 'dirs-first' yes
+zstyle ':omz:plugins:eza' 'git-status' yes
+zstyle ':omz:plugins:eza' 'icons' yes
+
 # uutils
 
 alias \[="uu-["
@@ -218,5 +225,8 @@ alias wc="uu-wc"
 alias who="uu-who"
 alias whoami="uu-whoami"
 alias yes="uu-yes"
+
+
+
 autoload -Uz promptinit
 promptinit
