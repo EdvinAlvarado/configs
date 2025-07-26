@@ -1,9 +1,27 @@
-# Run this before running this scritpy
+# Run this before running this script
 # sudo pacman -S --needed git base-devel
 
 
 # Pacman Config
 sudo sed -i -e "s/#ParallelDownloads = 5/ParallelDownloads = 10/" /etc/pacman.conf
+
+
+## chaotic-aur
+sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
+sudo pacman-key --lsign-key 3056513887B78AEB
+sudo pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst'
+sudo pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
+sudo echo "[chaotic-aur]" >> /etc/pacman.conf
+sudo echo "Include = /etc/pacman.d/chaotic-mirrorlist" >> /etc/pacman.conf
+sudo pacman --noconfirm -Syu
+
+
+## pikaur
+git clone https://aur.archlinux.org/pikaur.git
+cd pikaur
+makepkg --noconfirm -fsri
+cd ..
+rm -rf pikaur
 
 
 ## System Packages
@@ -24,29 +42,23 @@ rustup component add rust-analyzer rustfmt rust-src clippy
 # bluetooth
 sudo pacman --noconfirm -S bluez bluez-utils
 sudo systemctl enable --now bluetooth.service
-# pikaur
-git clone https://aur.archlinux.org/pikaur.git
-cd pikaur
-makepkg --noconfirm -fsri
-cd ..
-rm -rf pikaur
+# hyprland
+sudo pacman --noconfirm -S hyprland wayland slurp hyprpaper hyprpicker hypridle hyprlock hyprcusror xdg-desktop-portal-hyprland hyprpolkitagent hyprsunsent ghostty swww wofi
 
 
 ## Applications 
 # KDE
 sudo pacman --noconfirm -S kde-accessibility-meta kde-graphics-meta kde-multimedia-meta kdeconnect kdenetwork-filesharing kget kio-extras kio-gdrive kio-zeroconf krdc krfb kde-pim-meta kde-system-meta ark filelight kate kbackup kcalc kcharselect kdf kdialog kfind kgpg print-manager skanpage sweeper yakuake kdiff3 kompare dolphin-plugins elisa
 # GUI
-sudo pacman --noconfirm -S mkvtoolnix-cli mkvtoolnix-gui deluge deluge-gtk code libreoffice-fresh libreoffice-fresh-ja vlc texlive-bin ghostwriter handbrake keepass aegisub audiacity calibre texlab virtualbox
-
-## Japanese
+sudo pacman --noconfirm -S mkvtoolnix-cli mkvtoolnix-gui deluge deluge-gtk code libreoffice-freshlibreoffice-fresh-ja vlc texlive-bin obsidian handbrake keepass aegisub audacity calibre texlab virtualbox
+# Japanese
 sudo pacman --noconfirm -S adobe-source-han-sans-jp-fonts adobe-source-han-sans-jp-fonts otf-ipafont ttf-hanazono ttf-sazanami
 sudo pacman --noconfirm -S fcitx5-im
 pikaur --noconfirm -S fcitx5-mozc-ut fctix5-breeze
 
 
 ## Snapper
-sudo pacman --noconfirm -S snapper snap-pac
-pikaur --noconfirm -S btrfs-assistant
+sudo pacman --noconfirm -S snapper snap-pac btrfs-assistant
 # Setup root config (recommended by Arch wiki)
 sudo umount /.snapshots
 sudo rm -r /.snapshots
@@ -71,7 +83,6 @@ sudo sed -i -e 's/#post/post/' /etc/snap-pac.ini
 sudo sed -i -e 's/#important/important/g' /etc/snap-pac.ini
 sudo sed -i -e 's/"pacman -Syu"/"pacman -Syu", "pikaur -Syu"/' /etc/snap-pac.ini
 sudo sed -i -e 's/"linux"/"linux", "linux-zen", "nvidia-utils", "nvidia-dkms", "systemd", "systemd-libs", "zram-generator", "amd-ucode", "intel-ucode", "networkmanager", "linux-firmware", "btrfs-progs"/' /etc/snap-pac.ini
-sudo nvim /etc/snap-pac.ini
 
 
 ## Network Printing
@@ -89,23 +100,27 @@ sudo systemctl restart cups.service
 
 
 ## Extra Applications 
-# Flatpak
-flatpak install discord flatseal geogebra komikku monero signal thinkorswim keepassxc chrome app.zen_browser.zen
-# Games
-flatpak install steam lutris minecraft
-pikaur --noconfirm -S game-devices-udev
-# Pikaur
-pikaur --noconfirm -S insync 
-pikaur --noconfirm -S sublime-merge
-pikaur --noconfirm -S anki
+# AUR
+sudo pacman --noconfirm -S insync anki ledger-live ventoy-bin
 pikaur --noconfirm -S frame-eth
-pikaur --noconfirm -S ledger-live
-pikaur --noconfirm -S google-chrome
-pikaur --noconfirm -S ventoy-bin
 pikaur --noconfirm -S libation 
 
+if ($XDG_SESSION_TYPE = "wayland"); then
+	$ESPANSO = "espanso-wayland"
+else
+	$ESPANSO = "espanso-x11"
+pikaur --noconfirm -S $ESPANSO espanso-gui
+espanso service register
+espanso start
 
-clear
+# Flatpak
+flatpak install discord flatseal geogebra komikku monero signal thinkorswim keepassxc com.Google.Chrome app.zen_browser.zen
+# Games
+flatpak install steam lutris minecraft
+sudo pacman --noconfirm -S game-devices-udev
+
+
+echo ""
 echo "Finished"
 echo "run recover.sh for neovim and zsh setup"
 echo "Running KDE Wayland might require disabling saving sessions"
