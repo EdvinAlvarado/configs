@@ -32,11 +32,11 @@ while true; do
 	esac
 done
 
-# ranger
+# yazi
 while true; do
-	read -p "Backup ranger configs? " yn
+	read -p "Backup yazi configs? " yn
 	case $yn in
-		[Yy]* ) cp -a ~/.config/ranger .config/ranger; break;;
+		[Yy]* ) cp -a ~/.config/yazi .config/yazi; break;;
 		[Nn]* ) break;;
 		*     ) echo "Yes or No?";;
 	esac

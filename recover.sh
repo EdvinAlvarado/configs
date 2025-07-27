@@ -40,12 +40,12 @@ while true; do
 	esac
 done
 
-# ranger
+# yazi
 while true; do
-	read -p "Install ranger configs? " yn
+	read -p "Install yazi configs? " yn
 	case $yn in
-		[Yy]* ) mkdir -p ~/.config/ranger; 
-				cp -a .config/ranger ~/.config/ranger; break;;
+		[Yy]* ) mkdir -p ~/.config/yazi; 
+				cp -a .config/yazi ~/.config/yazi; break;;
 		[Nn]* ) break;;
 		*     ) echo "Yes or No?";;
 	esac
