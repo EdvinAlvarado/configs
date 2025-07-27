@@ -125,7 +125,7 @@ zstyle ':omz:plugins:eza' 'icons' yes
 
 # uutils
 
-alias \[="uu-["
+#alias \[="uu-["
 alias arch="uu-arch"
 alias base32="uu-base32"
 alias base64="uu-base64"
@@ -169,7 +169,7 @@ alias kill="uu-kill"
 alias link="uu-link"
 alias ln="uu-ln"
 alias logname="uu-logname"
-alias ls="uu-ls"
+#alias ls="uu-ls"
 alias mkdir="uu-mkdir"
 alias mkfifo="uu-mkfifo"
 alias mknod="uu-mknod"
