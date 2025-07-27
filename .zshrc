@@ -236,6 +236,8 @@ function y() {
 	rm -f -- "$tmp"
 }
 
+# zoxide
+eval "$(zoxide init zsh --cmd cd)"
 
 autoload -Uz promptinit
 promptinit
