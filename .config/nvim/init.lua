@@ -154,6 +154,9 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+-- Change how much space character spaces a Tab takes.
+vim.opt.tabstop = 4
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
@@ -333,7 +336,7 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
-
+  'lilydjwg/fcitx.vim',
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
   -- keys can be used to configure plugin behavior/loading/etc.
@@ -382,32 +385,23 @@ require('lazy').setup({
   { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
-    config = function() -- This is the function that runs, AFTER loading
-      require('which-key').setup()
-
-      -- Document existing key chains
-      require('which-key').register {
-        { '<leader>c', group = '[C]ode' },
-        { '<leader>c_', hidden = true },
-        { '<leader>d', group = '[D]ocument' },
-        { '<leader>d_', hidden = true },
-        { '<leader>r', group = '[R]ename' },
-        { '<leader>r_', hidden = true },
-        { '<leader>s', group = '[S]earch' },
-        { '<leader>s_', hidden = true },
-        { '<leader>w', group = '[W]orkspace' },
-        { '<leader>w_', hidden = true },
-        { '<leader>t', group = '[T]oggle' },
-        { '<leader>t_', hidden = true },
-        { '<leader>h', group = 'Git [H]unk' },
-        { '<leader>h_', hidden = true },
-      }
-      -- visual mode
-      require('which-key').register {
-        ['<leader>h'] = { 'Git [H]unk' },
-        mode = 'v',
-      }
-    end,
+    keys = {
+      { '<leader>c', group = '[C]ode' },
+      { '<leader>c_', hidden = true },
+      { '<leader>d', group = '[D]ocument' },
+      { '<leader>d_', hidden = true },
+      { '<leader>h', group = 'Git [H]unk' },
+      { '<leader>h_', hidden = true },
+      { '<leader>r', group = '[R]ename' },
+      { '<leader>r_', hidden = true },
+      { '<leader>s', group = '[S]earch' },
+      { '<leader>s_', hidden = true },
+      { '<leader>t', group = '[T]oggle' },
+      { '<leader>t_', hidden = true },
+      { '<leader>w', group = '[W]orkspace' },
+      { '<leader>w_', hidden = true },
+      { '<leader>h', desc = 'Git [H]unk', mode = 'v' },
+    },
   },
 
   -- NOTE: Plugins can specify dependencies.
