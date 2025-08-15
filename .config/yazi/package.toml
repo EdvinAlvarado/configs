@@ -3,5 +3,8 @@ use = "yazi-rs/plugins:smart-enter"
 rev = "de53d90"
 hash = "56fdabc96fc1f4d53c96eb884b02a5be"
 
-[flavor]
-deps = []
+
+[[flavor.deps]]
+use = "yazi-rs/flavors:dracula"
+rev = "d3fd3a5"
+hash = "7b9ff01a0070cc9176e0c683329aeb26"

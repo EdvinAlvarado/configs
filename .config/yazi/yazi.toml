@@ -8,9 +8,31 @@ prepend_keymap = [
 [opener]
 music = [{ run = 'elisa "$@"', orphan = true, for = "unix" }]
 image = [{ run = 'feh "$@"', orphan = true, for = "unix" }]
+3dprint = [{ run = 'bambu-studio "$@"', orphan = true, for = "unix" }]
+video = [
+	{ run = 'mpv "$@"', orphan = true, for = "unix" },
+	{ run = 'vlc "$@"', orphan = true, for = "unix" },
+	{ run = 'ghb "$@"', orphan = true, for = "unix", desc = "Handbrake" },
+]
+mkv = [
+	{ run = 'mkvtoolnix-gui "$@"', orphan = true, for = "unix", desc = "MKVToolNix" },
+]
+docs = [{ run = 'okular "$@"', orphan = true, for = "unix" }]
+nvim = [{ run = 'nvim "$@"', block = true, for = "unix" }]
+archive = [{ run = 'ark "$@"', orphan = true, for = "unix" }]
+
 
 [open]
 prepend_rules = [
 	{ mime = "audio/*", use = "music" },
 	{ mime = "image/*", use = "image" },
+	{ name = "*.3mf", use = "3dprint" },
+	{ name = "*.cbz", use = "docs" },
+	{ mime = "video/*", use = "video" },
+]
+
+append_rules = [
+	{ mime = "video/matroska", use = "mkv" },
+	{ mime = "application/gzip", use = "archive" },
+	{ name = "*", use = "nvim" },
 ]
