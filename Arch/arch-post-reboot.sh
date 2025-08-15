@@ -4,7 +4,8 @@
 
 # Pacman Config
 sudo sed -i -e "s/#ParallelDownloads = 5/ParallelDownloads = 10/" /etc/pacman.conf
-
+sed -i -E 's/^(CFLAGS="-march=)\w+/\1native/' /etc/makepkg.conf
+sed -i -E 's/^(RUSTFLAGS=".+)"/\1 -C target-cpu=native"/' /etc/makepkg.conf.d/rust.conf
 
 ## chaotic-aur
 sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
