@@ -27,7 +27,7 @@ rm -rf pikaur
 
 ## System Packages
 # CLI
-sudo pacman --noconfirm -S neovim nodejs npm htop glances flatpak rustup zsh dos2unix expac fd fzf go gopls hdparm links neofetch nushell namcap postgresql rsync tree-sitter wget which vorbis-tools zig zls zip unzip rar clang upx tealdeer wikiman fdupes duperemove btop nfs-utils uutils-coreutils zoxide zellij yazi kitty p7zip bat borg cava feh hyperfine syncthing tailscale
+sudo pacman --noconfirm -S neovim nodejs npm htop glances flatpak rustup zsh dos2unix expac fd fzf go gopls hdparm links neofetch nushell namcap postgresql rsync tree-sitter wget which vorbis-tools zig zls zip unzip rar clang upx tealdeer wikiman fdupes duperemove btop nfs-utils uutils-coreutils zoxide zellij yazi kitty p7zip bat borg cava feh hyperfine syncthing tailscale ueberzugpp resvg
 # Tealdeer
 tldr --update
 # wikiman
@@ -44,7 +44,7 @@ rustup component add rust-analyzer rustfmt rust-src clippy
 sudo pacman --noconfirm -S bluez bluez-utils
 sudo systemctl enable --now bluetooth.service
 # hyprland
-sudo pacman --noconfirm -S hyprland wayland slurp hyprpaper hyprpicker hypridle hyprlock hyprcusror xdg-desktop-portal-hyprland hyprpolkitagent hyprsunsent ghostty swww wofi
+sudo pacman --noconfirm -S hyprland wayland slurp hyprpaper hyprpicker hypridle hyprlock xdg-desktop-portal-hyprland hyprpolkitagent kitty swww wofi waybar network-manager-applet
 
 
 ## Applications 
