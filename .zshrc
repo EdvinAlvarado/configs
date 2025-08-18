@@ -111,6 +111,7 @@ alias tmux="tmux -2" #force tmux to assume terminal supports 256 colors
 alias fzf="fzf --tmux"
 alias nvimf="nvim \$(fzf)"
 alias cat="bat"
+alias rename="perl-rename"
 # alias vpn='cyberghostvpn --connect --country-code'
 export PATH="$HOME/.local/bin/:$HOME/bin/:$HOME/.ghcup/bin:$HOME/.cabal/bin:$PATH:$GOPATH/bin:$HOME/go/bin:$HOME/.cargo/bin"
 export EDITOR=nvim
