@@ -25,9 +25,7 @@ sudo pacman --noconfirm -S kde-accessibility-meta kde-graphics-meta kde-multimed
 sudo pacman --noconfirm -S mkvtoolnix-cli mkvtoolnix-gui deluge deluge-gtk code libreoffice-freshlibreoffice-fresh-ja vlc vlc-plugins-extra texlive-bin obsidian handbrake aegisub audacity calibre texlab virtualbox thunderbirb systray-x-kde
 pikaur --noconfirm -S proton-mail proton-vpn-gtk-app protonmail-bridge
 # Japanese
-sudo pacman --noconfirm -S adobe-source-han-sans-jp-fonts adobe-source-han-sans-jp-fonts otf-ipafont ttf-hanazono ttf-sazanami
-sudo pacman --noconfirm -S fcitx5-im
-pikaur --noconfirm -S fcitx5-mozc-ut fctix5-breeze
+pikaur --noconfirm -S fcitx5-mozc-ut fcitx5-breeze
 pikaur --noconfirm -S wike-tui 
 pikaur --noconfirm -S rusty-man 
 pikaur --noconfirm -S cargo-info 
