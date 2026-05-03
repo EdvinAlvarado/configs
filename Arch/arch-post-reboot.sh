@@ -16,11 +16,6 @@ sudo make -f ./wikiman-makefile clean
 # Rust
 rustup default stable
 rustup component add rust-analyzer rustfmt rust-src clippy
-# bluetooth
-sudo pacman --noconfirm -S bluez bluez-utils
-sudo systemctl enable --now bluetooth.service
-# hyprland
-sudo pacman --noconfirm -S hyprland wayland slurp hyprpaper hyprpicker hypridle hyprlock xdg-desktop-portal-hyprland hyprpolkitagent kitty swww wofi waybar network-manager-applet
 
 
 ## Applications 
