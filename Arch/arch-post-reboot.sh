@@ -1,6 +1,4 @@
-## System Packages
-# CLI
-sudo pacman --noconfirm -S neovim nodejs npm htop glances flatpak rustup zsh dos2unix expac fd fzf go gopls hdparm links neofetch nushell namcap postgresql rsync tree-sitter wget which vorbis-tools zig zls zip unzip unrar clang upx tealdeer wikiman fdupes duperemove btop nfs-utils uutils-coreutils zoxide zellij yazi kitty p7zip bat borg cava feh hyperfine syncthing tailscale ueberzugpp resvg perl-rename eza tmux
+## CLI 
 # Add yazi theme
 ya pkg add yazi-rs/flavors:dracula
 # zsh
@@ -19,38 +17,12 @@ rustup component add rust-analyzer rustfmt rust-src clippy
 
 
 ## Applications 
-# KDE
-sudo pacman --noconfirm -S kde-accessibility-meta kde-graphics-meta kde-multimedia-meta kdeconnect kdenetwork-filesharing kget kio-extras kio-gdrive kio-zeroconf krdc krfb kde-pim-meta kde-system-meta ark filelight kate kbackup kcalc kcharselect kdf kdialog kfind kgpg print-manager skanpage sweeper yakuake kdiff3 kompare dolphin-plugins elisa kwalletmanager kwallet-pam
-# GUI
-sudo pacman --noconfirm -S mkvtoolnix-cli mkvtoolnix-gui deluge deluge-gtk code libreoffice-fresh libreoffice-fresh-ja vlc vlc-plugins-extra texlive-bin obsidian handbrake aegisub audacity calibre texlab virtualbox systray-x-kde
+sudo pacman --noconfirm -S neofetch insync anki ledger-live ventoy-bin bambustudio-bin orca-slicer-bin ocrmypdf qdirstat subtitleedit trayscale
 pikaur --noconfirm -S proton-mail proton-vpn-gtk-app
-# Japanese
-sudo pacman --noconfirm -S adobe-source-han-sans-jp-fonts  otf-ipafont ttf-jigmo ttf-sazanami fcitx5-im
 pikaur --noconfirm -S fcitx5-mozc-ut fcitx5-breeze
 pikaur --noconfirm -S wike-tui 
 pikaur --noconfirm -S rusty-man 
 pikaur --noconfirm -S cargo-info 
-
-
-## Snapper
-sudo pacman --noconfirm -S snapper snap-pac btrfs-assistant
-# Setup root config (recommended by Arch wiki)
-# Setup pre/post root snapshots for pacman transactions
-# TODO root command did not work. added fix. not tested
-sudo sed -i -e 's/#\[root\]/\[root\]/' /etc/snap-pac.ini
-sudo sed -i -e 's/#desc_limit/desc_limit/' /etc/snap-pac.ini
-sudo sed -i -e 's/#snapshot/snapshot/' /etc/snap-pac.ini
-sudo sed -i -e 's/#cleanup/cleanup/' /etc/snap-pac.ini
-sudo sed -i -e 's/#pre/pre/' /etc/snap-pac.ini
-sudo sed -i -e 's/#post/post/' /etc/snap-pac.ini
-sudo sed -i -e 's/#important/important/g' /etc/snap-pac.ini
-sudo sed -i -e 's/"pacman -Syu"/"pacman -Syu", "pikaur -Syu"/' /etc/snap-pac.ini
-sudo sed -i -e 's/"linux"/"linux", "linux-zen", "nvidia-utils", "nvidia-dkms", "systemd", "systemd-libs", "zram-generator", "amd-ucode", "intel-ucode", "networkmanager", "linux-firmware", "btrfs-progs"/' /etc/snap-pac.ini
-
-
-## Extra Applications 
-# AUR
-sudo pacman --noconfirm -S insync anki ledger-live ventoy-bin bambustudio-bin orca-slicer-bin ocrmypdf qdirstat subtitleedit trayscale
 pikaur --noconfirm -S frame-eth
 pikaur --noconfirm -S libation 
 pikaur --noconfirm -S audiobookconverter-bin 
@@ -68,6 +40,22 @@ flatpak install discord flatseal geogebra komikku monero signal thinkorswim keep
 # Games
 flatpak install steam lutris minecraft
 sudo pacman --noconfirm -S game-devices-udev
+
+## Snapper
+# Setup root config (recommended by Arch wiki)
+# Setup pre/post root snapshots for pacman transactions
+# TODO root command did not work. added fix. not tested
+sudo sed -i -e 's/#\[root\]/\[root\]/' /etc/snap-pac.ini
+sudo sed -i -e 's/#desc_limit/desc_limit/' /etc/snap-pac.ini
+sudo sed -i -e 's/#snapshot/snapshot/' /etc/snap-pac.ini
+sudo sed -i -e 's/#cleanup/cleanup/' /etc/snap-pac.ini
+sudo sed -i -e 's/#pre/pre/' /etc/snap-pac.ini
+sudo sed -i -e 's/#post/post/' /etc/snap-pac.ini
+sudo sed -i -e 's/#important/important/g' /etc/snap-pac.ini
+sudo sed -i -e 's/"pacman -Syu"/"pacman -Syu", "pikaur -Syu"/' /etc/snap-pac.ini
+sudo sed -i -e 's/"linux"/"linux", "linux-zen", "nvidia-utils", "nvidia-dkms", "systemd", "systemd-libs", "zram-generator", "amd-ucode", "intel-ucode", "networkmanager", "linux-firmware", "btrfs-progs"/' /etc/snap-pac.ini
+
+
 
 
 echo ""
