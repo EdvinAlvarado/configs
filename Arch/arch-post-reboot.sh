@@ -1,6 +1,6 @@
 ## System Packages
 # CLI
-sudo pacman --noconfirm -S neovim nodejs npm htop glances flatpak rustup zsh dos2unix expac fd fzf go gopls hdparm links neofetch nushell namcap postgresql rsync tree-sitter wget which vorbis-tools zig zls zip unzip rar clang upx tealdeer wikiman fdupes duperemove btop nfs-utils uutils-coreutils zoxide zellij yazi kitty p7zip bat borg cava feh hyperfine syncthing tailscale ueberzugpp resvg perl-rename eza tmux uutils-coreutils
+sudo pacman --noconfirm -S neovim nodejs npm htop glances flatpak rustup zsh dos2unix expac fd fzf go gopls hdparm links neofetch nushell namcap postgresql rsync tree-sitter wget which vorbis-tools zig zls zip unzip unrar clang upx tealdeer wikiman fdupes duperemove btop nfs-utils uutils-coreutils zoxide zellij yazi kitty p7zip bat borg cava feh hyperfine syncthing tailscale ueberzugpp resvg perl-rename eza tmux
 # Add yazi theme
 ya pkg add yazi-rs/flavors:dracula
 # zsh
