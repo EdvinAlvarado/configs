@@ -1,30 +1,3 @@
-# Run this before running this script
-# sudo pacman -S --needed git base-devel
-
-
-# Pacman Config
-sudo sed -i -e "s/#ParallelDownloads = 5/ParallelDownloads = 10/" /etc/pacman.conf
-sed -i -E 's/^(CFLAGS="-march=)\w+/\1native/' /etc/makepkg.conf
-sed -i -E 's/^(RUSTFLAGS=".+)"/\1 -C target-cpu=native"/' /etc/makepkg.conf.d/rust.conf
-
-## chaotic-aur
-sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
-sudo pacman-key --lsign-key 3056513887B78AEB
-sudo pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst'
-sudo pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
-sudo echo "[chaotic-aur]" >> /etc/pacman.conf
-sudo echo "Include = /etc/pacman.d/chaotic-mirrorlist" >> /etc/pacman.conf
-sudo pacman --noconfirm -Syu
-
-
-## pikaur
-git clone https://aur.archlinux.org/pikaur.git
-cd pikaur
-makepkg --noconfirm -fsri
-cd ..
-rm -rf pikaur
-
-
 ## System Packages
 # CLI
 sudo pacman --noconfirm -S neovim nodejs npm htop glances flatpak rustup zsh dos2unix expac fd fzf go gopls hdparm links neofetch nushell namcap postgresql rsync tree-sitter wget which vorbis-tools zig zls zip unzip rar clang upx tealdeer wikiman fdupes duperemove btop nfs-utils uutils-coreutils zoxide zellij yazi kitty p7zip bat borg cava feh hyperfine syncthing tailscale ueberzugpp resvg perl-rename eza tmux uutils-coreutils
