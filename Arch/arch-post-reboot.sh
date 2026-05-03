@@ -15,7 +15,6 @@ sudo make -f ./wikiman-makefile source-install
 sudo make -f ./wikiman-makefile clean
 # Rust
 rustup default stable
-source "$HOME/.cargo/env"
 rustup component add rust-analyzer rustfmt rust-src clippy
 # bluetooth
 sudo pacman --noconfirm -S bluez bluez-utils
