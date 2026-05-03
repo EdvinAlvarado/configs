@@ -1,4 +1,4 @@
-sudo pacman -S --needed git base-devel
+sudo pacman --noconfirm -S --needed git base-devel
 
 # Pacman Config
 sudo sed -i -e "s/#ParallelDownloads = 5/ParallelDownloads = 10/" /etc/pacman.conf
@@ -15,7 +15,6 @@ echo "Include = /etc/pacman.d/chaotic-mirrorlist" | sudo tee -a /etc/pacman.conf
 sudo pacman --noconfirm -Syu
 
 ## pikaur
-sudo pacman -S --needed base-devel git
 git clone https://aur.archlinux.org/pikaur.git
 cd pikaur
 makepkg --noconfirm -fsri
