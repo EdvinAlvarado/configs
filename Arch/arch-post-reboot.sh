@@ -5,7 +5,6 @@ sudo pacman --noconfirm -S neovim nodejs npm htop glances flatpak rustup zsh dos
 ya pkg add yazi-rs/flavors:dracula
 # zsh
 pikaur --noconfirm -S oh-my-zsh-git
-chsh -s /usr/bin/zsh
 # Tealdeer
 tldr --update
 # wikiman
