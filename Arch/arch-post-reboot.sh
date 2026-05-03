@@ -20,10 +20,10 @@ rustup component add rust-analyzer rustfmt rust-src clippy
 
 ## Applications 
 # KDE
-sudo pacman --noconfirm -S kde-accessibility-meta kde-graphics-meta kde-multimedia-meta kdeconnect kdenetwork-filesharing kget kio-extras kio-gdrive kio-zeroconf krdc krfb kde-pim-meta kde-system-meta ark filelight kate kbackup kcalc kcharselect kdf kdialog kfind kgpg print-manager skanpage sweeper yakuake kdiff3 kompare dolphin-plugins elisa
+sudo pacman --noconfirm -S kde-accessibility-meta kde-graphics-meta kde-multimedia-meta kdeconnect kdenetwork-filesharing kget kio-extras kio-gdrive kio-zeroconf krdc krfb kde-pim-meta kde-system-meta ark filelight kate kbackup kcalc kcharselect kdf kdialog kfind kgpg print-manager skanpage sweeper yakuake kdiff3 kompare dolphin-plugins elisa kwalletmanager kwallet-pam
 # GUI
-sudo pacman --noconfirm -S mkvtoolnix-cli mkvtoolnix-gui deluge deluge-gtk code libreoffice-freshlibreoffice-fresh-ja vlc vlc-plugins-extra texlive-bin obsidian handbrake aegisub audacity calibre texlab virtualbox thunderbirb systray-x-kde
-pikaur --noconfirm -S proton-mail proton-vpn-gtk-app protonmail-bridge
+sudo pacman --noconfirm -S mkvtoolnix-cli mkvtoolnix-gui deluge deluge-gtk code libreoffice-fresh libreoffice-fresh-ja vlc vlc-plugins-extra texlive-bin obsidian handbrake aegisub audacity calibre texlab virtualbox systray-x-kde
+pikaur --noconfirm -S proton-mail proton-vpn-gtk-app
 # Japanese
 sudo pacman --noconfirm -S adobe-source-han-sans-jp-fonts  otf-ipafont ttf-jigmo ttf-sazanami fcitx5-im
 pikaur --noconfirm -S fcitx5-mozc-ut fcitx5-breeze
