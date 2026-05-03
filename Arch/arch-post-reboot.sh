@@ -36,18 +36,6 @@ pikaur --noconfirm -S cargo-info
 ## Snapper
 sudo pacman --noconfirm -S snapper snap-pac btrfs-assistant
 # Setup root config (recommended by Arch wiki)
-sudo umount /.snapshots
-sudo rm -r /.snapshots
-sudo snapper -c root create-config /
-sudo btrfs subvolume delete /.snapshots
-sudo mkdir /.snapshots
-sudo mount -a
-sudo chmod 750 /.snapshots
-# Setup home config
-sudo snapper -c home create-config /home
-# Activate automatic snapshots
-sudo systemctl enable --now snapper-timeline.timer
-sudo systemctl enable --now snapper-cleanup.timer
 # Setup pre/post root snapshots for pacman transactions
 # TODO root command did not work. added fix. not tested
 sudo sed -i -e 's/#\[root\]/\[root\]/' /etc/snap-pac.ini
@@ -59,20 +47,6 @@ sudo sed -i -e 's/#post/post/' /etc/snap-pac.ini
 sudo sed -i -e 's/#important/important/g' /etc/snap-pac.ini
 sudo sed -i -e 's/"pacman -Syu"/"pacman -Syu", "pikaur -Syu"/' /etc/snap-pac.ini
 sudo sed -i -e 's/"linux"/"linux", "linux-zen", "nvidia-utils", "nvidia-dkms", "systemd", "systemd-libs", "zram-generator", "amd-ucode", "intel-ucode", "networkmanager", "linux-firmware", "btrfs-progs"/' /etc/snap-pac.ini
-
-
-## Network Printing
-# You must disable the systemd DNS resolver
-sudo systemctl stop systemd-resolved.service
-sudo systemctl disable systemd-resolved.service
-# and use avahi and mdns for it to work.
-sudo pacman --noconfirm -S nss-mdns avahi samba
-sudo systemctl enable --now avahi-daemon.service
-sudo sed -i -e 's/mymachines/mymachines mdns_minimal [NOTFOUND=return]/g' /etc/nsswitch.conf
-# CUPS
-sudo pacman --noconfirm -S cups cups-pdf
-sudo systemctl enable --now cups.service
-sudo systemctl restart cups.service
 
 
 ## Extra Applications 
