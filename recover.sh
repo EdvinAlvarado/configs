@@ -6,7 +6,7 @@ while true; do
 	read -p "Install neovim configs? " yn
 	case $yn in
 		[Yy]* ) 
-				cp $NEOVIM_DIR/init.lua ~/$NEOVIM_DIR/init.lua;
+				mkdir -p ~/$NEOVIM_DIR && cp $NEOVIM_DIR/init.lua ~/$NEOVIM_DIR/init.lua;
 				nvim;
 				break;;
 		[Nn]* ) break;;
