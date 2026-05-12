@@ -1,1 +1,6 @@
 *.pyc
+.config/yazi/yazi/flavors
+.config/yazi/yazi/plugins
+.config/yazi/yazi/package.toml
+.config/yazi/yazi/init.lua
+

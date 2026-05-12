@@ -1,0 +1,38 @@
+[mgr]
+linemode = "size"
+prepend_keymap = [
+	{ on = "<Enter>", run = "plugin smart-enter", desc = "Enter the child directory, or open the file" },
+]
+
+
+[opener]
+music = [{ run = 'elisa "$@"', orphan = true, for = "unix" }]
+image = [{ run = 'feh "$@"', orphan = true, for = "unix" }]
+3dprint = [{ run = 'bambu-studio "$@"', orphan = true, for = "unix" }]
+video = [
+	{ run = 'mpv "$@"', orphan = true, for = "unix" },
+	{ run = 'vlc "$@"', orphan = true, for = "unix" },
+	{ run = 'ghb "$@"', orphan = true, for = "unix", desc = "Handbrake" },
+]
+mkv = [
+	{ run = 'mkvtoolnix-gui "$@"', orphan = true, for = "unix", desc = "MKVToolNix" },
+]
+docs = [{ run = 'okular "$@"', orphan = true, for = "unix" }]
+nvim = [{ run = 'nvim "$@"', block = true, for = "unix" }]
+archive = [{ run = 'ark "$@"', orphan = true, for = "unix" }]
+
+
+[open]
+prepend_rules = [
+	{ mime = "audio/*", use = "music" },
+	{ mime = "image/*", use = "image" },
+	{ url = "*.3mf", use = "3dprint" },
+	{ url = "*.cbz", use = "docs" },
+	{ mime = "video/*", use = "video" },
+]
+
+append_rules = [
+	{ mime = "video/matroska", use = "mkv" },
+	{ mime = "application/gzip", use = "archive" },
+	{ mime = "text/*", use = "nvim" },
+]
