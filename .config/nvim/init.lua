@@ -1165,6 +1165,16 @@ require('lazy').setup({
       lazy = '💤 ',
     },
   },
+  {
+    'LhKipp/nvim-nu',
+    build = ':TSInstall nu',
+    event = { 'BufRead *.nu' },
+    ft = 'zig',
+    config = function()
+      vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = true })
+    end,
+    opts = {},
+  },
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
