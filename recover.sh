@@ -27,38 +27,15 @@ while true; do
 	esac
 done
 
-# tmux
-while true; do
-	read -p "Install tmux configs? " yn
-	case $yn in
-		[Yy]* ) cp .tmux.conf ~/.tmux.conf;
-				git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm;
-				tmux;
-				break;;
-		[Nn]* ) break;;
-		*     ) echo "Yes or No?";;
-	esac
-done
-
 # yazi
 while true; do
 	read -p "Install yazi configs? " yn
 	case $yn in
 		[Yy]* ) mkdir -p ~/.config/yazi; 
-				cp -a .config/yazi ~/.config/yazi; break;;
-		[Nn]* ) break;;
-		*     ) echo "Yes or No?";;
-	esac
-done
-
-# xmonad/xmobar
-while true; do
-	read -p "Install xmonad and xmobarrc configs? " yn
-	case $yn in
-		[Yy]* ) mkdir -p ~/.xmonad; 
-				cp .xmonad/xmonad.hs ~/.xmonad/xmonad.hs;
-				cp .xmobarrc ~/.xmobarrc;
-				xmonad --recompile; break;;
+				cp -a .config/yazi/init.lua ~/.config/yazi/; 
+				cp -a .config/yazi/theme.toml ~/.config/yazi/; 
+				cp -a .config/yazi/yazi.toml ~/.config/yazi/; 
+				break;;
 		[Nn]* ) break;;
 		*     ) echo "Yes or No?";;
 	esac

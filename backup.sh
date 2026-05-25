@@ -22,16 +22,6 @@ while true; do
 	esac
 done
 
-# tmux
-while true; do
-	read -p "Backup tmux configs? " yn
-	case $yn in
-		[Yy]* ) cp ~/.tmux.conf .tmux.conf; break;;
-		[Nn]* ) break;;
-		*     ) echo "Yes or No?";;
-	esac
-done
-
 # yazi
 while true; do
 	read -p "Backup yazi configs? " yn
