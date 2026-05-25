@@ -1,6 +1,7 @@
 ## CLI 
-# Add yazi theme
+# Add yazi plugins 
 ya pkg add yazi-rs/flavors:dracula
+ya pkg add yazi-rs/plugins:smart-enter
 # zsh
 pikaur --noconfirm -S oh-my-zsh-git
 # Tealdeer
@@ -36,9 +37,9 @@ espanso service register
 espanso start
 
 # Flatpak
-flatpak install discord flatseal geogebra komikku monero signal thinkorswim keepassxc com.Google.Chrome app.zen_browser.zen
+flatpak -y install discord flatseal geogebra komikku monero signal thinkorswim app.zen_browser.zen
 # Games
-flatpak install steam lutris minecraft
+flatpak -y install steam lutris minecraft
 sudo pacman --noconfirm -S game-devices-udev
 
 ## Snapper
@@ -56,7 +57,8 @@ sudo sed -i -e 's/"pacman -Syu"/"pacman -Syu", "pikaur -Syu"/' /etc/snap-pac.ini
 sudo sed -i -e 's/"linux"/"linux", "linux-zen", "nvidia-utils", "nvidia-dkms", "systemd", "systemd-libs", "zram-generator", "amd-ucode", "intel-ucode", "networkmanager", "linux-firmware", "btrfs-progs"/' /etc/snap-pac.ini
 
 
-
+## Configuration
+sudo systemctl mask systemd-udev-settle
 
 echo ""
 echo "Finished"

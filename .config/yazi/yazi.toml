@@ -26,13 +26,13 @@ archive = [{ run = 'ark "$@"', orphan = true, for = "unix" }]
 prepend_rules = [
 	{ mime = "audio/*", use = "music" },
 	{ mime = "image/*", use = "image" },
-	{ name = "*.3mf", use = "3dprint" },
-	{ name = "*.cbz", use = "docs" },
+	{ url = "*.3mf", use = "3dprint" },
+	{ url = "*.cbz", use = "docs" },
 	{ mime = "video/*", use = "video" },
 ]
 
 append_rules = [
 	{ mime = "video/matroska", use = "mkv" },
 	{ mime = "application/gzip", use = "archive" },
-	{ name = "*", use = "nvim" },
+	{ mime = "text/*", use = "nvim" },
 ]
