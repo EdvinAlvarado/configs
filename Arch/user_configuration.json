@@ -211,6 +211,7 @@
         "flatpak",
         "fzf",
         "glances",
+        "glow",
         "go",
         "gopls",
         "handbrake",

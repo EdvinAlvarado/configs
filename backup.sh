@@ -28,6 +28,8 @@ while true; do
 	case $yn in
 		[Yy]* ) cp -a ~/.config/yazi/theme.toml .config/yazi/; 
 				cp -a ~/.config/yazi/yazi.toml .config/yazi/; 
+				cp -a ~/.config/yazi/keymap.toml .config/yazi/; 
+				cp -a ~/.config/yazi/init.lua .config/yazi/; 
 				break;;
 		[Nn]* ) break;;
 		*     ) echo "Yes or No?";;
