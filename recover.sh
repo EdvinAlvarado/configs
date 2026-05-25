@@ -53,3 +53,14 @@ while true; do
 		*     ) echo "Yes or No?";;
 	esac
 done
+
+# Plasma Session
+while true; do
+	read -p "setup plasma session system env. variables? " yn
+	case $yn in
+		[Yy]* ) cp $PLASMA_WORKSPACE_DIR/env/*.sh ~/$PLASMA_WORKSPACE_DIR/env/; 
+				break;;
+		[Nn]* ) break;;
+		*     ) echo "Yes or No?";;
+	esac
+done
