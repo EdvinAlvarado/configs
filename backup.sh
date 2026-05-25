@@ -26,8 +26,7 @@ done
 while true; do
 	read -p "Backup yazi configs? " yn
 	case $yn in
-		[Yy]* ) cp -a ~/.config/yazi/init.lua .config/yazi/; 
-				cp -a ~/.config/yazi/theme.toml .config/yazi/; 
+		[Yy]* ) cp -a ~/.config/yazi/theme.toml .config/yazi/; 
 				cp -a ~/.config/yazi/yazi.toml .config/yazi/; 
 				break;;
 		[Nn]* ) break;;

@@ -32,7 +32,6 @@ while true; do
 	read -p "Install yazi configs? " yn
 	case $yn in
 		[Yy]* ) mkdir -p ~/.config/yazi; 
-				cp -a .config/yazi/init.lua ~/.config/yazi/; 
 				cp -a .config/yazi/theme.toml ~/.config/yazi/; 
 				cp -a .config/yazi/yazi.toml ~/.config/yazi/; 
 				break;;
