@@ -107,8 +107,6 @@ INSERT_MODE_INDICATOR='%*'
 
 bindkey -v
 #alias ls='ls --color=auto'
-alias tmux="tmux -2" #force tmux to assume terminal supports 256 colors
-alias fzf="fzf --tmux"
 alias nvimf="nvim \$(fzf)"
 alias cat="bat"
 alias rename="perl-rename"
