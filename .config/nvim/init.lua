@@ -1161,6 +1161,17 @@ require('lazy').setup({
     end,
   },
   {
+    'LhKipp/nvim-nu',
+    build = ':TSInstall nu',
+    event = { 'BufRead *.nu' },
+    ft = 'nu',
+    dependencies = { 'jose-elias-alvarez/null-ls.nvim' },
+    config = function()
+      vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = true })
+    end,
+    opts = {},
+  },
+  {
     'yetone/avante.nvim',
     -- enabled = false,
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
@@ -1272,17 +1283,7 @@ require('lazy').setup({
       lazy = '💤 ',
     },
   },
-  {
-    'LhKipp/nvim-nu',
-    build = ':TSInstall nu',
-    event = { 'BufRead *.nu' },
-    ft = 'zig',
-    config = function()
-      vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = true })
-    end,
-    opts = {},
-  },
-})
+  })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
