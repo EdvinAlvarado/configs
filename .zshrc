@@ -240,5 +240,8 @@ function y() {
 # zoxide
 eval "$(zoxide init zsh --cmd cd)"
 
+# API Keys
+source .api_keys.env
+
 autoload -Uz promptinit
 promptinit
