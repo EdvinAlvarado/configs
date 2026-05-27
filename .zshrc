@@ -123,7 +123,6 @@ zstyle ':omz:plugins:eza' 'git-status' yes
 zstyle ':omz:plugins:eza' 'icons' yes
 
 # uutils
-
 #alias \[="uu-["
 alias arch="uu-arch"
 alias base32="uu-base32"
