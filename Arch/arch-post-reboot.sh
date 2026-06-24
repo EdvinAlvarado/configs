@@ -67,6 +67,26 @@ sudo sed -i -e 's/"linux"/"linux", "linux-zen", "nvidia-utils", "nvidia-dkms", "
 ## Configuration
 sudo systemctl mask systemd-udev-settle
 
+## AI
+# Setup Kagi MCP Server
+cd ~/Projects && \
+	git clone https://github.com/kagisearch/kagimcp.git && \
+	cd kagicmp && \
+	uv sync
+# Setup Ollama
+while true; do
+	read -p "Nvidia or AMD GPU? (e.g. nvidia, amd, none) " yn
+	case $yn in
+		[nvidiaNVIDIA]* ) sudo pacman -S ollama-cuda;
+				break;;
+		[amdAMD]* ) sudo pacman -S ollama-rocm;
+				break;;
+		[Nn]* ) break;;
+		*     ) echo "Which one?";;
+	esac
+done
+echo "NOTICE: install ollama-cuda (for nvidea) or ollama-rocm (for AMD) for ollama use."
+
 echo ""
 echo "Finished"
 echo "run recover.sh for neovim and zsh setup"
