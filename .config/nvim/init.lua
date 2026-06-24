@@ -160,6 +160,9 @@ vim.opt.tabstop = 4
 -- avante: views can only be fully collapsed with the global statusline
 vim.opt.laststatus = 3
 
+-- Enable inlay hint
+vim.lsp.inlay_hint.enable(true, nil)
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
@@ -168,8 +171,7 @@ vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
+vim.diagnostic.config { jump = { float = true } }
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
@@ -191,10 +193,10 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 --  Use CTRL+<hjkl> to switch between windows
 --
 --  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+-- vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+-- vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+-- vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+-- vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- closing paranthesis
 vim.keymap.set('i', '"', '""<left>')
@@ -219,102 +221,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- Find and Replace
 vim.cmd 'vnoremap <expr> <c-h> ":s/" . input("find: ") . "/" . input("replace: ") . "/g<cr>"'
-
--- Language specific autocommands
--- c
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'c',
-  callback = function()
-    vim.keymap.set('n', '<c-b>', '<cmd>make<cr>')
-  end,
-})
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'c',
-  callback = function()
-    vim.keymap.set('n', '<c-c>', 'I// <esc>')
-  end,
-})
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'c',
-  callback = function()
-    vim.keymap.set('n', '<c-x>', '<home>xxx')
-  end,
-})
--- python
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'python',
-  callback = function()
-    vim.keymap.set('n', '<c-c>', 'I# <esc>')
-  end,
-})
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'python',
-  callback = function()
-    vim.keymap.set('n', '<c-x>', '<home>xx')
-  end,
-})
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'python',
-  callback = function()
-    vim.keymap.set('v', '<c-c>', 'I# <esc>')
-  end,
-})
--- rust
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'rust',
-  callback = function()
-    vim.keymap.set('n', '<c-b>', '<cmd>w<cr>' .. '<cmd>!cargo build<cr>')
-  end,
-})
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'rust',
-  callback = function()
-    vim.keymap.set('n', '<c-r>', '<cmd>w<cr>' .. '<cmd>!cargo run<cr>')
-  end,
-})
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'rust',
-  callback = function()
-    vim.keymap.set('n', '<c-t>', '<cmd>w<cr>' .. '<cmd>!cargo test<cr>')
-  end,
-})
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'rust',
-  callback = function()
-    vim.keymap.set('n', '<c-c>', 'I// <esc>')
-  end,
-})
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'rust',
-  callback = function()
-    vim.keymap.set('n', '<c-x>', '<home>xxx')
-  end,
-})
--- apl
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'apl',
-  callback = function()
-    vim.keymap.set('n', '<c-r>', '<cmd>w<cr>' .. '<cmd>!dyalog -script DYALOG_LINEEDITOR_MODE=1 %<cr>')
-  end,
-})
--- haskell
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'haskell',
-  callback = function()
-    vim.keymap.set('n', '<c-r>', '<cmd>w<cr>' .. '<cmd>!cghc -dynamic %<cr>')
-  end,
-})
-
--- LSP
--- Covered in nvim-lspconfig with green colorscheme
--- This one defaults to grey color.
--- If you have both you will have duplicates
--- <v0.10
--- vim.lsp.inlay_hint(0, true)
--- v0.10
-if vim.version().minor >= 10 then
-  vim.lsp.inlay_hint.enable(true, nil)
-end
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
@@ -416,8 +322,8 @@ require('lazy').setup({
 
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
+    version = '0.2',
     event = 'VimEnter',
-    branch = '0.1.x',
     dependencies = {
       'nvim-lua/plenary.nvim',
       { -- If encountering errors, see telescope-fzf-native README for installation instructions
@@ -523,17 +429,22 @@ require('lazy').setup({
     'neovim/nvim-lspconfig',
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
+      -- Ensure the servers and tools above are installed
+      --  To check the current status of installed tools and/or manually install
+      --  other tools, you can run
+      --    :Mason
+      --
+      --  You can press `g?` for help in this menu.
       { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
       -- Useful status updates for LSP.
-      -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
-
+      'j-hui/fidget.nvim',
       -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
       -- used for completion, annotations and signatures of Neovim apis
-      { 'folke/neodev.nvim', opts = {} },
+      'folke/neodev.nvim',
+      'nvim-telescope/telescope.nvim',
     },
     opts = {
       inlay_hints = { enable = true },
@@ -676,76 +587,36 @@ require('lazy').setup({
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
       --
-      --  Add any additional override configuration in the following tables. Available keys are:
-      --  - cmd (table): Override the default command used to start the server
-      --  - filetypes (table): Override the default list of associated filetypes for the server
-      --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
-      --  - settings (table): Override the default settings passed when initializing the server.
-      --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        clangd = {},
-        gopls = {},
-        pyright = {},
-        rust_analyzer = {},
-        html = {},
-        jsonls = {},
-        yamlls = {},
-        pest_ls = {},
-        zls = {},
-        taplo = {}, --toml
+        'clangd',
+        'gopls',
+        'pyright',
+        'rust_analyzer',
+        'html',
+        'jsonls',
+        'yamlls',
+        'pest_ls',
+        'zls',
+        'taplo', --toml
+        'lua_ls',
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
-        -- tsserver = {},
-        --
-
-        lua_ls = {
-          -- cmd = {...},
-          -- filetypes = { ...},
-          -- capabilities = {},
-          settings = {
-            Lua = {
-              completion = {
-                callSnippet = 'Replace',
-              },
-              -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fields' } },
-            },
-          },
-        },
       }
 
-      -- Ensure the servers and tools above are installed
-      --  To check the current status of installed tools and/or manually install
-      --  other tools, you can run
-      --    :Mason
-      --
-      --  You can press `g?` for help in this menu.
-      require('mason').setup()
+      -- mason-lspconfig automatically enables installed servers so there is no need for vim.lsp.enable('...')
+      require('mason-lspconfig').setup { ensure_installed = servers }
 
       -- You can add other tools here that you want Mason to install
       -- for you, so that they are available from within Neovim.
-      local ensure_installed = vim.tbl_keys(servers or {})
+      local ensure_installed = servers or {}
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
-
-      require('mason-lspconfig').setup {
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            -- This handles overriding only values explicitly passed
-            -- by the server configuration above. Useful when disabling
-            -- certain features of an LSP (for example, turning off formatting for tsserver)
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
-          end,
-        },
-      }
     end,
   },
 
@@ -785,7 +656,37 @@ require('lazy').setup({
       },
     },
   },
+  {
+    'tzachar/cmp-ai',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      local cmp_ai = require 'cmp_ai.config'
 
+      cmp_ai:setup {
+        max_lines = 100,
+        provider = 'Ollama',
+        provider_options = {
+          model = 'qwen2.5-coder:14b-base',
+          auto_unload = true, -- Set to true to automatically unload the model when exiting nvim.
+          prompt = function(lines_before, lines_after)
+            -- You may include filetype and/or other project-wise context in this string as well.
+            -- Consult model documentation in case there are special tokens for this.
+            return '<|fim_prefix|>' .. lines_before .. '<|fim_suffix|>' .. lines_after .. '<|fim_middle|>'
+          end,
+        },
+        notify = true,
+        notify_callback = function(msg)
+          vim.notify(msg)
+        end,
+        run_on_every_keystroke = true,
+        ignored_file_types = {
+          -- default is not to ignore
+          -- uncomment to ignore in lua:
+          -- lua = true
+        },
+      }
+    end,
+  },
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
@@ -821,6 +722,7 @@ require('lazy').setup({
       --  into multiple repos for maintenance purposes.
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
+      'tzachar/cmp-ai', -- adds ollama support
     },
     config = function()
       -- See `:help cmp`
@@ -884,7 +786,16 @@ require('lazy').setup({
               luasnip.jump(-1)
             end
           end, { 'i', 's' }),
-
+          ['<C-x>'] = cmp.mapping(
+            cmp.mapping.complete {
+              config = {
+                sources = cmp.config.sources {
+                  { name = 'cmp_ai' },
+                },
+              },
+            },
+            { 'i' }
+          ),
           -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
           --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
         },
@@ -892,11 +803,11 @@ require('lazy').setup({
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'path' },
+          { name = 'cmp_ai' },
         },
       }
     end,
   },
-
   { -- You can easily change to a different colorscheme.
     -- Change the name of the colorscheme plugin below, and then
     -- change the command in the config to whatever the name of that colorscheme is.
@@ -914,10 +825,13 @@ require('lazy').setup({
       vim.cmd.hi 'Comment gui=none'
     end,
   },
-
   -- Highlight todo, notes, etc in comments
-  { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
-
+  {
+    'folke/todo-comments.nvim',
+    event = 'VimEnter',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    opts = { signs = false },
+  },
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()
@@ -961,7 +875,7 @@ require('lazy').setup({
     lazy = false,
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'bash', 'c', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'rust', 'go', 'python', 'toml', 'json', 'make', 'latex' },
+      ensure_installed = { 'bash', 'c', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'rust', 'go', 'python', 'toml', 'json', 'make', 'latex', 'yaml' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
@@ -998,40 +912,6 @@ require('lazy').setup({
     },
     cmd = 'Neotree',
     keys = { { '<C-f>', '<cmd>Neotree toggle<cr>', desc = 'NeoTree' } },
-    config = function()
-      require('neo-tree').setup {
-        filesystem = {
-          commands = {
-            avante_add_files = function(state)
-              local node = state.tree:get_node()
-              local filepath = node:get_id()
-              local relative_path = require('avante.utils').relative_path(filepath)
-
-              local sidebar = require('avante').get()
-
-              local open = sidebar:is_open()
-              -- ensure avante sidebar is open
-              if not open then
-                require('avante.api').ask()
-                sidebar = require('avante').get()
-              end
-
-              sidebar.file_selector:add_selected_file(relative_path)
-
-              -- remove neo tree buffer
-              if not open then
-                sidebar.file_selector:remove_selected_file 'neo-tree filesystem [1]'
-              end
-            end,
-          },
-          window = {
-            mappings = {
-              ['oa'] = 'avante_add_files',
-            },
-          },
-        },
-      }
-    end,
   },
   {
     -- Colored brackets
@@ -1044,16 +924,15 @@ require('lazy').setup({
     -- Cargo crate versions and features
     'saecki/crates.nvim',
     event = { 'BufRead Cargo.toml' },
-    tag = 'v0.3.0',
+    tag = 'stable',
     dependencies = { 'nvim-lua/plenary.nvim' },
     opts = {},
   },
   {
     -- pest parser LSP and syntax highlighting
-    -- Prerequisite for LSP features
-    --   cargo install pest-language-server
-    --     Requires openssl
+    -- NOTE: Requires openssl
     'pest-parser/pest.vim',
+    build = 'cargo install pest-language-server',
     event = { 'BufRead *.pest' },
     dependencies = { 'williamboman/mason.nvim' },
     config = function()
@@ -1066,34 +945,13 @@ require('lazy').setup({
     end,
   },
   {
-    -- Rust Support
-    'simrat39/rust-tools.nvim',
-    event = { 'BufRead *.rs' },
-    dependencies = {
-      'neovim/nvim-lspconfig',
-      'nvim-lua/plenary.nvim', --Debugging
-      -- 'mfussenegger/nvim-dap',
-    },
-    config = function()
-      local rt = require 'rust-tools'
-      --rt.inlay_hints.disable()
-      rt.setup {
-        tools = {
-          inlay_hints = {
-            auto = false,
-            show_parameter_hints = false,
-          },
-        },
-        server = {
-          on_attach = function(_, bufnr)
-            -- Hover actions
-            vim.keymap.set('n', '<C-s>', rt.hover_actions.hover_actions, { buffer = bufnr, desc = 'hover actions' })
-            -- Code action groups
-            vim.keymap.set('n', '<C-a>', rt.code_action_group.code_action_group, { buffer = bufnr, desc = 'code actions' })
-          end,
-        },
-      }
-    end,
+    'mrcjkb/rustaceanvim',
+    -- To avoid being surprised by breaking changes,
+    -- I recommend you set a version range
+    version = '^9',
+    -- This plugin implements proper lazy-loading (see :h lua-plugin-lazy).
+    -- No need for lazy.nvim to lazy-load it.
+    lazy = false,
   },
   --{
   -- Adds go language support: e.g.
@@ -1113,6 +971,9 @@ require('lazy').setup({
   --},
   {
     'ray-x/go.nvim',
+    event = { 'BufRead *.go' },
+    ft = { 'go', 'gomod' },
+    build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
     dependencies = { -- optional packages
       'ray-x/guihua.lua',
       'neovim/nvim-lspconfig',
@@ -1132,9 +993,6 @@ require('lazy').setup({
         group = format_sync_grp,
       })
     end,
-    event = { 'BufRead *.go' },
-    ft = { 'go', 'gomod' },
-    build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
   },
   {
     'neovimhaskell/haskell-vim',
@@ -1154,93 +1012,120 @@ require('lazy').setup({
     'ziglang/zig.vim',
     event = { 'BufRead *.zig' },
     ft = 'zig',
-    config = function()
-      vim.keymap.set('n', '<c-b>', '<cmd>w<cr>' .. '<cmd>compiler zig_build<cr>')
-      vim.keymap.set('n', '<c-t>', '<cmd>w<cr>' .. '<cmd>compiler zig_test<cr>')
-      vim.keymap.set('n', '<c-r>', '<cmd>w<cr>' .. '<cmd>compiler zig_build_exe<cr>')
-    end,
+    keys = {
+      vim.keymap.set('n', '<c-b>', '<cmd>w<cr>' .. '<cmd>compiler zig_build<cr>'),
+      vim.keymap.set('n', '<c-t>', '<cmd>w<cr>' .. '<cmd>compiler zig_test<cr>'),
+      vim.keymap.set('n', '<c-r>', '<cmd>w<cr>' .. '<cmd>compiler zig_build_exe<cr>'),
+    },
   },
   {
     'LhKipp/nvim-nu',
     build = ':TSInstall nu',
     event = { 'BufRead *.nu' },
     ft = 'nu',
-    dependencies = { 'jose-elias-alvarez/null-ls.nvim' },
-    config = function()
-      vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = true })
-    end,
+    dependencies = { 'nvimtools/none-ls.nvim' },
+    keys = {
+      vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = true }),
+    },
     opts = {},
   },
   {
-    'yetone/avante.nvim',
-    -- enabled = false,
-    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-    -- ⚠️ must add this setting! ! !
-    build = vim.fn.has 'win32' ~= 0 and 'powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false' or 'make',
+    'olimorris/codecompanion.nvim',
     event = 'VeryLazy',
-    version = false, -- Never set this value to "*"! Never!
-    ---@module 'avante'
-    ---@type avante.Config
-    opts = {
-      -- add any opts here
-      -- this file can contain specific instructions for your project
-      instructions_file = 'avante.md',
-      -- for example
-      provider = 'ollama',
-      providers = {
-        ollama = {
-          endpoint = 'http://10.31.0.6:11434',
-          model = 'gemma4:e4b',
-        },
-      },
-      web_search_engine = {
-        provider = 'kagi',
-        proxy = nil,
-      },
-    },
+    version = '^19',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      'MunifTanjim/nui.nvim',
-      --- The below dependencies are optional,
-      'nvim-mini/mini.pick', -- for file_selector provider mini.pick
-      'nvim-telescope/telescope.nvim', -- for file_selector provider telescope
-      'hrsh7th/nvim-cmp', -- autocompletion for avante commands and mentions
-      'ibhagwan/fzf-lua', -- for file_selector provider fzf
-      'stevearc/dressing.nvim', -- for input provider dressing
-      'folke/snacks.nvim', -- for input provider snacks
-      'nvim-tree/nvim-web-devicons', -- or echasnovski/mini.icons
-      'zbirenbaum/copilot.lua', -- for providers='copilot'
+      'nvim-treesitter/nvim-treesitter',
       {
-        -- support for image pasting
+        'MeanderingProgrammer/render-markdown.nvim',
+        ft = { 'markdown', 'codecompanion' },
+      },
+      {
         'HakonHarnes/img-clip.nvim',
-        event = 'VeryLazy',
         opts = {
-          -- recommended settings
-          default = {
-            embed_image_as_base64 = false,
-            prompt_for_file_name = false,
-            drag_and_drop = {
-              insert_mode = true,
+          filetypes = {
+            codecompanion = {
+              prompt_for_file_name = false,
+              template = '[Image]($FILE_PATH)',
+              use_absolute_path = true,
             },
-            -- required for Windows users
-            use_absolute_path = true,
           },
         },
       },
-      {
-        -- Make sure to set this up properly if you have lazy=true
-        'MeanderingProgrammer/render-markdown.nvim',
-        dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.nvim' },
-        ---@module 'render-markdown'
-        ---@type render.md.UserConfig
-        opts = {
-          file_types = { 'markdown', 'Avante' },
+    },
+    keys = {
+      vim.keymap.set({ 'n', 'v' }, '<C-a>', '<cmd>CodeCompanionActions<cr>', { noremap = true, silent = true }),
+      vim.keymap.set({ 'n', 'v' }, '<LocalLeader>a', '<cmd>CodeCompanionChat Toggle<cr>', { noremap = true, silent = true }),
+      vim.keymap.set('v', 'ga', '<cmd>CodeCompanionChat Add<cr>', { noremap = true, silent = true }),
+      vim.keymap.set({ 'n', 'v' }, '<LocalLeader>c', '<cmd>CodeCompanion<cr>', { noremap = true, silent = true }),
+    },
+    opts = {
+      interactions = {
+        chat = {
+          adapter = 'ollama',
+          model = 'qwen2.5-coder',
         },
-        ft = { 'markdown', 'Avante' },
+        inline = {
+          adapter = 'ollama',
+          model = 'qwen2.5-coder',
+        },
+        cmd = {
+          adapter = 'ollama',
+          model = 'qwen2.5-coder',
+        },
+        background = {
+          adapter = 'ollama',
+          model = 'qwen3',
+        },
+      },
+      adapters = {
+        http = {
+          tavily = function()
+            return require('codecompanion.adapters').extend('tavily', {
+              env = {
+                api_key = 'TAVILY_API_KEY',
+              },
+            })
+          end,
+        },
+      },
+      mcp = {
+        servers = {
+          ['kagi-search'] = {
+            cmd = { 'uvx', 'kagimcp' },
+          },
+        },
       },
     },
   },
-
+  {
+    'github/copilot.vim',
+    enabled = false,
+    event = 'VeryLazy',
+    keys = {},
+  },
+  {
+    'ggml-org/llama.vim',
+    enabled = false,
+    event = 'VeryLazy',
+    keys = {
+      vim.keymap.set('n', '<LocalLeader>l', '<cmd>Llama<cr>', { noremap = true, silent = true }),
+      vim.keymap.set('n', '<LocalLeader>c', '<cmd>LlamaChat<cr>', { noremap = true, silent = true }),
+      vim.keymap.set('v', '<LocalLeader>c', '<cmd>LlamaChat<cr>', { noremap = true, silent = true }),
+    },
+  },
+  {
+    'https://git.sr.ht/~swaits/zellij-nav.nvim',
+    lazy = true,
+    event = 'VeryLazy',
+    keys = {
+      { '<c-h>', '<cmd>ZellijNavigateLeft<cr>', { silent = true, desc = 'navigate left' } },
+      { '<c-j>', '<cmd>ZellijNavigateDown<cr>', { silent = true, desc = 'navigate down' } },
+      { '<c-k>', '<cmd>ZellijNavigateUp<cr>', { silent = true, desc = 'navigate up' } },
+      { '<c-l>', '<cmd>ZellijNavigateRight<cr>', { silent = true, desc = 'navigate right' } },
+    },
+    opts = {},
+  },
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
   -- place them in the correct locations.
