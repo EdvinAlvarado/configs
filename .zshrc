@@ -239,6 +239,7 @@ eval "$(zoxide init zsh --cmd cd)"
 
 # API Keys
 source "$HOME/.api_keys.env"
-
+export OLLAMA_HOST="http://127.0.0.1:11434"
+export OLLAMA_CONTEXT_LENGTH=40000
 autoload -Uz promptinit
 promptinit
