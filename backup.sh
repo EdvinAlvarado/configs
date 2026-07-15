@@ -22,17 +22,6 @@ while true; do
 	esac
 done
 
-# mpd
-while true; do
-	read -p "Backup mpd configs? " yn
-	case $yn in
-		[Yy]* ) cp ~/.config/mpd/mpd.conf .config/mpd/mpd.conf; break;;
-		[Nn]* ) break;;
-		*     ) echo "Yes or No?";;
-	esac
-done
-
-
 # Plasma Session
 while true; do
 	read -p "Backup plasma session system env. variables? " yn

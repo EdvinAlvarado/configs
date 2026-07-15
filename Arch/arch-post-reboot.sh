@@ -89,6 +89,6 @@ echo "NOTICE: install ollama-cuda (for nvidea) or ollama-rocm (for AMD) for olla
 
 echo ""
 echo "Finished"
-echo "run recover.sh for neovim and zsh setup"
+echo "run recover.sh for conf files"
 echo "Running KDE Wayland might require disabling saving sessions"
 echo "Run fcitx5-configtool to setup mozc"

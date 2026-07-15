@@ -26,18 +26,6 @@ while true; do
 	esac
 done
 
-# mpd
-while true; do
-	read -p "Install mpd configs? " yn
-	case $yn in
-		[Yy]* ) mkdir -p ~/.config/mpd; 
-				cp .config/mpd/mpd.conf ~/.config/mpd/mpd.conf;
-				echo "mpd: remember to enable this daemon (e.g. systemctl enable --now mpd)"; break;;
-		[Nn]* ) break;;
-		*     ) echo "Yes or No?";;
-	esac
-done
-
 # Plasma Session
 while true; do
 	read -p "setup plasma session system env. variables? " yn
