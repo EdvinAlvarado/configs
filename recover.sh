@@ -1,19 +1,3 @@
-NEOVIM_DIR=.config/nvim
-NEOVIM_LUA_DIR=$NEOVIM_DIR/lua
-
-# neovim
-while true; do
-	read -p "Install neovim configs? " yn
-	case $yn in
-		[Yy]* ) 
-				mkdir -p ~/$NEOVIM_DIR && cp $NEOVIM_DIR/init.lua ~/$NEOVIM_DIR/init.lua;
-				nvim;
-				break;;
-		[Nn]* ) break;;
-		*     ) echo "Yes or No?";;
-	esac
-done
-
 # zsh
 while true; do
 	read -p "Install zsh configs? " yn

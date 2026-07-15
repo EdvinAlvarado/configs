@@ -1,18 +1,3 @@
-NEOVIM_DIR=.config/nvim
-NEOVIM_LUA_DIR=$NEOVIM_DIR/lua
-PLASMA_WORKSPACE_DIR=.config/plasma-workspace
-
-# neovim
-while true; do
-	read -p "Backup neovim configs? " yn
-	case $yn in
-		[Yy]* ) cp ~/$NEOVIM_DIR/init.lua $NEOVIM_DIR/init.lua; 
-				break;;
-		[Nn]* ) break;;
-		*     ) echo "Yes or No?";;
-	esac
-done
-
 # zsh
 while true; do
 	read -p "Backup zsh configs? " yn
