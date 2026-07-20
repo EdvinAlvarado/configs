@@ -46,8 +46,9 @@ espanso start
 # Flatpak
 flatpak -y install discord flatseal geogebra komikku monero signal thinkorswim app.zen_browser.zen
 # Games
-flatpak -y install steam lutris minecraft
+flatpak -y install steam lutris minecraft TinyWiiBackupManager ca.wiilink.Patcher
 sudo pacman --noconfirm -S game-devices-udev
+pikaur --noconfirm -S wit-bin # wii game ISO manipulation
 
 ## Snapper
 # Setup root config (recommended by Arch wiki)
