@@ -22,6 +22,12 @@ sudo make -f ./wikiman-makefile clean
 # Rust
 rustup default stable
 rustup component add rust-analyzer rustfmt rust-src clippy
+# Common Lisp
+sbcl --load /usr/share/quicklisp/quicklisp.lisp \
+     --eval '(quicklisp-quickstart:install)' \
+     --eval '(ql:add-to-init-file)' \
+     --quit
+
 
 
 ## Applications 
