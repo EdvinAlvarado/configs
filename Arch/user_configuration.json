@@ -22,11 +22,11 @@
             "enabled": true
         }
     },
-    "archinstall-language": "English",
-    "auth_config": null,
+    "archinstall_language": "English",
     "bootloader_config": {
-        "bootloader": "Systemd-boot",
-        "removable": false,
+        "bootloader": "Limine",
+        "plymouth": "bgrt",
+        "removable": true,
         "uki": true
     },
     "custom_commands": [],
@@ -36,6 +36,7 @@
         "linux-zen"
     ],
     "locale_config": {
+        "console_font": "default8x16",
         "kb_layout": "us",
         "sys_enc": "UTF-8",
         "sys_lang": "en_US.UTF-8"
@@ -200,6 +201,7 @@
         "dos2unix",
         "dosfstools",
         "duperemove",
+        "efibootmgr",
         "elisa",
         "expac",
         "eza",
@@ -248,8 +250,10 @@
         "kwalletmanager",
         "libreoffice-fresh",
         "libreoffice-fresh-ja",
+        "limine",
         "links",
         "mame-tools",
+        "memtest86+-efi",
         "mkvtoolnix-cli",
         "mkvtoolnix-gui",
         "namcap",
@@ -336,5 +340,5 @@
         "enabled": true
     },
     "timezone": "America/Chicago",
-    "version": "4.3"
+    "version": "4.4"
 }

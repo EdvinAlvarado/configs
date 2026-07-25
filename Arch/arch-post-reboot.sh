@@ -27,7 +27,8 @@ sbcl --load /usr/share/quicklisp/quicklisp.lisp \
      --eval '(quicklisp-quickstart:install)' \
      --eval '(ql:add-to-init-file)' \
      --quit
-
+# Bootloader
+paru --noconfirm -S limine-mkinitcpio-hook limine-snapper-sync
 
 
 ## Applications 
