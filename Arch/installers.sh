@@ -22,8 +22,3 @@ cd ..
 rm -rf paru
 paru --gendb
 
-## Hooks
-# Change username path to yours.
-sudo cp ./repos/pacman_hooks/pikaur-cache-cleanup.hook /usr/share/libalpm/hooks/pikaur-cache-cleanup.hook
-username="$USER"
-sudo sed -i -e "s/YOUR_USER/$username/" /usr/share/libalpm/hooks/pikaur-cache-cleanup.hook
