@@ -112,7 +112,6 @@ done
 ../recover.sh
 
 echo ""
-echo "Finished"
-echo "run recover.sh for conf files"
+echo "Finished!"
 echo "Running KDE Wayland might require disabling saving sessions"
 echo "Run fcitx5-configtool to setup mozc"
