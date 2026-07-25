@@ -1,8 +1,8 @@
-# zsh
+# fish 
 while true; do
-	read -p "Backup zsh configs? " yn
+	read -p "Backup fish configs? " yn
 	case $yn in
-		[Yy]* ) cp ~/.zshrc .zshrc; break;;
+		[Yy]* ) cp ~/.config/fish/config.fish .config/fish/config.fish; break;;
 		[Nn]* ) break;;
 		*     ) echo "Yes or No?";;
 	esac

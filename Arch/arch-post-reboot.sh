@@ -9,8 +9,8 @@ ya pkg add yazi-rs/plugins:git
 ya pkg add yazi-rs/plugins:jump-to-char
 ya pkg add yazi-rs/plugins:vcs-files
 ya pkg add yazi-rs/plugins:piper
-# zsh
-paru --noconfirm -S oh-my-zsh-git
+# fish
+fisher install jorgebucaran/fisher
 # Tealdeer
 tldr --update
 # wikiman

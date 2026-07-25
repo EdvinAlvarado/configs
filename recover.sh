@@ -1,10 +1,9 @@
-# zsh
+# fish 
 while true; do
-	read -p "Install zsh configs? " yn
+	read -p "Install fish configs? " yn
 	case $yn in
-		[Yy]* ) cp .zshrc ~/.zshrc; 
-				chsh -s $(which zsh); 
-				sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)";
+		[Yy]* ) cp .config/fish/config.fish ~/.config/fish/config.fish; 
+				chsh -s $(which fish); 
 				break;;
 		[Nn]* ) break;;
 		*     ) echo "Yes or No?";;
