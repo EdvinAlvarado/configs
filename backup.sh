@@ -32,3 +32,13 @@ while true; do
 		*     ) echo "Yes or No?";;
 	esac
 done
+
+# paru
+while true; do
+	read -p "Backup paru config? " yn
+	case $yn in
+		[Yy]* ) cp ~/.config/paru/paru.conf .config/paru/paru.conf; break;;
+		[Nn]* ) break;;
+		*     ) echo "Yes or No?";;
+	esac
+done

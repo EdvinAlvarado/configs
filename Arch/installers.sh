@@ -14,12 +14,13 @@ echo "[chaotic-aur]" | sudo tee -a /etc/pacman.conf
 echo "Include = /etc/pacman.d/chaotic-mirrorlist" | sudo tee -a /etc/pacman.conf
 sudo pacman --noconfirm -Syu
 
-## pikaur
-git clone https://aur.archlinux.org/pikaur.git
-cd pikaur
-makepkg --noconfirm -fsri
+## paru 
+git clone https://aur.archlinux.org/paru.git
+cd paru
+makepkg --noconfirm -si
 cd ..
-rm -rf pikaur
+rm -rf paru
+paru --gendb
 
 ## Hooks
 # Change username path to yours.

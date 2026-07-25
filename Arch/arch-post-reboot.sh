@@ -10,7 +10,7 @@ ya pkg add yazi-rs/plugins:jump-to-char
 ya pkg add yazi-rs/plugins:vcs-files
 ya pkg add yazi-rs/plugins:piper
 # zsh
-pikaur --noconfirm -S oh-my-zsh-git
+paru --noconfirm -S oh-my-zsh-git
 # Tealdeer
 tldr --update
 # wikiman
@@ -32,20 +32,20 @@ sbcl --load /usr/share/quicklisp/quicklisp.lisp \
 
 ## Applications 
 sudo pacman --noconfirm -S neofetch insync anki ledger-live ventoy-bin bambustudio-bin orca-slicer-bin ocrmypdf qdirstat subtitleedit trayscale
-pikaur --noconfirm -S proton-mail proton-vpn-gtk-app
-pikaur --noconfirm -S fcitx5-mozc-ut fcitx5-breeze
-pikaur --noconfirm -S wike-tui 
-pikaur --noconfirm -S rusty-man 
-pikaur --noconfirm -S cargo-info 
-pikaur --noconfirm -S frame-eth
-pikaur --noconfirm -S libation 
-pikaur --noconfirm -S audiobookconverter-bin 
+paru --noconfirm -S proton-mail proton-vpn-gtk-app
+paru --noconfirm -S fcitx5-mozc-ut fcitx5-breeze
+paru --noconfirm -S wike-tui 
+paru --noconfirm -S rusty-man 
+paru --noconfirm -S cargo-info 
+paru --noconfirm -S frame-eth
+paru --noconfirm -S libation 
+paru --noconfirm -S audiobookconverter-bin 
 
 if ($XDG_SESSION_TYPE = "wayland"); then
 	$ESPANSO = "espanso-wayland"
 else
 	$ESPANSO = "espanso-x11"
-pikaur --noconfirm -S $ESPANSO espanso-gui
+paru --noconfirm -S $ESPANSO espanso-gui
 espanso service register
 espanso start
 
@@ -54,7 +54,7 @@ flatpak -y install discord flatseal geogebra komikku monero signal thinkorswim a
 # Games
 flatpak -y install steam lutris minecraft TinyWiiBackupManager ca.wiilink.Patcher
 sudo pacman --noconfirm -S game-devices-udev
-pikaur --noconfirm -S wit-bin # wii game ISO manipulation
+paru --noconfirm -S wit-bin # wii game ISO manipulation
 
 ## Snapper
 # Setup root config (recommended by Arch wiki)
@@ -67,7 +67,7 @@ sudo sed -i -e 's/#cleanup/cleanup/' /etc/snap-pac.ini
 sudo sed -i -e 's/#pre/pre/' /etc/snap-pac.ini
 sudo sed -i -e 's/#post/post/' /etc/snap-pac.ini
 sudo sed -i -e 's/#important/important/g' /etc/snap-pac.ini
-sudo sed -i -e 's/"pacman -Syu"/"pacman -Syu", "pikaur -Syu"/' /etc/snap-pac.ini
+sudo sed -i -e 's/"pacman -Syu"/"pacman -Syu", "paru -Syu"/' /etc/snap-pac.ini
 sudo sed -i -e 's/"linux"/"linux", "linux-zen", "nvidia-utils", "nvidia-dkms", "systemd", "systemd-libs", "zram-generator", "amd-ucode", "intel-ucode", "networkmanager", "linux-firmware", "btrfs-progs"/' /etc/snap-pac.ini
 
 
@@ -92,7 +92,7 @@ while true; do
 		*     ) echo "Which one?";;
 	esac
 done
-echo "NOTICE: install ollama-cuda (for nvidea) or ollama-rocm (for AMD) for ollama use."
+echo "NOTICE: install ollama-cuda (for nvidia) or ollama-rocm (for AMD) for ollama use."
 
 echo ""
 echo "Finished"
