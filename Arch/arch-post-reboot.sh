@@ -9,18 +9,18 @@ ya pkg add yazi-rs/plugins:git
 ya pkg add yazi-rs/plugins:jump-to-char
 ya pkg add yazi-rs/plugins:vcs-files
 ya pkg add yazi-rs/plugins:piper
-# fish
+# fish plugins
 fisher install jorgebucaran/fisher
 # Tealdeer
 tldr --update
 # wikiman
-curl -L 'https://raw.githubusercontent.com/filiparag/wikiman/master/Makefile' -o 'wikiman-makefile'
-make -f ./wikiman-makefile source-arch
-make -f ./wikiman-makefile source-tldr
-sudo make -f ./wikiman-makefile source-install
+curl -L 'https://raw.githubusercontent.com/filiparag/wikiman/master/Makefile' -o 'wikiman-makefile' && \
+make -f ./wikiman-makefile source-arch && \
+make -f ./wikiman-makefile source-tldr && \
+sudo make -f ./wikiman-makefile source-install && \
 sudo make -f ./wikiman-makefile clean
 # Rust
-rustup default stable
+rustup default stable && \
 rustup component add rust-analyzer rustfmt rust-src clippy
 # Common Lisp
 sbcl --load /usr/share/quicklisp/quicklisp.lisp \
@@ -67,7 +67,7 @@ espanso start
 # Flatpak
 flatpak -y install discord flatseal geogebra komikku monero signal thinkorswim app.zen_browser.zen
 # Games
-flatpak -y install steam lutris minecraft TinyWiiBackupManager ca.wiilink.Patcher
+flatpak -y install steam lutris minecraft TinyWiiBackupManager ca.wiilink.Patcher Heroic
 sudo pacman --noconfirm -S game-devices-udev
 paru --noconfirm -S wit-bin # wii game ISO manipulation
 
@@ -92,9 +92,9 @@ sudo systemctl mask systemd-udev-settle
 ## AI
 # Setup Kagi MCP Server
 cd ~/Projects && \
-	git clone https://github.com/kagisearch/kagimcp.git && \
-	cd kagicmp && \
-	uv sync
+git clone https://github.com/kagisearch/kagimcp.git && \
+cd kagicmp && \
+uv sync
 # Setup Ollama
 while true; do
 	read -p "Nvidia or AMD GPU? (e.g. nvidia, amd, none) " yn
