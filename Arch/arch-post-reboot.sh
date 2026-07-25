@@ -103,11 +103,13 @@ while true; do
 				break;;
 		[amdAMD]* ) sudo pacman -S ollama-rocm;
 				break;;
-		[Nn]* ) break;;
+		[Nn]* ) echo "NOTICE: install ollama-cuda (for nvidia) or ollama-rocm (for AMD) for ollama use.";
+			break;;
 		*     ) echo "Which one?";;
 	esac
 done
-echo "NOTICE: install ollama-cuda (for nvidia) or ollama-rocm (for AMD) for ollama use."
+
+../recover.sh
 
 echo ""
 echo "Finished"
