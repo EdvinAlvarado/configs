@@ -29,6 +29,20 @@ sbcl --load /usr/share/quicklisp/quicklisp.lisp \
      --quit
 # Bootloader
 paru --noconfirm -S limine-mkinitcpio-hook limine-snapper-sync
+sudo limine-update
+# archiso
+paru -S archiso-systemd-boot && \
+sudo cat <<EOF >> /boot/limine.conf
+
+
+/Arch Linux Rescue
+comment: arch rescue
+comment: order-priority=30
+protocol: linux
+kernel_path: boot():/archiso/vmlinuz-linux
+module_path: boot():/archiso/initramfs-linux.img
+cmdline: archisobasedir=archiso archisosearchfilename=/archiso/vmlinuz-linux 
+EOF
 
 
 ## Applications 
