@@ -3,35 +3,31 @@ linemode = "size"
 
 
 [opener]
-music = [{ run = 'elisa "$@"', orphan = true, for = "unix" }]
-image = [{ run = 'feh "$@"', orphan = true, for = "unix" }]
-3dprint = [{ run = 'bambu-studio "$@"', orphan = true, for = "unix" }]
+music = [{ run = 'elisa %s', orphan = true, for = "unix" }]
+image = [{ run = 'feh %s', orphan = true, for = "unix" }]
+3dprint = [{ run = 'bambu-studio %s', orphan = true, for = "unix" }]
 video = [
-	{ run = 'mpv "$@"', orphan = true, for = "unix" },
-	{ run = 'vlc "$@"', orphan = true, for = "unix" },
-	{ run = 'ghb "$@"', orphan = true, for = "unix", desc = "Handbrake" },
+	{ run = 'mpv %s', orphan = true, for = "unix" },
+	{ run = 'vlc %s', orphan = true, for = "unix" },
+	{ run = 'ghb %s', orphan = true, for = "unix", desc = "Handbrake" },
 ]
 mkv = [
-	{ run = 'mkvtoolnix-gui "$@"', orphan = true, for = "unix", desc = "MKVToolNix" },
+	{ run = 'mkvtoolnix-gui %s', orphan = true, for = "unix", desc = "MKVToolNix" },
 ]
-docs = [{ run = 'okular "$@"', orphan = true, for = "unix" }]
-nvim = [{ run = 'nvim "$@"', block = true, for = "unix" }]
-archive = [{ run = 'ark "$@"', orphan = true, for = "unix" }]
+docs = [{ run = 'okular %s', orphan = true, for = "unix" }]
+nvim = [{ run = 'nvim %s', block = true, for = "unix" }]
+archive = [{ run = 'ark %s', orphan = true, for = "unix" }]
 
 
 [open]
 prepend_rules = [
-	{ mime = "audio/*", use = "music" },
-	{ mime = "image/*", use = "image" },
+	{ mime = "audio/*", use = ["music", "reveal"] },
+	{ mime = "image/*", use = ["image", "reveal"] },
 	{ url = "*.3mf", use = "3dprint" },
-	{ url = "*.cbz", use = "docs" },
-	{ mime = "video/*", use = "video" },
-]
-
-append_rules = [
-	{ mime = "video/matroska", use = "mkv" },
-	{ mime = "application/gzip", use = "archive" },
-	{ mime = "text/*", use = "nvim" },
+	{ url = "*.cbz", use = ["docs", "reveal"] },
+	{ url = "*.cbr", use = ["docs", "reveal"] },
+	{ mime = "video/matroska", use = ["play", "reveal", "video", "mkv"] },
+	{ mime = "video/*", use = ["play", "reveal", "video"] },
 ]
 
 
