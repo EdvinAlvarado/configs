@@ -253,6 +253,8 @@
         "limine",
         "links",
         "mame-tools",
+        "markdownlint",
+        "markdownlint-cli",
         "memtest86+-efi",
         "mkvtoolnix-cli",
         "mkvtoolnix-gui",

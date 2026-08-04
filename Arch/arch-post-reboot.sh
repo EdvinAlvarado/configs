@@ -10,7 +10,7 @@ ya pkg add yazi-rs/plugins:jump-to-char
 ya pkg add yazi-rs/plugins:vcs-files
 ya pkg add yazi-rs/plugins:piper
 # fish plugins
-fisher install jorgebucaran/fisher
+fish -c "fisher install jorgebucaran/fisher"
 # Tealdeer
 tldr --update
 # wikiman
