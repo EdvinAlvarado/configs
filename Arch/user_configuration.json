@@ -258,6 +258,8 @@
         "memtest86+-efi",
         "mkvtoolnix-cli",
         "mkvtoolnix-gui",
+        "mpv",
+        "mpd",
         "namcap",
         "neovim",
         "neovim-lspconfig",

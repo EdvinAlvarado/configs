@@ -8,7 +8,7 @@ set -gx OLLAMA_HOST "http://127.0.0.1:11434"
 set -gx OLLAMA_CONTEXT_LENGTH 40000
 
 # --- PATH ---
-fish_add_path $HOME/.local/bin $HOME/.bin $HOME/.ghcup/bin $HOME/.cabal/bin $GOPATH/bin $HOME/go/bin $HOME/.cargo/bin
+fish_add_path $HOME/.local/bin $HOME/.bin $HOME/.ghcup/bin $HOME/.cabal/bin $GOPATH/bin $HOME/go/bin $HOME/.cargo/bin $HOME/.config/emacs/bin
 
 # --- Vi mode ---
 fish_vi_key_bindings
@@ -37,6 +37,7 @@ source "$HOME/.api_keys.env"
 alias nvimf='nvim (fzf)'
 alias cat='bat'
 alias rename='perl-rename'
+alias ls='eza'
 
 # uutils coreutils aliases
 #alias \[="uu-["
