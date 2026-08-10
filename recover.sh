@@ -46,3 +46,14 @@ while true; do
 		*     ) echo "Yes or No?";;
 	esac
 done
+
+# paru
+while true; do
+	read -p "setup paru? " yn
+	case $yn in
+		[Yy]* ) cp .config/doom/*el ~/.config/doom/;
+				break;;
+		[Nn]* ) break;;
+		*     ) echo "Yes or No?";;
+	esac
+done

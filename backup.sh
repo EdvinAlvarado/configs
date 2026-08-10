@@ -1,44 +1,7 @@
-# fish 
-while true; do
-	read -p "Backup fish configs? " yn
-	case $yn in
-		[Yy]* ) cp ~/.config/fish/config.fish .config/fish/config.fish; break;;
-		[Nn]* ) break;;
-		*     ) echo "Yes or No?";;
-	esac
-done
-
-# yazi
-while true; do
-	read -p "Backup yazi configs? " yn
-	case $yn in
-		[Yy]* ) cp -a ~/.config/yazi/theme.toml .config/yazi/; 
-				cp -a ~/.config/yazi/yazi.toml .config/yazi/; 
-				cp -a ~/.config/yazi/keymap.toml .config/yazi/; 
-				cp -a ~/.config/yazi/init.lua .config/yazi/; 
-				break;;
-		[Nn]* ) break;;
-		*     ) echo "Yes or No?";;
-	esac
-done
-
-# Plasma Session
-while true; do
-	read -p "Backup plasma session system env. variables? " yn
-	case $yn in
-		[Yy]* ) cp ~/$PLASMA_WORKSPACE_DIR/env/*.sh $PLASMA_WORKSPACE_DIR/env/; 
-				break;;
-		[Nn]* ) break;;
-		*     ) echo "Yes or No?";;
-	esac
-done
-
-# paru
-while true; do
-	read -p "Backup paru config? " yn
-	case $yn in
-		[Yy]* ) cp ~/.config/paru/paru.conf .config/paru/paru.conf; break;;
-		[Nn]* ) break;;
-		*     ) echo "Yes or No?";;
-	esac
-done
+cp ~/.config/plasma-workspace/env/*.sh .config/plasma-workspace/env/
+cp ~/.config/fish/config.fish .config/fish/config.fish
+cp ~/.config/paru/paru.conf .config/paru/paru.conf
+cp ~/.config/doom/*el ./.config/doom/
+cp ~/.config/yazi/keymap.toml .config/yazi/
+cp ~/.config/yazi/theme.toml .config/yazi/
+cp ~/.config/yazi/yazi.toml .config/yazi/
