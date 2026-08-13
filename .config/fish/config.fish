@@ -38,6 +38,7 @@ alias nvimf='nvim (fzf)'
 alias cat='bat'
 alias rename='perl-rename'
 alias ls='eza'
+alias magit='emacs -nw -e "magit-status"'
 
 # uutils coreutils aliases
 #alias \[="uu-["
