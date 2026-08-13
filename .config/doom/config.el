@@ -101,7 +101,16 @@
         "C" #'rustic-cargo-clippy
         "d" #'rustic-cargo-doc))
 
+(use-package! crates
+  :config
+  (add-hook! 'find-file-hook (when (string= (file-name-nondirectory buffer-file-name) "Cargo.toml") (crates-mode))))
 
+;; Odin
+(use-package! odin-ts-mode
+  :mode "\\.odin\\'")
+(after! treesit
+  (add-to-list 'treesit-language-source-alist
+               '(odin "https://github.com/tree-sitter-grammars/tree-sitter-odin")))
 
 ;; accept completion from copilot and fallback to company
 (use-package! copilot

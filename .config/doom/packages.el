@@ -54,3 +54,8 @@
 (package! tldr)
 (package! copilot
   :recipe (:host github :repo "copilot-emacs/copilot.el" :files ("*.el")))
+;; Rust
+(package! crates :recipe (:host github :repo "shadr/crates.el"))
+;; Odin
+(package! odin-ts-mode
+  :recipe (:host github :repo "Sampie159/odin-ts-mode"))
