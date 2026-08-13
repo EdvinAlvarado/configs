@@ -1,3 +1,5 @@
+#!/bin/bash
+
 cp ~/.config/plasma-workspace/env/*.sh .config/plasma-workspace/env/
 cp ~/.config/fish/config.fish .config/fish/config.fish
 cp ~/.config/paru/paru.conf .config/paru/paru.conf
