@@ -276,6 +276,8 @@
         "python-uv",
         "quicklisp",
         "resvg",
+        "ripgrep",
+        "ripgrep-all",
         "rsync",
         "rustup",
         "sbcl",
