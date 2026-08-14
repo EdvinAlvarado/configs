@@ -306,7 +306,6 @@
         "upx",
         "uutils-coreutils",
         "virtualbox",
-        "virtualbox-host-modules-arch",
         "vlc",
         "vlc-cli",
         "vlc-plugins-extra",
