@@ -129,3 +129,8 @@
   (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode 2))
   (add-to-list 'copilot-indentation-alist '(lisp-mode 2))
   (add-to-list 'copilot-indentation-alist '(rustic-mode 4)))
+
+;;gptel setup
+(use-package! gptel
+  :config
+  (gptel-make-gh-copilot "Copilot"))
