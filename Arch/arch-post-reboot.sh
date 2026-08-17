@@ -57,7 +57,7 @@ EOF
 
 
 ## Applications 
-sudo pacman --noconfirm -S neofetch insync anki ledger-live ventoy-bin bambustudio-bin orca-slicer-bin ocrmypdf qdirstat subtitleedit trayscale
+sudo pacman --noconfirm -S neofetch insync anki ledger-live ventoy-bin bambustudio-bin orca-slicer-bin ocrmypdf qdirstat subtitleedit trayscale otf-symbola
 paru --noconfirm -S proton-mail proton-vpn-gtk-app
 paru --noconfirm -S fcitx5-mozc-ut fcitx5-breeze
 paru --noconfirm -S wike-tui 
