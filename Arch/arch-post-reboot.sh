@@ -28,6 +28,7 @@ ghcup install ghc && \
 ghcup install cabal && \
 ghcup install hls && \
 ghcup install stack && \
+ghcup install ShellCheck
 # Common Lisp
 sbcl --load /usr/share/quicklisp/quicklisp.lisp \
      --eval '(quicklisp-quickstart:install)' \
