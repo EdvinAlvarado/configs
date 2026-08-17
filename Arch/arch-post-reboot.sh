@@ -22,6 +22,12 @@ sudo make -f ./wikiman-makefile clean
 # Rust
 rustup default stable && \
 rustup component add rust-analyzer rustfmt rust-src clippy
+# Haskell
+paru --noconfirm -S ghcup-hs-bin && \
+ghcup install ghc && \
+ghcup install cabal && \
+ghcup install hls && \
+ghcup install stack && \
 # Common Lisp
 sbcl --load /usr/share/quicklisp/quicklisp.lisp \
      --eval '(quicklisp-quickstart:install)' \
