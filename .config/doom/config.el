@@ -75,6 +75,7 @@
 ;; they are implemented.
 (global-visual-line-mode 1)
 (setopt emms-player-list '(emms-player-mpv))
+(setq shell-file-name (executable-find "bash"))
 
 ;; Rust setup
 (after! rustic
