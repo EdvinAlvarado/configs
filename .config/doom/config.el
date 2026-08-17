@@ -134,3 +134,10 @@
 (use-package! gptel
   :config
   (gptel-make-gh-copilot "Copilot"))
+
+;; Haskell
+;; Custom function to build Haskell project in a specific subdirectory
+(defun my/haskell-cabal-build ()
+  (interactive)
+  (let ((default-directory "../"))
+    (shell-command "cabal build")))
