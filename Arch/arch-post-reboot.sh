@@ -34,6 +34,8 @@ sbcl --load /usr/share/quicklisp/quicklisp.lisp \
      --eval '(quicklisp-quickstart:install)' \
      --eval '(ql:add-to-init-file)' \
      --quit
+# Clojure
+paru --noconfirm -S clojure-lsp-bin clj-kondo-bin
 # doom emacs
 git clone --depth 1 https://github.com/doomemacs/core ~/.config/emacs
 ~/.config/emacs/bin/doom install

@@ -325,7 +325,9 @@
         "zls",
         "zoxide",
         "snap-pac",
-        "btrfs-assistant"
+        "btrfs-assistant",
+        "clojure",
+        "leiningen"
     ],
     "pacman_config": {
         "color": true,
