@@ -17,14 +17,16 @@ done
 while true; do
 	read -p "Install yazi configs? " yn
 	case $yn in
-		[Yy]* ) mkdir -p ~/.config/yazi; 
-				cp -a .config/yazi/theme.toml ~/.config/yazi/; 
-				cp -a .config/yazi/yazi.toml ~/.config/yazi/; 
-				cp -a .config/yazi/keymap.toml ~/.config/yazi/; 
-				cp -a .config/yazi/init.lua ~/.config/yazi/; 
-				break;;
-		[Nn]* ) break;;
-		*     ) echo "Yes or No?";;
+	[Yy]*)
+		mkdir -p ~/.config/yazi
+		cp -a .config/yazi/theme.toml ~/.config/yazi/
+		cp -a .config/yazi/yazi.toml ~/.config/yazi/
+		cp -a .config/yazi/keymap.toml ~/.config/yazi/
+		cp -a .config/yazi/init.lua ~/.config/yazi/
+		break
+		;;
+	[Nn]*) break ;;
+	*) echo "Yes or No?" ;;
 	esac
 done
 
@@ -32,10 +34,12 @@ done
 while true; do
 	read -p "setup plasma session system env. variables? " yn
 	case $yn in
-		[Yy]* ) cp $PLASMA_WORKSPACE_DIR/env/*.sh ~/$PLASMA_WORKSPACE_DIR/env/; 
-				break;;
-		[Nn]* ) break;;
-		*     ) echo "Yes or No?";;
+	[Yy]*)
+		cp $PLASMA_WORKSPACE_DIR/env/*.sh ~/$PLASMA_WORKSPACE_DIR/env/
+		break
+		;;
+	[Nn]*) break ;;
+	*) echo "Yes or No?" ;;
 	esac
 done
 
@@ -43,10 +47,12 @@ done
 while true; do
 	read -p "setup paru? " yn
 	case $yn in
-		[Yy]* ) cp .config/paru/paru.conf ~/.config/paru/paru.conf; 
-				break;;
-		[Nn]* ) break;;
-		*     ) echo "Yes or No?";;
+	[Yy]*)
+		cp .config/paru/paru.conf ~/.config/paru/paru.conf
+		break
+		;;
+	[Nn]*) break ;;
+	*) echo "Yes or No?" ;;
 	esac
 done
 
@@ -54,9 +60,11 @@ done
 while true; do
 	read -p "setup paru? " yn
 	case $yn in
-		[Yy]* ) cp .config/doom/*el ~/.config/doom/;
-				break;;
-		[Nn]* ) break;;
-		*     ) echo "Yes or No?";;
+	[Yy]*)
+		cp .config/doom/*el ~/.config/doom/
+		break
+		;;
+	[Nn]*) break ;;
+	*) echo "Yes or No?" ;;
 	esac
 done
