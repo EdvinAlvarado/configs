@@ -59,3 +59,13 @@
 ;; Odin
 (package! odin-ts-mode
   :recipe (:host github :repo "Sampie159/odin-ts-mode"))
+(package! nushell-ts-mode
+  :recipe (:host github :repo "herbertjones/nushell-ts-mode")
+  :config
+  (require 'nushell-ts-babel)
+  (defun hfj/nushell/mode-hook ()
+    (corfu-mode 1)
+    (highlight-parentheses-mode 1)
+    (electric-pair-local-mode 1)
+    (electric-indent-local-mode 1))
+  (add-hook 'nushell-ts-mode-hook 'hfj/nushell/mode-hook))
