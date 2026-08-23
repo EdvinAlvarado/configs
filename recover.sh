@@ -1,12 +1,15 @@
-# fish 
+# fish
 while true; do
 	read -p "Install fish configs? " yn
 	case $yn in
-		[Yy]* ) cp .config/fish/config.fish ~/.config/fish/config.fish; 
-				chsh -s $(which fish); 
-				break;;
-		[Nn]* ) break;;
-		*     ) echo "Yes or No?";;
+	[Yy]*)
+		cp .config/fish/config.fish ~/.config/fish/config.fish
+		cp .config/fish/completions/bb.fish ~/.config/fish/completions/bb.fish
+		chsh -s $(which fish)
+		break
+		;;
+	[Nn]*) break ;;
+	*) echo "Yes or No?" ;;
 	esac
 done
 
