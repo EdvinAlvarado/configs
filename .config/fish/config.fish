@@ -13,14 +13,6 @@ fish_add_path $HOME/.local/bin $HOME/.bin $HOME/.ghcup/bin $HOME/.cabal/bin $GOP
 # --- Vi mode ---
 fish_vi_key_bindings
 
-# --- Prompt / theme ---
-# Fish doesn't use oh-my-zsh themes. Pick a built-in (e.g. `fish_config`) or install a prompt like Starship/Tide.
-# The zsh prompt you had:
-#   PROMPT='[%F{red}%n%f@%m %F{blue}%~%f] %(?.%F{green}√%f.%F{red}?%?%f) %(!.%F{red}!%f.>) '
-#   MODE_INDICATOR='%F{red}<<<%f %*'
-#   INSERT_MODE_INDICATOR='%*'
-# can be recreated in a custom prompt function if desired.
-
 # --- fzf ---
 fzf --fish | source
 
@@ -39,6 +31,7 @@ alias cat='bat'
 alias rename='perl-rename'
 alias ls='eza'
 alias magit='emacs -nw -e "magit-status"'
+alias makemkv_fix='LD_LIBRARY_PATH=/opt/ffmpeg8/lib makemkv'
 
 # uutils coreutils aliases
 #alias \[="uu-["
