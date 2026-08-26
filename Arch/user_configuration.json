@@ -192,6 +192,7 @@
         "borg",
         "btop",
         "calibre",
+        "cargo-nextest",
         "cava",
         "clang",
         "code",
