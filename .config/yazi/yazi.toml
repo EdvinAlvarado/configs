@@ -1,6 +1,8 @@
 [mgr]
 linemode = "size"
 
+[preview]
+image_preview = "kitty"
 
 [opener]
 music = [{ run = 'elisa %s', orphan = true, for = "unix" }]

@@ -56,12 +56,25 @@ while true; do
 	esac
 done
 
-# paru
+# emacs
 while true; do
-	read -p "setup paru? " yn
+	read -p "setup doom emacs? " yn
 	case $yn in
 	[Yy]*)
 		cp .config/doom/*el ~/.config/doom/
+		break
+		;;
+	[Nn]*) break ;;
+	*) echo "Yes or No?" ;;
+	esac
+done
+
+# zellij
+while true; do
+	read -p "setup zellij? " yn
+	case $yn in
+	[Yy]*)
+		cp .config/zellij/config.kdl ~/.config/zellij/
 		break
 		;;
 	[Nn]*) break ;;

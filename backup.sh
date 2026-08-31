@@ -8,3 +8,4 @@ cp ~/.config/doom/*el ./.config/doom/
 cp ~/.config/yazi/keymap.toml .config/yazi/
 cp ~/.config/yazi/theme.toml .config/yazi/
 cp ~/.config/yazi/yazi.toml .config/yazi/
+cp ~/.config/zellij/config.kdl .config/zellij/

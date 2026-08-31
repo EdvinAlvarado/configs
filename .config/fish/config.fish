@@ -6,7 +6,7 @@ set -gx VISUAL nvim
 set -gx MANPAGER 'nvim +Man!'
 set -gx OLLAMA_HOST "http://127.0.0.1:11434"
 set -gx OLLAMA_CONTEXT_LENGTH 40000
-
+set -gx YAZI_ADAPTER kitty
 # --- PATH ---
 fish_add_path $HOME/.local/bin $HOME/.bin $HOME/.ghcup/bin $HOME/.cabal/bin $GOPATH/bin $HOME/go/bin $HOME/.cargo/bin $HOME/.config/emacs/bin
 
