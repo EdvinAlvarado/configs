@@ -128,6 +128,9 @@ while true; do
 	esac
 done
 
+## Package Configuration
+mkdir -p ~/.config/nvim
+git clone https://EdvinAlvarado/kickstart.nvim.git ~/.config/nvim/
 ../recover.sh
 
 echo ""
