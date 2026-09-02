@@ -1,3 +1,4 @@
+mkdir -p ~/.config/{fish,paru,yazi,zellij}
 # fish
 while true; do
 	read -p "Install fish configs? " yn
