@@ -3,6 +3,7 @@ sudo pacman --noconfirm -S --needed git base-devel
 # Pacman Config
 sudo sed -i -e "s/#ParallelDownloads = 5/ParallelDownloads = 10/" /etc/pacman.conf
 sudo sed -i -E 's/^(CFLAGS="-march=).*[[:space:]]/\1native /' /etc/makepkg.conf
+sudo sed -i -E 's/^OPTIONS=(.*)debug(.*)/OPTIONS=\1!debug\2/' /etc/makepkg.conf
 sudo sed -i -E 's/^(RUSTFLAGS=".+)"/\1 -C target-cpu=native"/' /etc/makepkg.conf.d/rust.conf
 
 ## cachyos-kernel
