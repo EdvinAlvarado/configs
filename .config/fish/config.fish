@@ -7,8 +7,13 @@ set -gx MANPAGER 'nvim +Man!'
 set -gx OLLAMA_HOST "http://127.0.0.1:11434"
 set -gx OLLAMA_CONTEXT_LENGTH 40000
 set -gx YAZI_ADAPTER kitty
+
+# Guix environment variables
+set -gx GUIX_LOCPATH "$HOME/.guix-profile/lib/locale"
+set -gx GUIX_PROFILE "$HOME/.guix-profile"
+set -gx XDG_DATA_DIRS $XDG_DATA_DIRS $HOME/.guix-profile/share
 # --- PATH ---
-fish_add_path $HOME/.local/bin $HOME/.bin $HOME/.ghcup/bin $HOME/.cabal/bin $GOPATH/bin $HOME/go/bin $HOME/.cargo/bin $HOME/.config/emacs/bin
+fish_add_path $HOME/.local/bin $HOME/.bin $HOME/.ghcup/bin $HOME/.cabal/bin $GOPATH/bin $HOME/go/bin $HOME/.cargo/bin $HOME/.config/emacs/bin  $HOME/.guix-profile/bin
 
 # --- Vi mode ---
 fish_vi_key_bindings
