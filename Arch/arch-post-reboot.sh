@@ -21,10 +21,6 @@ curl -L 'https://raw.githubusercontent.com/filiparag/wikiman/master/Makefile' -o
 	make -f ./wikiman-makefile source-tldr &&
 	sudo make -f ./wikiman-makefile source-install &&
 	sudo make -f ./wikiman-makefile clean
-# Rust
-rustup default stable &&
-	rustup component add rust-analyzer rustfmt rust-src clippy &&
-	cargo install cargo-seek
 # Haskell
 paru --noconfirm -S ghcup-hs-bin &&
 	ghcup install ghc &&
