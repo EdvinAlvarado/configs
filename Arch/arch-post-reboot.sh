@@ -71,10 +71,11 @@ paru --noconfirm -S frame-eth
 paru --noconfirm -S libation 
 paru --noconfirm -S audiobookconverter-bin 
 
-if ($XDG_SESSION_TYPE = "wayland"); then
-	$ESPANSO = "espanso-wayland"
+if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+	ESPANSO="espanso-wayland"
 else
-	$ESPANSO = "espanso-x11"
+	ESPANSO="espanso-x11"
+fi
 paru --noconfirm -S $ESPANSO espanso-gui
 espanso service register
 espanso start
