@@ -6,7 +6,7 @@ while true; do
 	[Yy]*)
 		cp .config/fish/config.fish ~/.config/fish/config.fish
 		cp .config/fish/completions/bb.fish ~/.config/fish/completions/bb.fish
-		chsh -s $(which fish)
+		chsh -s "$(which fish)"
 		break
 		;;
 	[Nn]*) break ;;

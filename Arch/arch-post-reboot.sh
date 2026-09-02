@@ -1,4 +1,22 @@
 #!/usr/bin/env bash
+## Kernel
+paru --noconfirm -S linux-cachyos
+# Bootloader
+paru --noconfirm -S limine-mkinitcpio-hook limine-snapper-sync
+sudo limine-update
+# archiso
+paru -S archiso-systemd-boot &&
+	sudo cat <<EOF >>/boot/limine.conf
+
+
+/Arch Linux Rescue
+comment: arch rescue
+comment: order-priority=30
+protocol: linux
+kernel_path: boot():/archiso/vmlinuz-linux
+module_path: boot():/archiso/initramfs-linux.img
+cmdline: archisobasedir=archiso archisosearchfilename=/archiso/vmlinuz-linux 
+EOF
 
 ## CLI
 # Add yazi plugins
@@ -39,23 +57,6 @@ paru --noconfirm -S clojure-lsp-bin clj-kondo-bin babashka-bin
 # doom emacs
 git clone --depth 1 https://github.com/doomemacs/core ~/.config/emacs
 ~/.config/emacs/bin/doom install
-
-# Bootloader
-paru --noconfirm -S limine-mkinitcpio-hook limine-snapper-sync
-sudo limine-update
-# archiso
-paru -S archiso-systemd-boot &&
-	sudo cat <<EOF >>/boot/limine.conf
-
-
-/Arch Linux Rescue
-comment: arch rescue
-comment: order-priority=30
-protocol: linux
-kernel_path: boot():/archiso/vmlinuz-linux
-module_path: boot():/archiso/initramfs-linux.img
-cmdline: archisobasedir=archiso archisosearchfilename=/archiso/vmlinuz-linux 
-EOF
 
 ## Applications
 sudo pacman --noconfirm -S neofetch insync anki ledger-live ventoy-bin bambustudio-bin orca-slicer-bin ocrmypdf qdirstat subtitleedit trayscale otf-symbola
