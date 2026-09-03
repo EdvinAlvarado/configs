@@ -7,7 +7,8 @@ sed -i 's/ftp.gnu.org/ftpmirror.gnu.org/g' guix-install.sh &&
 
 if guix build hello
 then
-	guix pull --url=https://codeberg.org/guix/guix
+	guix pull --url=https://codeberg.org/guix/guix 
+	hash guix
 	# Custmom locales
 	guix package -f my-locales.scm &&
 		export GUIX_LOCPATH=$HOME/.guix-profile/lib/locale &&
