@@ -4,7 +4,7 @@ MOUNT=$2
 DISTRO=$3
 
 # create
-cryptsetup --type luks1 --label="CRYPTROOT" luksFormat $DEVICE
+cryptsetup --label="CRYPTROOT" luksFormat $DEVICE
 cryptsetup open $DEVICE cryptroot
 mkfs.btrfs -L ROOT /dev/mapper/cryptroot
 
