@@ -24,11 +24,11 @@ fi
 
 # mount
 umount $MOUNT
+mkdir -p $MOUNT/home/.snapshots
+mkdir $MOUNT/.snapshots
 mount -o compress=zstd,subvol=@ /dev/mapper/cryptroot $MOUNT
-mkdir $MOUNT/{home,.snapshots}
 mount -o compress=zstd,subvol=@home /dev/mapper/cryptroot $MOUNT/home
 mount -o compress=zstd,subvol=@snapshots /dev/mapper/cryptroot $MOUNT/.snapshots
-mkdir $MOUNT/home/.snapshots
 mount -o compress=zstd,subvol=@home/.snapshots /dev/mapper/cryptroot $MOUNT/home/.snapshots
 
 if [ "$DISTRO" == "arch" ]; then
