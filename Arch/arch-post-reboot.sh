@@ -68,6 +68,7 @@ paru --noconfirm -S cargo-info
 paru --noconfirm -S frame-eth
 paru --noconfirm -S libation
 paru --noconfirm -S audiobookconverter-bin
+paru --noconfirm -S naps2-bin
 
 if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
 	ESPANSO="espanso-wayland"
