@@ -1,0 +1,14 @@
+* Installation
+
+Just use the graphical installation. The base KDE install is base enough that it doesn't include any bloat.
+
+* Post-Installation
+
+Copy over the configuration file to ~/etc/nixos/configuration.nix~.
+
+** Enable Flatpak
+
+#+begin_src shell
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak update
+#+end_src

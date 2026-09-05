@@ -12,6 +12,12 @@ set -gx YAZI_ADAPTER kitty
 set -gx GUIX_LOCPATH "$HOME/.guix-profile/lib/locale"
 set -gx GUIX_PROFILE "$HOME/.guix-profile"
 set -gx XDG_DATA_DIRS $XDG_DATA_DIRS $HOME/.guix-profile/share
+
+# Make Flatpak apps available immediately
+# This seems to be default in Arch linux and but not other distros, so we add it here to be safe
+set -gx XDG_DATA_DIRS $XDG_DATA_DIRS /var/lib/flatpak/exports/share
+set -gx XDG_DATA_DIRS $XDG_DATA_DIRS $HOME/.local/share/flatpak/exports/share
+
 # --- PATH ---
 fish_add_path $HOME/.local/bin $HOME/.bin $HOME/.ghcup/bin $HOME/.cabal/bin $GOPATH/bin $HOME/go/bin $HOME/.cargo/bin $HOME/.config/emacs/bin  $HOME/.guix-profile/bin
 
