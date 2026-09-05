@@ -7,7 +7,7 @@ Sadly, the guided TUI installation does not have a sensible BTRFS folder install
 ## Get the necessary packages
 
 ``` shell
-guix install git cryptsetup vim
+guix install git vim
 . "/root/.guix-profile/etc/profile"
 ```
 
