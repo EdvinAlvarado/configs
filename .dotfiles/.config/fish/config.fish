@@ -48,7 +48,7 @@ alias makemkv_fix='LD_LIBRARY_PATH=/opt/ffmpeg8/lib makemkv'
 set -l uu_prefix uu
 if test -f /etc/os-release
     set -l os_release_contents (cat /etc/os-release)
-    if string match -q -r '^(ID|ID_LIKE)=(.*[[:space:]]+)?nixos([[:space:]]|$)|^ID=nixos([[:space:]]|$)' -- "$os_release_contents"
+    if string match -q -r '^ID=nixos([[:space:]]|$)' -- "$os_release_contents"
         set uu_prefix uutils
     end
 end
