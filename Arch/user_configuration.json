@@ -327,8 +327,7 @@
         "snap-pac",
         "btrfs-assistant",
         "clojure",
-        "leiningen",
-        "stow",
+        "stow"
     ],
     "pacman_config": {
         "color": true,
