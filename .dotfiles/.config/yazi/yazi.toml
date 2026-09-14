@@ -28,7 +28,7 @@ prepend_rules = [
 	{ url = "*.3mf", use = "3dprint" },
 	{ url = "*.cbz", use = ["docs", "reveal"] },
 	{ url = "*.cbr", use = ["docs", "reveal"] },
-	{ mime = "video/matroska", use = ["play", "reveal", "video", "mkv"] },
+	{ mime = "video/matroska", use = ["video", "play", "reveal", "mkv"] },
 	{ mime = "video/*", use = ["play", "reveal", "video"] },
 ]
 
