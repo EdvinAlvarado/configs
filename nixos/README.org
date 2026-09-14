@@ -1,10 +1,30 @@
 * Installation
 
-Just use the graphical installation. The base KDE install is base enough that it doesn't include any bloat.
+Just use the graphical installation. The base KDE install is base enough that it doesn't include any bloat. Remember to select unstable!
 
 * Post-Installation
 
 Copy over the configuration file to ~/etc/nixos/configuration.nix~.
+
+** TODO Missing Packages
+
+- expac
+- fisher
+- kitty-shell-integration
+- kitty-terminfo
+- namcap
+- neovim-lspconfig
+- npm
+- odinfmt
+- otf-ipafont
+- systray-x-kde
+- vlc-cli
+- vlc-plugin-extra
+- snap-pac
+- proton-mail
+- frame-eth
+- audiobookconverter
+- subtitleedit
 
 ** Enable Flatpak
 
@@ -12,3 +32,13 @@ Copy over the configuration file to ~/etc/nixos/configuration.nix~.
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak update
 #+end_src
+
+** TODO Change Bootloader
+
+** Rust Setup
+
+#+begin_src shell
+rustup default stable &&
+    rustup component add rust-analyzer rustfmt rust-src clippy
+#+end_src
+

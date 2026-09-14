@@ -89,8 +89,10 @@ mkdir -p ~/.config/guix
 cp /etc/channels.scm ~/.config/guix/channels.scm
 cp /etc/config.scm ~/.config/guix/system.scm
 chmod +w ~/.config/guix/channels.scm
-guix pull && hash guix &&
-sudo -E guix system reconfigure ~/.config/guix/system.scm
+guix pull && hash guix
+wget -p ~/.config/guix https://substitutes.nonguix.org/signing-key.pub
+sudo guix archive --authorize < signing-key.pub
+sudo guix system reconfigure ~/.config/guix/system.scm --substitute-urls='https://ci.guix.gnu.org https://bordeaux.guix.gnu.org https://substitutes.nonguix.org'
 sudo herd restart guix-daemon
 #+end_src
 
