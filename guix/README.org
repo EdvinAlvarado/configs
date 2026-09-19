@@ -22,6 +22,8 @@ git clone https://github.com/EdvinAlvarado/configs.git
 
 ** Manual Partitioning
 
+Sadly, Guix graphical installer does not have sane BTRFS filesystem defaults and I refuse to choose ext4. Like, whose idea is to have two BTRFs partition for root and home respectively? That's what BTRFS subvolumes are for!
+
 Create a boot partition of at least 512MiB as the first partition and a primary partition as a second parition. The guix iso comes pre-installed with ~fdisk~ and ~cfdisk~.
 
 Change ~/dev/sda~ to your device you will use for guix.
@@ -57,18 +59,6 @@ sed -i "s/UUID_ROOT/$UUIDR/g" /mnt/etc/config.scm
 
 Perform any changes to config.scm you would like.
 
-*** Install Distro
-
-#+begin_src shell
-herd start cow-store /mnt &&
-guix time-machine -C /mnt/etc/channels.scm -- system init /mnt/etc/config.scm /mnt &&
-reboot
-#+end_src
-
-This has a habit of randomly failing to build or find substitutes. Just keep trying the second command until it completes building. This really makes guix not feel like it's production ready... Although to be fair, I didn't have any issues installling through the official guided installation. I respect GNU's zealoutry on free software but it really should come at the expense of the user experience; so, it's really dissapointing that there's no good documentation of installing the nongnu portion in one go. System Crafters has guides but it's very clear that it is considerably outdated; be it the guide making references to gitlab repos that don't have the folders where they state it is; or the guide saying to download an ISO that's not there. Outside of System Crafters, there are instructions for adding nongnu **after** installing GUIX. Which is ok if you have the necessary drivers or an ethernet connections until while adding nongnu. All this obstacles and pain points considerably adds friction to installing gnu guix basically limiting the target demographic to advanced users.
-
-It feels like the old days of Arch Linux where you had to install it all by hand but with worse documentation (for nongnu). If you don't need nongnu for installation or ever, then most of this friction dissapears as the GNU Guix Reference Material is actually pretty solid.
-
 *** Post-install
 
 **** Passwords
@@ -96,7 +86,41 @@ sudo guix system reconfigure ~/.config/guix/system.scm --substitute-urls='https:
 sudo herd restart guix-daemon
 #+end_src
 
-** References
+*** Install Distro
+
+#+begin_src shell
+herd start cow-store /mnt &&
+guix time-machine -C /mnt/etc/channels.scm -- system init /mnt/etc/config.scm /mnt &&
+reboot
+#+end_src
+
+** Compiling Rust Packages
+
+***** Defining Package
+The package can be defined from pulling from crates.io, github, or local cargo project. Rust workspaces cannot be installed from crates.io due to compiling various packages. Use github for these ones.
+
+
+
+***** Base 32
+The base32 needed for the package is not the sha256sum of the program but some special base32 hash of the downloaded package. You can pull it by running:
+#+begin_src shell
+guix download "<uri>"
+#+end_src
+
+If using git-fetch instead of url-fetch use:
+#+begin_src shell
+guix download --commit=<tag> <uri>
+#+end_src
+
+* Conclusion
+
+This has a habit of randomly failing to build or find substitutes. Just keep trying the second command until it completes building. This really makes guix not feel like it's production ready... Although to be fair, I didn't have any issues installling through the official guided installation. I respect GNU's zealoutry on free software but it really shouldn't come at the expense of the user experience; so, it's really dissapointing that there's no good documentation of installing the nongnu portion in one go. System Crafters has guides but it's very clear that it is considerably outdated; be it the guide making references to gitlab repos that don't have the folders where they state it is; or the guide saying to download an ISO that's not there. Outside of System Crafters, there are instructions for adding nongnu **after** installing GUIX. Which is ok if you have the necessary drivers or an ethernet connections until while adding nongnu. All this obstacles and pain points considerably adds friction to installing gnu guix basically limiting the target demographic to advanced users and/or hobbyist.
+
+It feels like the old days of Arch Linux where you had to install it all by hand but with worse documentation (for nongnu). If you don't need nongnu for installation or ever, then most of this friction dissapears as the GNU Guix Reference Material is actually pretty solid.
+
+Another pain point is the glaciar slow repositories that rarely crack 1MB/s.
+
+* References
 
 - [[https://guix.gnu.org/manual/devel/en/html_node/Manual-Installation.html][GNU Guix Reference Material - Manual Installation]]
 - [[https://systemcrafters.net/craft-your-system-with-guix/full-system-install/][System Crafters]]
