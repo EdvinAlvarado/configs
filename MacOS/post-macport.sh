@@ -1,4 +1,4 @@
-sudo port install rustup neovim zellij yazi fish xsel stow coreutils-uutils fzf zoxide eza tealdeer kitty imagemagick py314-pygments certsync ttf-nerd-fonts-symbols deluge
+sudo port install rustup neovim zellij yazi fish xsel stow coreutils-uutils fzf zoxide eza tealdeer kitty imagemagick py314-pygments certsync ttf-nerd-fonts-symbols deluge bat bat-extras
 rustup-init
 
 # Kitty
