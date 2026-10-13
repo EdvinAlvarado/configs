@@ -1,6 +1,7 @@
 *.pyc
-.config/yazi/yazi/flavors
-.config/yazi/yazi/plugins
-.config/yazi/yazi/package.toml
-.config/yazi/yazi/init.lua
 
+.dotfiles/.config/fish/fish_variables
+.dotfiles/.config/yazi/flavors
+.dotfiles/.config/yazi/package.toml
+.dotfiles/.config/yazi/plugins
+.dotfiles/.config/nvim
