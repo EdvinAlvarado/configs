@@ -94,14 +94,47 @@ guix time-machine -C /mnt/etc/channels.scm -- system init /mnt/etc/config.scm /m
 reboot
 #+end_src
 
+** Direct Checkout Hacking
+
+So to use this [[https://guix.gnu.org/cookbook/en/html_node/Direct-checkout-hacking.html][method]], you have to clone the guix tree and run ./pre-inst-env. However, that script is not available there and the link - takes you to section 22.4 - included does not tell you how to make it. That section then has a link to section 22.2 that does tell you how to make it! I had to ask AI to get the answer and reverse engineer how the fuck I wassupposed to find this out. IDK the reference manual has a lot of information but it's not ordered (or linked) in such a way that it is easy to execute (e.g. [[https://wiki.archlinux.org/title/Main_page][Arch Wiki]]).
+
+First let's clone the guix tree and set it up:
+#+begin_src shell
+git clone https://git.guix.gnu.org/guix.git &&
+cd guix &&
+guix shell -D guix --pure # gets all the dev tools
+./bootstrap
+./configure
+make
+make check # for verifying
+#+end_src
+
 ** Compiling Rust Packages
 
 ***** Defining Package
 The package can be defined from pulling from crates.io, github, or local cargo project. Rust workspaces cannot be installed from crates.io due to compiling various packages. Use github for these ones.
 
+***** Rust Develpoment Environment
 
+#+begin_src shell
+guix shell rust rust:cargo cargo-audit cargo-license
+#+end_src
 
-***** Base 32
+When using Guix source tree
+
+#+begin_src shell
+guix import -i gnu/packages/rust-crates.scm crate -f /path/to/Cargo.lock <rust package name>
+./pre-inst-env guix build <rust package name>
+#+end_src
+
+When doing package scheme, you would change the insert from rust-crates.scm to the package.scm. Keep in mind that the package definition must be at the yybottom.
+
+#+begin_src shell
+guix import -i path/to/package.scm crate -f /path/to/Cargo.lock <package>
+guix build -L path/to/package/ <package>
+#+end_src
+*****
+Base 32
 The base32 needed for the package is not the sha256sum of the program but some special base32 hash of the downloaded package. You can pull it by running:
 #+begin_src shell
 guix download "<uri>"
