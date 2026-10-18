@@ -59,7 +59,7 @@ git clone --depth 1 https://github.com/doomemacs/core ~/.config/emacs
 ~/.config/emacs/bin/doom install
 
 ## Applications
-sudo pacman --noconfirm -S neofetch insync anki ledger-live ventoy-bin bambustudio-bin orca-slicer-bin ocrmypdf qdirstat subtitleedit trayscale otf-symbola
+sudo pacman --noconfirm -S neofetch insync anki ledger-live ventoy-bin bambustudio-bin orca-slicer-bin ocrmypdf qdirstat subtitleedit trayscale otf-symbola woeusb
 paru --noconfirm -S proton-mail proton-vpn-gtk-app
 paru --noconfirm -S fcitx5-mozc-ut fcitx5-breeze
 paru --noconfirm -S wike-tui
