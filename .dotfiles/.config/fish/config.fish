@@ -8,6 +8,11 @@ set -gx OLLAMA_HOST "http://127.0.0.1:11434"
 set -gx OLLAMA_CONTEXT_LENGTH 40000
 set -gx YAZI_ADAPTER kitty
 
+# API keys
+if test -f $HOME/.api_keys.env
+    source $HOME/.api_keys.env
+end
+
 # Guix environment variables
 set -gx GUIX_LOCPATH "$HOME/.guix-profile/lib/locale"
 set -gx GUIX_PROFILE "$HOME/.guix-profile"
@@ -39,8 +44,6 @@ zoxide init fish --cmd cd | source
 # --- starship prompt ---
 starship init fish | source
 
-# --- API keys ---
-source "$HOME/.api_keys.env"
 
 # --- Aliases ---
 alias nvimf='nvim (fzf)'
