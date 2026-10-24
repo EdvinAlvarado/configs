@@ -19,44 +19,18 @@ cmdline: archisobasedir=archiso archisosearchfilename=/archiso/vmlinuz-linux
 EOF
 
 ## CLI
-# Add yazi plugins
-ya pkg add yazi-rs/flavors:dracula
-ya pkg add yazi-rs/plugins:smart-enter
-ya pkg add yazi-rs/plugins:mount
-ya pkg add yazi-rs/plugins:chmod
-ya pkg add yazi-rs/plugins:full-border
-ya pkg add yazi-rs/plugins:git
-ya pkg add yazi-rs/plugins:jump-to-char
-ya pkg add yazi-rs/plugins:vcs-files
-ya pkg add yazi-rs/plugins:piper
-# fish plugins
-fish -c "fisher install jorgebucaran/fisher"
-# Tealdeer
-tldr --update
-# wikiman
-curl -L 'https://raw.githubusercontent.com/filiparag/wikiman/master/Makefile' -o 'wikiman-makefile' &&
-	make -f ./wikiman-makefile source-arch &&
-	make -f ./wikiman-makefile source-tldr &&
-	sudo make -f ./wikiman-makefile source-install &&
-	sudo make -f ./wikiman-makefile clean
+../universal/yazi.sh
+../universal/fish.sh
+../universal/wikiman.sh
+../universal/teeldear.sh
 # Haskell
-paru --noconfirm -S ghcup-hs-bin &&
-	ghcup install ghc &&
-	ghcup install cabal &&
-	ghcup install hls &&
-	ghcup install stack &&
-	ghcup install ShellCheck &&
-	cabal install fast-tags
+paru --noconfirm -S ghcup-hs-bin && ../universal/haskell.sh
 # Common Lisp
-sbcl --load /usr/share/quicklisp/quicklisp.lisp \
-	--eval '(quicklisp-quickstart:install)' \
-	--eval '(ql:add-to-init-file)' \
-	--quit
+../universal/clisp.sh
 # Clojure
 paru --noconfirm -S clojure-lsp-bin clj-kondo-bin babashka-bin
 # doom emacs
-git clone --depth 1 https://github.com/doomemacs/core ~/.config/emacs
-~/.config/emacs/bin/doom install
+../universal/doom-emacs.sh
 
 ## Applications
 sudo pacman --noconfirm -S neofetch insync anki ledger-live ventoy-bin bambustudio-bin orca-slicer-bin ocrmypdf qdirstat subtitleedit trayscale otf-symbola woeusb
@@ -75,9 +49,7 @@ if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
 else
 	ESPANSO="espanso-x11"
 fi
-paru --noconfirm -S $ESPANSO espanso-gui
-espanso service register
-espanso start
+paru --noconfirm -S $ESPANSO espanso-gui && ../universal/espanso.sh
 
 # Flatpak
 flatpak -y install discord flatseal geogebra komikku monero signal thinkorswim app.zen_browser.zen
@@ -105,10 +77,7 @@ sudo systemctl mask systemd-udev-settle
 
 ## AI
 # Setup Kagi MCP Server
-cd ~/Projects &&
-	git clone https://github.com/kagisearch/kagimcp.git &&
-	cd kagicmp &&
-	uv sync
+../universal/kagicmp.sh
 # Setup Ollama
 while true; do
 	read -p "Nvidia or AMD GPU? (e.g. nvidia, amd, none) " yn
@@ -130,8 +99,7 @@ while true; do
 done
 
 ## Package Configuration
-mkdir -p ~/.config/nvim
-git clone https://EdvinAlvarado/kickstart.nvim.git ~/.config/nvim/
+../universal/nvim.sh
 ../recover.sh
 
 echo ""
