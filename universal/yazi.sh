@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 
-if ! command -v yazi &> /dev/null
-then
-    echo "Emacs is not installed. Please install Emacs first."
-    exit 1
+if ! command -v yazi &>/dev/null; then
+	echo "yazi is not installed. Please install yazi first."
+	exit 1
 fi
 # Add yazi plugins
 ya pkg add yazi-rs/flavors:dracula
