@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, pkgs, ... }:
+{ config, pkgs, yazi, ... }:
 
 {
   imports =
@@ -272,6 +272,9 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
+
+  nixpkgs.overlays = [ yazi.overlay.default ];
+  programs.yazi.enable = true;
 
   # List services that you want to enable:
 
