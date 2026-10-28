@@ -13,6 +13,11 @@ if test -f $HOME/.api_keys.env
     source $HOME/.api_keys.env
 end
 
+# NixOS Home Manager
+if test -f $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
+    source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
+end
+
 # Guix environment variables
 set -gx GUIX_LOCPATH "$HOME/.guix-profile/lib/locale"
 set -gx GUIX_PROFILE "$HOME/.guix-profile"
