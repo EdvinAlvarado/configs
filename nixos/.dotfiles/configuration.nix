@@ -259,7 +259,7 @@
 		sweeper
 		util-linux
 		yakuake
-]) ++ (with tree-sitter-grammars; [tree-sitter-c tree-sitter-lua tree-sitter-toml tree-sitter-latex tree-sitter-sql tree-sitter-haskell tree-sitter-scheme tree-sitter-nix tree-sitter-rust tree-sitter-go tree-sitter-clojure]);
+]) ++ (with tree-sitter-grammars; [tree-sitter-c tree-sitter-lua tree-sitter-toml tree-sitter-latex tree-sitter-sql tree-sitter-haskell tree-sitter-scheme tree-sitter-nix tree-sitter-rust tree-sitter-go tree-sitter-clojure tree-sitter-nu]);
 
 	# Some programs need SUID wrappers, can be configured further or are
 	# started in user sessions.
