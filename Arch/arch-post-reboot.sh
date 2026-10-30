@@ -51,10 +51,8 @@ else
 fi
 paru --noconfirm -S $ESPANSO espanso-gui && ../universal/espanso.sh
 
-# Flatpak
-flatpak -y install discord flatseal geogebra komikku monero signal thinkorswim app.zen_browser.zen
-# Games
-flatpak -y install steam lutris minecraft TinyWiiBackupManager ca.wiilink.Patcher Heroic
+../universal/flatpak.sh
+# Gaming
 sudo pacman --noconfirm -S game-devices-udev
 paru --noconfirm -S wit-bin # wii game ISO manipulation
 
