@@ -8,6 +8,7 @@
 	imports =
 		[ # Include the results of the hardware scan.
 			./hardware-configuration.nix
+			./snapper.nix
 		];
 	
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -187,7 +188,7 @@
 		obsidian
 		ocrmypdf
 		odin
-		ols
+		ols #ols & odinfmt
 		orca-slicer
 		proton-pass
 		proton-vpn
