@@ -190,6 +190,7 @@
 		odin
 		ols #ols & odinfmt
 		orca-slicer
+		python3
 		proton-pass
 		proton-vpn
 		protonmail-bridge
