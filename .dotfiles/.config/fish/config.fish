@@ -59,7 +59,7 @@ alias magit='emacs -nw -e "magit-status"'
 #alias makemkv_fix='LD_LIBRARY_PATH=/opt/ffmpeg8/lib makemkv'
 
 # uutils coreutils aliases
-if test -f /etc/os-release
+if test -f /etc/os-release; and not string match -q -r '^ID=guix$' < /etc/os-release
     set -l uu_prefix uu
 
     # NixOS uses a different prefix for uutils coreutils, so we check for that and set the prefix accordingly
