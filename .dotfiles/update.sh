@@ -13,7 +13,10 @@ tldr --update
 rustup update
 
 if command -v guix >/dev/null 2>&1; then
-    guix pull && guix upgrade u && sudo -i guix pull && sudo systemctl restart guix-daemon.service
+    guix pull && guix upgrade u
+    if not string match -q -r '^ID=guix$' < /etc/os-release; then
+        sudo -i guix pull && sudo systemctl restart guix-daemon.service
+    fi
 else
     echo "info: Guix is not installed, skipping guix commands."
 fi

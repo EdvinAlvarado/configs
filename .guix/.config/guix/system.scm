@@ -5,8 +5,11 @@
        (gnu services linux)
        (gnu system nss)
        (gnu packages cryptsetup)
+       (gnu packages compression)
        (gnu packages emacs)
+       (gnu packages emacs-xyz)
        (gnu packages disk)
+       (gnu packages kde-utils)
        (gnu packages linux)
        (gnu packages rust)
        (gnu packages rust-apps)
@@ -61,7 +64,7 @@
   ;; The UUID is that returned by 'cryptsetup luksUUID'.
   (mapped-devices
    (list (mapped-device
-          (source (uuid "UUIDR"))
+          (source (uuid "8cd178d7-a542-42a0-9b3f-823924001190"))
           (target "ROOT")
           (type luks-device-mapping))))
 
@@ -97,7 +100,7 @@
                    (options "compress=zstd,subvol=@gnu-store")
                    (dependencies mapped-devices))
                   (file-system
-                    (device (uuid "UUIDB" 'fat))
+                    (device (uuid "4BD3-F3DA" 'fat))
                     (mount-point "/boot/efi")
                     (type "vfat")))
                  %base-file-systems))
@@ -115,15 +118,23 @@
 
   ;; This is where we specify system-wide packages.
   (packages (append (list
+                     ark
+                     bat
                      git
                      cryptsetup
                      ranger
                      stow
-                     vim
+                     neovim
                      emacs
+                     emacs-zoxide
                      flatpak
                      fish
-                     perl)
+                     perl
+                     unzip
+                     yazi
+                     zellij
+                     zoxide
+                     )
                     %base-packages))
 
 
