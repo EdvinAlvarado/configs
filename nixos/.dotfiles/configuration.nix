@@ -253,6 +253,7 @@
 		krdc
 		krfb
 		partitionmanager
+		plasma-browser-integration
 		print-manager
 		sddm-kcm
 		skanpage
