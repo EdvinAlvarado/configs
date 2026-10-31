@@ -22,9 +22,15 @@ if [[ "$force" == true ]]; then
     read -r confirmation
     if [[ "$confirmation" == "y" ]]; then
         stow -t $HOME --adopt .dotfiles/ && git restore .
+        if string match -q -r '^ID=guix' < /etc/os-release; then
+            stow -t $HOME --adopt .guix/ && git restore .
+        fi
     else
         echo "Operation canceled."
     fi
 else
     stow -t $HOME .dotfiles/
+    if string match -q -r '^ID=guix' < /etc/os-release; then
+        stow -t $HOME .guix/
+    fi
 fi
