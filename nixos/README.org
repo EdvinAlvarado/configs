@@ -9,13 +9,11 @@ Copy over the configuration file to ~/etc/nixos/configuration.nix~.
 ** TODO Missing Packages
 
 - expac
-- fisher
 - kitty-shell-integration
 - kitty-terminfo
 - namcap
 - neovim-lspconfig
 - npm
-- odinfmt
 - otf-ipafont
 - systray-x-kde
 - vlc-cli
