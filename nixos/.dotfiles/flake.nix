@@ -8,7 +8,7 @@
 
   outputs = inputs@{ self, nixpkgs, home-manager, ... }:
     let
-      common = [ ./modules/snapper.nix ./configuration.nix ./home.nix ];
+      common = [ ./modules/snapper.nix ./configuration.nix ];
     in {
       nixosConfigurations = {
         nixos = nixpkgs.lib.nixosSystem {
