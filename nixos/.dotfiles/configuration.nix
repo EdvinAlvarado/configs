@@ -8,7 +8,6 @@
 	imports =
 		[ # Include the results of the hardware scan.
 			./hardware-configuration.nix
-			./snapper.nix
 		];
 	
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -19,8 +18,6 @@
 	# Use latest kernel.
 	boot.kernelPackages = pkgs.linuxPackages_latest;
 
-	boot.initrd.luks.devices."luks-978b1448-8f36-4e12-897e-c36e13ca4d50".device = "/dev/disk/by-uuid/978b1448-8f36-4e12-897e-c36e13ca4d50";
-	networking.hostName = "nixos"; # Define your hostname.
 	# networking.wireless.enable = true;	# Enables wireless support via wpa_supplicant.
 
 	# Configure network proxy if necessary
