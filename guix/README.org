@@ -109,6 +109,17 @@ make
 make check # for verifying
 #+end_src
 
+*** Updating Yazi
+
+Update yazi packages to the latest version.
+#+begin_src shell
+mkdir ~/.gnupg && chmod 700 ~/.gnupg
+echo "keyserver hkps://keys.openpgp.org" >> ~/.gnupg/dirmngr.conf
+gpgconf --kill dirmngr
+gpgconf --launch dirmngr
+./pre-inst-env guix refresh yazi -ru
+#+end_src
+
 ** Compiling Rust Packages
 
 ***** Defining Package

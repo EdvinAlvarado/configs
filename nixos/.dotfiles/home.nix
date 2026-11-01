@@ -9,6 +9,7 @@
 		enable = true;
 		settings.user.email = "ealvarado301@gmail.com";
 		settings.user.name = "Edvin Alvarado";
+		extraConfig.pull.rebase = true;
 	};
 
 }
