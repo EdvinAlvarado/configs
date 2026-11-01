@@ -1,0 +1,73 @@
+(define-module (packages yazi)
+  #:use-module (guix licenses)
+  #:use-module (guix packages)
+  #:use-module (guix build-system gnu)
+  #:use-module (guix download)
+  #:use-module (gnu packages compression) ; unzip
+  #:use-module (gnu packages elf)         ; patchelf
+  #:use-module (gnu packages gcc)
+  #:export (yazi))
+
+(define-public yazi
+  (package
+    (name "yazi")
+    (version "26.9.1")
+    (source
+     (origin
+       (method url-fetch)
+       (uri (string-append
+             "https://github.com/sxyazi/yazi/releases/download/v"
+             version "/yazi-x86_64-unknown-linux-gnu.zip"))
+       (file-name (string-append name "-" version ".zip"))
+       ;; sha256 of the zip (hex):
+       ;; a02fe91d3304294048c681f010f1100856872a4e98ecf6927328e888d40a6ad2
+       (sha256
+        (base32 "1lka1ba8is18ff9gdv4q9qm8fmh823qi1w41qr440a846cfyjbx0"))))
+    (build-system gnu-build-system)
+    (arguments
+     (list
+      #:tests? #f
+      #:phases
+      #~(modify-phases %standard-phases
+          ;; Unpack manually: the default unpack phase doesn't recognize
+          ;; the source file, so call unzip ourselves.
+          (replace 'unpack
+            (lambda* (#:key source #:allow-other-keys)
+              (invoke "unzip" source)
+              (chdir "yazi-x86_64-unknown-linux-gnu")))
+          ;; Nothing to configure or build — it's a prebuilt binary.
+          (delete 'configure)
+          (delete 'build)
+          (add-after 'unpack 'patch-binaries
+            (lambda* (#:key inputs #:allow-other-keys)
+              (let ((libc    (assoc-ref inputs "libc"))
+                    (gcc-lib (assoc-ref inputs "gcc:lib")))
+                (for-each
+                 (lambda (bin)
+                   (chmod bin #o755)
+                   (invoke "patchelf"
+                           "--set-interpreter"
+                           (string-append libc "/lib/ld-linux-x86-64.so.2")
+                           "--set-rpath"
+                           (string-append libc "/lib:" gcc-lib "/lib")
+                           bin))
+                 '("yazi" "ya")))))
+          (replace 'install
+            (lambda* (#:key outputs #:allow-other-keys)
+              (let ((bin (string-append (assoc-ref outputs "out") "/bin")))
+                (install-file "yazi" bin)
+                (install-file "ya" bin)
+                #t)))
+          (delete 'strip))))
+    (native-inputs (list unzip patchelf))
+    ;; gcc:lib provides libgcc_s.so.1, required by the Rust binary;
+    ;; glibc comes in as an implicit input ("libc").
+    (inputs (list `(,gcc "lib")))
+    (home-page "https://yazi-rs.github.io/")
+    (synopsis "Blazing fast terminal file manager (prebuilt binary)")
+    (description
+     "Yazi is a terminal file manager written in Rust, based on non-blocking
+async I/O.  This package installs the official prebuilt x86_64 Linux binary
+from the upstream GitHub release, including the @command{ya} CLI companion.")
+    (license expat)))
+
