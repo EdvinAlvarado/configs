@@ -6,9 +6,10 @@
        (gnu system nss)
        (gnu packages cryptsetup)
        (gnu packages compression)
+       (gnu packages disk)
        (gnu packages emacs)
        (gnu packages emacs-xyz)
-       (gnu packages disk)
+       (gnu packages gnupg)
        (gnu packages kde-utils)
        (gnu packages linux)
        (gnu packages rust)
@@ -18,6 +19,7 @@
        (gnu packages shells)
        (gnu packages version-control)
        (gnu packages vim)
+       (packages zellij)
        (guix utils)
        (guix packages)
        (nongnu packages linux)
@@ -129,12 +131,12 @@
                      emacs-zoxide
                      flatpak
                      fish
+                     gnupg
                      perl
                      unzip
                      yazi
                      zellij
-                     zoxide
-                     )
+                     zoxide)
                     %base-packages))
 
 
