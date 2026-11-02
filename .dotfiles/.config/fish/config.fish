@@ -54,7 +54,7 @@ starship init fish | source
 alias nvimf='nvim (fzf)'
 if command -v bat
     alias cat='bat'
-elif command -v batcat
+else if command -v batcat
     alias cat='batcat'
 end
 alias rename='perl-rename'
