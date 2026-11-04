@@ -62,12 +62,15 @@ alias ls='eza'
 alias magit='emacs -nw -e "magit-status"'
 #alias makemkv_fix='LD_LIBRARY_PATH=/opt/ffmpeg8/lib makemkv'
 
+# --- Uutils coreutils aliases ---
 # uutils coreutils aliases
-if test -f /etc/os-release; and not string match -q -r '^ID=guix$' < /etc/os-release; and not string match -q -r '^ID=debian$' < /etc/os-release
+set -gx OS_ID (grep ^ID= /etc/os-release | cut -d '=' -f2 | tr -d '"')
+# Define a string array of supported OSes
+set -l os_with_uutils 'nixos' 'arch' 'cachyos'
+if test -n "$OS_ID"; contains $os_with_uutils $OS_ID
     set -l uu_prefix uu
-
     # NixOS uses a different prefix for uutils coreutils, so we check for that and set the prefix accordingly
-    if string match -q -r '^ID=nixos$' < /etc/os-release
+    if test "$OS_ID" = 'nixos'
         set uu_prefix uutils
     end
 
