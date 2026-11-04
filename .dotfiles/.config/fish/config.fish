@@ -5,7 +5,7 @@ set -gx EDITOR nvim
 set -gx VISUAL nvim
 set -gx MANPAGER 'nvim +Man!'
 set -gx OLLAMA_HOST "http://127.0.0.1:11434"
-set -gx OLLAMA_CONTEXT_LENGTH 40000
+set -gx OLLAMA_CONTEXT_LENGTH 32768
 set -gx YAZI_ADAPTER kitty
 
 # API keys
