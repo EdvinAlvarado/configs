@@ -78,7 +78,7 @@ sudo systemctl mask systemd-udev-settle
 ../universal/kagicmp.sh
 # Setup Ollama
 while true; do
-	read -p "Nvidia or AMD GPU? (e.g. nvidia, amd, none) " yn
+	read -pr "Nvidia or AMD GPU? (e.g. nvidia, amd, none) " yn
 	case $yn in
 	[nvidiaNVIDIA]*)
 		sudo pacman -S ollama-cuda
@@ -95,6 +95,10 @@ while true; do
 	*) echo "Which one?" ;;
 	esac
 done
+curl -L https://github.com/AsamK.gpg | gpg --import &&
+	paru --noconfirm -S signal-cli
+sudo pacman --noconfirm -S hermes-agent hermes-agent-desktop
+../universal/hermes.sh
 
 ## Package Configuration
 ../universal/nvim.sh
