@@ -53,7 +53,7 @@ paru --noconfirm -S $ESPANSO espanso-gui && ../universal/espanso.sh
 
 ../universal/flatpak.sh
 # Gaming
-sudo pacman --noconfirm -S game-devices-udev
+sudo pacman --noconfirm -S game-devices-udev azahar-git
 paru --noconfirm -S wit-bin # wii game ISO manipulation
 
 ## Snapper
