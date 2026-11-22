@@ -52,9 +52,11 @@ fi
 paru --noconfirm -S $ESPANSO espanso-gui && ../universal/espanso.sh
 
 ../universal/flatpak.sh
+
 # Gaming
-sudo pacman --noconfirm -S game-devices-udev azahar-git
+sudo pacman --noconfirm -S game-devices-udev
 paru --noconfirm -S wit-bin # wii game ISO manipulation
+../universal/EmuDeck.sh
 
 ## Snapper
 # Setup root config (recommended by Arch wiki)
