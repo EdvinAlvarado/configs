@@ -44,6 +44,7 @@ paru --noconfirm -S libation
 paru --noconfirm -S audiobookconverter-bin
 paru --noconfirm -S naps2-bin
 paru --noconfirm -S sonora
+./navibeat.sh
 
 if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
 	ESPANSO="espanso-wayland"
