@@ -28,7 +28,7 @@ paru --noconfirm -S ghcup-hs-bin && ../universal/haskell.sh
 # Common Lisp
 ../universal/clisp.sh
 # Clojure
-paru --noconfirm -S clojure-lsp-bin clj-kondo-bin babashka-bin
+paru --noconfirm -S clojure-lsp-bin clj-kondo-bin babashka-bin leiningen
 # doom emacs
 ../universal/doom-emacs.sh
 
