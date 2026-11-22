@@ -3,11 +3,12 @@ This method maintains unencrypted exposure to an asbolute minimum while also pro
 
 ## Partition Table
 all paritions (including swap) besides the EFI boot will be made inside Btrfs as subvolumes.
-| partition | type 	   | size | mount point |
-| --------- | -------- | ---- | ----------- |
-| /dev/sda1 | EFI  	   | 260M | /efi        |
-| /dev/sda2 | Recovery | 1G   | /recovery   |
-| /dev/sda3 | root 	   | rest | /           |
+
+| partition | type       | size | mount point |
+| --------- | ---------- | ---- | ----------- |
+| /dev/sda1 | EFI        | 260M | /efi        |
+| /dev/sda2 | Recovery   | 1G   | /recovery   |
+| /dev/sda3 | root       | rest | /           |
 
 ## Clean Disk
 ```
@@ -110,7 +111,7 @@ Complete the main guide's General Configuration but be sure to pacstrap btrfs-pr
 
 ### Create and Embed cryptkey into initramfs
 This avoids being asked for password twice to open disk.
-```
+```shell
 dd bs=512 count=4 if=/dev/random of=/crypto_keyfile.bin iflag=fullblock
 chmod 600 /crypto_keyfile.bin
 chmod 600 /boot/initramfs-linux*

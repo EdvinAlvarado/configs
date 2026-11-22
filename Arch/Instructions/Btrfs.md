@@ -1,23 +1,28 @@
 # Btrfs
+
 Btrfs provides recoverable snapshots and dynamic "partitions". Also included a /recovery to create a live cd like recovery(WIP).
 
 ## Partition Table
+
 all paritions (including swap) besides the EFI boot will be made inside Btrfs as subvolumes.
-| partition | type 	   | size | mount point |
+
+| partition | type     | size | mount point |
 | --------- | -------- | ---- | ----------- |
-| /dev/sda1 | EFI  	   | 260M | /boot       |
+| /dev/sda1 | EFI      | 260M | /boot       |
 | /dev/sda2 | Recovery | 1G   | /recovery   |
-| /dev/sda3 | root 	   | rest | /           |
+| /dev/sda3 | root     | rest | /           |
 
 ## Clean Disk
-```
+
+```shell
 cryptsetup open --type plain -d /dev/urandom /dev/sda to_be_wiped
 dd if=/dev/zero of=/dev/mapper/to_be_wiped status=progress
 cryptsetup close to_be_wiped
 ```
 
 ## Prepare Partition
-```
+
+```shell
 fdisk /dev/sda
 mkfs.fat -F 32 -n "EFI" /dev/sda1
 mkfs.ext4 -L "RECOVERY" /dev/sda2
@@ -41,7 +46,8 @@ subvolid=5
   └── @...
 
 #### Create top-level subvolumes
-```
+
+```shell
 mount /dev/sda3 /mnt
 btrfs subvolume create /mnt/@
 btrfs subvolume create /mnt/@home
@@ -51,13 +57,15 @@ btrfs subvolume create /mnt/@swap
 ```
 
 #### Create subvolumes to excludes from snapshots
-```
+
+```shell
 mkdir -p /mnt/@/var/cache/pacman
 btrfs subvolume create /mnt/@/var/cache/pacman/pkg
 ```
 
 #### Mount top-level subvolumes
-```
+
+```shell
 umount /mnt
 mount -o compress=zstd,subvol=@ /dev/sda3 /mnt
 mkdir /mnt/{home,.snapshots,swap}
@@ -69,8 +77,9 @@ mount -o subvol=@swap /dev/sda3 /mnt/swap
 ```
 
 #### Create swapfile
+
 Here the size of the swapfile is set to 4GB. You can calculate and change the swapfile size by changing the dd parameters of bs and count.
-```
+```shell
 truncate -s 0 /mnt/swap/swapfile
 chattr +C /mnt/swap/swapfile
 btrfs property set /mnt/swap/swapfile compression none
@@ -82,7 +91,8 @@ swapon /mnt/swap/swapfile
 ```
 
 ### Mount the non-btrfs partitions
-```
+
+```shell
 mkdir /mnt/{efi,recovery}
 mount /dev/sda1 /mnt/efi
 mount /dev/sda2 /mnt/recovery
