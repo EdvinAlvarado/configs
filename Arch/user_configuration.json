@@ -335,7 +335,7 @@
     ],
     "pacman_config": {
         "color": true,
-        "parallel_downloads": 5
+        "parallel_downloads": 10
     },
     "profile_config": {
         "gfx_driver": "All open-source",
