@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 ## Kernel
 paru --noconfirm -S linux-cachyos
 # Bootloader
@@ -23,14 +24,15 @@ EOF
 ../universal/fish.sh
 ../universal/wikiman.sh
 ../universal/teeldear.sh
+
+## Development
+../universal/doom-emacs.sh
 # Haskell
 paru --noconfirm -S ghcup-hs-bin && ../universal/haskell.sh
 # Common Lisp
 ../universal/clisp.sh
 # Clojure
 paru --noconfirm -S clojure-lsp-bin clj-kondo-bin babashka-bin leiningen
-# doom emacs
-../universal/doom-emacs.sh
 # C/C++
 ../universal/stclib.sh
 

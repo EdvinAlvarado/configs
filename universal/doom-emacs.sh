@@ -3,7 +3,7 @@
 
 # Check if Emacs is installed
 if ! command -v emacs &>/dev/null; then
-	echo "Emacs is not installed. Please install Emacs first."
+	echo "FAILURE: doom emacs. REQUIRED: emacs"
 	exit 1
 fi
 
