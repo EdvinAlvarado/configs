@@ -31,6 +31,8 @@ paru --noconfirm -S ghcup-hs-bin && ../universal/haskell.sh
 paru --noconfirm -S clojure-lsp-bin clj-kondo-bin babashka-bin leiningen
 # doom emacs
 ../universal/doom-emacs.sh
+# C/C++
+../universal/stclib.sh
 
 ## Applications
 sudo pacman --noconfirm -S neofetch insync anki ledger-live ventoy-bin bambustudio-bin orca-slicer-bin ocrmypdf qdirstat subtitleedit trayscale otf-symbola woeusb
